@@ -1,6 +1,6 @@
 // Boostrap
 @import "~bootstrap/scss/bootstrap";
 
-h1 {
-  color: red;
-}
+// App specific styles go here
+@import "type";
+@import "standup-diagram";
