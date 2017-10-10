@@ -1,0 +1,26 @@
+// Type
+//
+// Set default browser font size and declare fonts
+
+@font-face {
+  font-family: "DIN Next Slab Pro Light";
+  src: url("/assets/fonts/DINNextSlabPro-Light.eot"); /* IE9 Compat Modes */
+  src: url("/assets/fonts/DINNextSlabPro-Light.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+       url("/assets/fonts/DINNextSlabPro-Light.woff") format("woff"), /* Modern Browsers */
+       url("/assets/fonts/DINNextSlabPro-Light.ttf")  format("truetype"), /* Safari, Android, iOS */
+       url("/assets/fonts/DINNextSlabPro-Light.svg#3835ebcab51e839177740a39a6a94bec") format("svg"); /* Legacy iOS */
+
+  font-style: normal;
+  font-weight: 200;
+}
+@font-face {
+  font-family: "DIN Next Slab Pro";
+  src: url("/assets/fonts/DINNextSlabPro-Regular.eot"); /* IE9 Compat Modes */
+  src: url("/assets/fonts/DINNextSlabPro-Regular.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+       url("/assets/fonts/DINNextSlabPro-Regular.woff") format("woff"), /* Modern Browsers */
+       url("/assets/fonts/DINNextSlabPro-Regular.ttf")  format("truetype"), /* Safari, Android, iOS */
+       url("/assets/fonts/DINNextSlabPro-Regular.svg#a3427892c222b26d4542084e78d7bb2c") format("svg"); /* Legacy iOS */
+
+  font-style: normal;
+  font-weight: 400;
+}
