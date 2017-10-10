@@ -1,0 +1,32 @@
+.standup-diagram {
+  background: black;
+  height: 300px;
+  width: 300px;
+}
+
+.standup-diagram__path {
+  stroke: white;
+  fill: transparent;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.standup-diagram__initials {
+  fill: white;
+  font-family: "DIN Next Slab Pro";
+  opacity: 0.6;
+  &.active {
+    opacity: 1;
+  }
+  &.small {
+    display: none;
+  }
+}
+
+.standup-diagram__dot {
+  fill: white;
+  &.small {
+    display: none;
+  }
+}
