@@ -1,11 +1,10 @@
 .standup-diagram {
-  background: black;
   height: 300px;
   width: 300px;
 }
 
 .standup-diagram__path {
-  stroke: white;
+  stroke: $white;
   fill: transparent;
   stroke-width: 3px;
   stroke-linecap: round;
@@ -13,11 +12,9 @@
 }
 
 .standup-diagram__initials {
-  fill: white;
-  font-family: "DIN Next Slab Pro";
-  opacity: 0.6;
+  fill: $gray-666;
   &.active {
-    opacity: 1;
+    fill: $white;
   }
   &.small {
     display: none;
@@ -25,7 +22,7 @@
 }
 
 .standup-diagram__dot {
-  fill: white;
+  fill: $white;
   &.small {
     display: none;
   }
