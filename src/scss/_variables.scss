@@ -44,6 +44,8 @@
 // Close
 // Code
 
+// Custom
+
 
 //
 // Color system
@@ -81,7 +83,7 @@ $grays: (
 // $pink:    #e83e8c ;
 // $red:     #dc3545 ;
 // $orange:  #fd7e14 ;
-// $yellow:  #ffc107 ;
+$yellow:  #f8e71c ;
 // $green:   #28a745 ;
 // $teal:    #20c997 ;
 // $cyan:    #17a2b8 ;
@@ -99,7 +101,6 @@ $colors: (
   cyan: $cyan,
   white: $white,
   gray: $gray-666,
-  gray-dark: $gray-800
 ) ;
 
 $theme-colors: (
@@ -850,3 +851,7 @@ $text-muted: $gray-666 ;
 
 // $pre-color:                   $gray-900 ;
 // $pre-scrollable-max-height:   340px ;
+
+// Custom
+
+$line-weight-default: 3px;
