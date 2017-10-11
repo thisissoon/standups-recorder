@@ -1,0 +1,154 @@
+::-webkit-scrollbar { 
+  display: none; 
+}
+
+.positions-line__container {
+  width: $segment-width;
+  height: 100vh;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+  position: absolute;
+  left: calc(50% - #{$segment-width / 2});
+  transition: left 0.5s;
+  transition-timing-function: ease-in-out;
+  &.adding-staff {
+    overflow-y: hidden;
+    left: 0;
+  }
+}
+
+.scroll-height {
+  width: 1px;
+  height: 10000px;
+}
+
+.positions-line { 
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: $line-width-default;
+  background-color: $white;
+  position: absolute;
+  top: 0;
+  left: 50%;
+}
+
+.positions-line__item {
+  width: $item-width;
+  position: relative;
+  left: - (($segment-width - $line-width-default) / 2);
+  margin: 0;
+  padding: 0;
+}
+
+.positions-line__segment {
+  height: $segment-height;
+  width: $segment-width;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.positions-line__index {
+  position: absolute;
+  left: 0;
+  top: ($segment-height / 2) - ($node-width-staff / 2);
+  height: $node-width-staff;
+  width: $node-width-staff;
+  text-align: right;
+  line-height: $node-width-staff - 1;
+  font-size: 1.3rem;
+  color: $gray-666;
+}
+
+.positions-line__node {
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.positions-line__node--staff {
+  font-size: 1.3rem;
+  line-height: $node-width-staff - $node-border-width - 3;
+  background: $black;
+  border: $white solid $line-width-default;
+  width: $node-width-staff;
+  height: $node-width-staff;
+  left: ($segment-width / 2) - ($node-width-staff / 2);
+  top: ($segment-height / 2) - ($node-width-staff / 2);
+}
+
+.positions-line__node--add {
+  background-color: $yellow;
+  color: $black;
+  font-size: 26px;
+  line-height: $node-width-add - 2;
+  font-weight: bold;
+  width: $node-width-add;
+  height: $node-width-add;
+  left: ($segment-width / 2) - ($node-width-add / 2);
+  top: ($segment-height / 2) - ($node-width-add / 2);
+  &.active {
+    background-color: $white;
+    color: $black;
+  }
+  &.inactive {
+    display: none;
+  }
+}
+
+.positions-line__indicator {
+  position: absolute;
+  height: $line-width-default;
+  width: 40px;
+  background-color: $white;
+  top: calc( 50% - #{$line-width-default / 2});
+  left: 68%;
+  display: none;
+  &.active {
+    display: block;
+  }
+}
+
+.staff-member-list__container {
+  width: 200px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 100vw;
+  transition: left 0.5s;
+  transition-timing-function: ease-in-out;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  &.adding-staff {
+    left: $segment-width;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+  }
+}
+
+.staff-member-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.staff-member-list__item {
+  font-size: 22px;
+  font-weight: 100;
+  height: $item-height-staff;
+  line-height: $item-height-staff;
+  &.selected {
+    color: $yellow
+  }
+}
+
+.scroll-height-staff {
+  width: 1px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
