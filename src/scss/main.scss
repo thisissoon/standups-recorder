@@ -14,8 +14,10 @@
 @import "~bootstrap/scss/grid";
 @import "~bootstrap/scss/forms";
 @import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/utilities";
 
 // App specific styles go here
 @import "type";
 @import "standup-diagram";
-@import "nav"
+@import "nav";
+@import "standup-new";
