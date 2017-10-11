@@ -861,3 +861,20 @@ $line-weight-default: 3px;
 $nav-gradient-height: 50px;
 $nav-item-height: 100px;
 $nav-divider-height: 40px;
+
+// Custom Stand-up list
+
+$line-width-default: 3px;
+
+$segment-width: 200px;
+$segment-height: 100px;
+
+$item-height: ($segment-height * 2);
+$item-width: $segment-width;
+$item-number: 10;
+
+$node-width-staff: 60px;
+$node-width-add: 20px;
+$node-border-width: $line-width-default;
+
+$item-height-staff: 100px;
