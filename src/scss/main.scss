@@ -1,6 +1,21 @@
-// Boostrap
-@import "~bootstrap/scss/bootstrap";
+// Bootstrap functions
+@import "~bootstrap/scss/functions";
+
+// Core variables and mixins
+@import "helpers";
+
+// Reset and dependencies
+@import "~bootstrap/scss/print";
+
+// Core CSS
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/code";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
 
 // App specific styles go here
 @import "type";
 @import "standup-diagram";
+@import "nav"
