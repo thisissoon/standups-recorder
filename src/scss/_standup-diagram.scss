@@ -1,3 +1,7 @@
+.standup-diagram__container {
+  text-align: center;
+}
+
 .standup-diagram {
   height: 300px;
   width: 300px;
@@ -13,6 +17,7 @@
 
 .standup-diagram__initials {
   fill: $gray-666;
+  text-align: left;
   &.active {
     fill: $white;
   }
