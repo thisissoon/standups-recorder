@@ -1,0 +1,45 @@
+$nav-gradient-height: 50px;
+$nav-item-height: 100px;
+$nav-divider-height: 40px;
+
+.nav {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+.nav__gradient {
+  display: none;
+}
+
+.nav__item {
+  background: $black;
+  height: $nav-item-height;
+  text-align: center;
+  padding-top: ($nav-item-height - $nav-divider-height)  * (1/2);
+}
+
+.nav__divider {
+  height: $nav-divider-height;
+  border-right: $gray-666 solid $line-weight-default;
+}
+
+.nav__link {
+  color: $gray-666;
+  line-height: $nav-divider-height;
+  &.lighten {
+    color: $white;
+  }
+  &.cta {
+    color: $yellow;
+  }
+}
+
+.nav--gradient {
+  .nav__gradient {
+    display: block;
+    height: $nav-gradient-height;
+    background: linear-gradient(rgba(0, 0, 0, 0), $black)
+  }
+}
