@@ -32,7 +32,7 @@
   background-color: $white;
   position: absolute;
   top: 0;
-  left: 50%;
+  left: calc( 50% - #{$line-width-default} );
 }
 
 .positions-line__item {
