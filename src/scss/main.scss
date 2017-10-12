@@ -17,8 +17,8 @@
 @import "~bootstrap/scss/utilities";
 
 // App specific styles go here
-@import "general";
 @import "type";
+@import "general";
 @import "nav";
 @import "standup-detail";
 @import "standup-diagram";
@@ -26,3 +26,4 @@
 @import "standup-list";
 @import "standup-new";
 @import "standups-calendar";
+@import "team";

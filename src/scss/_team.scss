@@ -1,0 +1,29 @@
+.team-member-indicator {
+    position: fixed;
+    top: 50%;
+    left: 30px;
+    height: 3px;
+    width: 30px;
+    background-color: white;
+}
+
+.team-member-add {
+  border-radius: 50%;
+  font-size: 26px;
+  line-height: $node-width-add - 2;
+  font-weight: bold;
+  width: $node-width-add;
+  height: $node-width-add;
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  background-color: $yellow;
+  color: $black;
+  text-align: center;
+}
+
+.staff-member-list__container--team {
+  left: 100px;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+}
