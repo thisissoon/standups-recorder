@@ -21,20 +21,11 @@
 }
 
 .calendar-day__add {
-  border-radius: 50%;
-  font-size: 26px;
-  line-height: $node-width-add - 2;
-  font-weight: bold;
-  width: $node-width-add;
-  height: $node-width-add;
+  width: $button-add-sm-width;
+  height: $button-add-sm-width;
   position: absolute;
-  top: ($calendar-day-width / 2) - 10px;
-  left: ($calendar-day-width / 2) - 10px;
-}
-
-.calendar-day__add--today {
-  background-color: $yellow;
-  color: $black;
+  top: ($calendar-day-width / 2) - ($button-add-sm-width / 2);
+  left: ($calendar-day-width / 2) - ($button-add-sm-width / 2);
 }
 
 .calendar-day__date {
