@@ -1,0 +1,23 @@
+.staff-member-edit__labels {
+  color: $gray-666;
+  & label {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.staff-member-edit__values {
+  background: $black;
+  color: $yellow;
+  & input {
+    background: $black;
+    color: $yellow;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 100%;
+    &:focus {
+      outline: none;
+    }
+  }
+}
