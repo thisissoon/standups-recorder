@@ -1,0 +1,32 @@
+$staff-membmer-img-width: 250px;
+
+.staff-member-detail__back {
+  display: block;
+  width: 100px;
+  position: fixed;
+  left: 30px;
+  top: 30px;
+}
+
+.staff-member-pic__container {
+  border: $white solid $line-width-default;
+  border-radius: 50%;
+  overflow: hidden;
+  height: $staff-membmer-img-width;
+  width: $staff-membmer-img-width;
+  margin: 0 auto;
+}
+
+img.staff-member-pic {
+    width: 100%;
+    filter: saturate(0%);
+    filter: contrast(155%) saturate(0%);
+}
+
+.staff-member-info__keys {
+  color: $gray-666;
+}
+
+.staff-member-detail__edit {
+  color: $yellow;
+}
