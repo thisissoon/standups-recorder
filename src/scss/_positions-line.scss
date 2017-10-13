@@ -1,7 +1,3 @@
-::-webkit-scrollbar { 
-  display: none; 
-}
-
 .positions-line__container {
   width: $segment-width;
   height: 100vh;
@@ -82,22 +78,8 @@
 }
 
 .positions-line__node--add {
-  background-color: $yellow;
-  color: $black;
-  font-size: 26px;
-  line-height: $node-width-add - 2;
-  font-weight: bold;
-  width: $node-width-add;
-  height: $node-width-add;
-  left: ($segment-width / 2) - ($node-width-add / 2);
-  top: ($segment-height / 2) - ($node-width-add / 2);
-  &.active {
-    background-color: $white;
-    color: $black;
-  }
-  &.inactive {
-    display: none;
-  }
+  left: ($segment-width / 2) - ($button-add-sm-width / 2);
+  top: ($segment-height / 2) - ($button-add-sm-width / 2);
 }
 
 .positions-line__indicator {
@@ -111,44 +93,4 @@
   &.active {
     display: block;
   }
-}
-
-.staff-member-list__container {
-  width: 200px;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 100vw;
-  transition: left 0.5s;
-  transition-timing-function: ease-in-out;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  &.adding-staff {
-    left: $segment-width;
-    -webkit-overflow-scrolling: touch;
-    overflow-y: scroll;
-  }
-}
-
-.staff-member-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.staff-member-list__item {
-  font-size: 22px;
-  font-weight: 100;
-  height: $item-height-staff;
-  line-height: $item-height-staff;
-  &.selected {
-    color: $yellow
-  }
-}
-
-.scroll-height-staff {
-  width: 1px;
-  position: absolute;
-  top: 0;
-  left: 0;
 }

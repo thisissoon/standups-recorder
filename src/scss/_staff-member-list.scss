@@ -1,0 +1,42 @@
+.staff-member-list__container {
+  width: 200px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  transition: left 0.5s;
+  transition-timing-function: ease-in-out;
+  overflow-x: hidden;
+  &.hidden-right {
+    overflow-y: hidden;
+    left: 100vw;
+  }
+  &.adding-staff {
+    left: $segment-width;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+  }
+}
+
+.staff-member-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.staff-member-list__item {
+  color: $gray-666;
+  font-size: 22px;
+  font-weight: 100;
+  height: $item-height-staff;
+  line-height: $item-height-staff;
+  &.selected {
+    color: $yellow
+  }
+}
+
+.scroll-height-staff {
+  width: 1px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

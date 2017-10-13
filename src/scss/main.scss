@@ -18,14 +18,13 @@
 
 // App specific styles go here
 @import "type";
+@import "buttons";
 @import "general";
 @import "nav";
-@import "staff-member-detail";
-@import "staff-member-edit";
-@import "standup-detail";
+@import "positions-line";
+@import "staff-member-form";
+@import "staff-member-list";
+@import "staff-member-pic";
 @import "standup-diagram";
-@import "standup-edit";
-@import "standup-list";
-@import "standup-new";
 @import "standups-calendar";
-@import "team";
+@import "tables";

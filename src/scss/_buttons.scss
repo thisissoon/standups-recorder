@@ -1,0 +1,55 @@
+// Add
+
+.button-add {
+  background: $yellow;
+  border-radius: 50%;
+  padding: 0;
+  border: none;
+  position: relative;
+  & > span {
+    display: inline-block;
+    position: absolute;
+  }
+  &.active {
+    background-color: $white;
+    color: $black;
+  }
+  &.inactive {
+    display: none;
+  }
+}
+
+.button-add--sm {
+  width: $button-add-sm-width;
+  height: $button-add-sm-width;
+  & > span {
+    font-size: 27px;
+    top: -11px;
+    left: 3px;
+  }
+}
+
+.button-add--md {
+  width: $button-add-md-width;
+  height: $button-add-md-width;
+  & > span {
+    font-size: 51px;
+    top: -15px;
+    left: 11px;
+  }
+}
+
+.button-add--lg {
+  width: $button-add-lg-width;
+  height: $button-add-lg-width;
+  & > span {
+    font-size: 100px;
+    top: -30px;
+    left: 24px;
+  }
+}
+
+.button-add--black {
+  background: $black;
+  color: $white;
+}

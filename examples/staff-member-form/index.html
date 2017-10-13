@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Stand-ups Recorder - Examples</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+  <style>
+
+  </style>
+
+  <main>
+    <div class="pt-5">
+      <div class="container-fluid">
+
+        <form class="staff-member-form">            
+          <div class="row">
+
+            <div class="col">
+              <div class="staff-member-form__labels text-right">
+                <p><label for="firstName">first name</label></p>
+                <p><label for="lastName">last name</label></p>
+                <p><label for="role">role</label></p>
+                <p><label for="active">active</label></p>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="staff-member-form__values">
+                <p><input type="text" name="firstName" id="firstName" value="ryan"></p>
+                <p><input type="text" name="lastName" id="lastName" value="french"></p>
+                <p><input type="text" name="role" id="role" value="designer"></p>
+                <p><input type="checkbox" name="active" id="active" value="active" checked hidden>true</p>
+              </div>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="/bundle.js"></script>
+  <script src="/webpack-dev-server.js"></script>
+
+</body>
+
+</html>
