@@ -1,4 +1,8 @@
-$staff-membmer-img-width: 250px;
+$staff-member-img-width: 250px;
+$staff-member-body-width: 200px;
+$staff-member-head-height: 122px;
+$staff-member-head-width: 100px;
+
 
 .staff-member-detail__back {
   display: block;
@@ -12,15 +16,36 @@ $staff-membmer-img-width: 250px;
   border: $white solid $line-width-default;
   border-radius: 50%;
   overflow: hidden;
-  height: $staff-membmer-img-width;
-  width: $staff-membmer-img-width;
+  height: $staff-member-img-width;
+  width: $staff-member-img-width;
   margin: 0 auto;
+  position: relative;
 }
 
-img.staff-member-pic {
+.staff-member-pic {
     width: 100%;
     filter: saturate(0%);
     filter: contrast(155%) saturate(0%);
+}
+
+.staff-member-pic__body {
+  position: absolute;
+  width: $staff-member-body-width;
+  height: $staff-member-body-width;
+  background-color: $white;
+  border-radius: 50%;
+  top: 50%;
+  left: calc( 50% - #{$staff-member-body-width / 2} );
+}
+
+.staff-member-pic__head {
+  height: $staff-member-head-height;
+  width: $staff-member-head-width;
+  background-color: $white;
+  border-radius: 50%;
+  top: 20px;
+  left: calc( 50% - #{$staff-member-head-width / 2} );
+  position: absolute;
 }
 
 .staff-member-info__keys {
