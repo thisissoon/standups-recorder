@@ -2,75 +2,30 @@
 <html lang="en">
 
 <head>
-  <title>Stand-ups Recorder - Examples</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Staff Detail - Examples</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.css">
 </head>
 
 <body>
-  <style>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
 
-  </style>
+        <h1>Staff Detail examples</h1>
 
-  <main>
-    <div class="staff-member-detail pt-5">
-      <div class="container-fluid">
-
-        <div class="staff-member-detail__back">
-          <span>back</span>
-        </div>
-
-        <div class="row">
-          <div class="col">
-            <div class="staff-member-pic__container">
-              <img class="staff-member-pic" src="src/assets/img/ryan.jpg" alt="ryan">
-            </div>
-          </div>
-        </div>
-
-        <div class="staff-member-info pt-3 pb-3">
-
-          <div class="row">
-
-            <div class="col">
-              <div class="staff-member-info__keys">
-                <p class="text-right">first name</p>
-                <p class="text-right">last name</p>
-                <p class="text-right">role</p>
-                <p class="text-right">joined</p>
-                <p class="text-right">active</p>
-                <p class="text-right">stand-ups</p>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="staff-member-info__values">
-                <p class="text-left">ryan</p>
-                <p class="text-left">french</p>
-                <p class="text-left">designer</p>
-                <p class="text-left">20/10/1991</p>
-                <p class="text-left">true</p>
-                <p class="text-left">234</p>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="row">
-          <div class="col">
-            <div class="staff-member-detail__edit">
-              <p class="text-center">edit</p>
-            </div>
-          </div>
-        </div>
+        <ul class="list-unstyled">
+          <li><a class="btn btn-primary" href="staff-member-detail/with-pic.html">With pic</a></li><br>
+          <li><a class="btn btn-primary" href="staff-member-detail/without-pic.html">Without pic</a></li><br>
+        </ul>
 
       </div>
     </div>
-  </main>
+  </div>
 
-  <script src="/bundle.js"></script>
   <script src="/webpack-dev-server.js"></script>
 
 </body>
