@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { RouterModule, Routes } from '@angular/router';
 
@@ -8,6 +9,8 @@ import { TodayComponent } from './today/today.component';
 import { HistoryComponent } from './history/history.component';
 import { TeamComponent } from './team/team.component';
 import { FooterNavComponent } from './footer-nav/footer-nav.component';
+
+import { ApiModule } from './api/api.module';
 
 const appRoutes: Routes = [
   { path: 'today', component: TodayComponent},
@@ -25,7 +28,9 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule,
+    ApiModule
   ],
   providers: [],
   bootstrap: [AppComponent]
