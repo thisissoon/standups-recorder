@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { environment } from '../../environments/environment';
@@ -28,7 +28,17 @@ export class PositionService {
    * @returns {Observable<PositionItem>}
    * @memberof CurrentService
    */
-  public get(): Observable<PositionItem> {
-    return this.http.get<PositionItem>(this.endpointUrl);
+  public get(positionID): Observable<PositionItem> {
+    return this.http.get<PositionItem>(`${this.endpointUrl}/${positionID}`);
+  }
+  /**
+   * Returns the matching positions
+   *
+   * @returns {Observable<PositionItem>}
+   * @memberof CurrentService
+   */
+  public list(params: HttpParams = new HttpParams()): Observable<any> {
+    const options: any = { params, observe: 'body' };
+    return this.http.get<PositionItem>(this.endpointUrl, options);
   }
 }
