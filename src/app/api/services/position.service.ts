@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
-import { PositionItem } from './models';
+import { PositionItem, PositionsResponse } from '../models';
 
 @Injectable()
 export class PositionService {
@@ -34,11 +34,11 @@ export class PositionService {
   /**
    * Returns the matching positions
    *
-   * @returns {Observable<PositionItem>}
+   * @returns {Observable<PositionsResponse>}
    * @memberof CurrentService
    */
   public list(params: HttpParams = new HttpParams()): Observable<any> {
     const options: any = { params, observe: 'body' };
-    return this.http.get<PositionItem>(this.endpointUrl, options);
+    return this.http.get<PositionsResponse[]>(this.endpointUrl, options);
   }
 }
