@@ -17,6 +17,9 @@
   &.inactive {
     display: none;
   }
+  &:focus {
+    outline: none;
+  }
 }
 
 .button-add--sm {
