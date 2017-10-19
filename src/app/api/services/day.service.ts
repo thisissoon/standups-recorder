@@ -39,6 +39,6 @@ export class DayService {
    */
   public list(params: HttpParams = new HttpParams()): Observable<any> {
     const options: any = { params, observe: 'body' };
-    return this.http.get<DaysResponse[]>(this.endpointUrl, options);
+    return this.http.get<DaysResponse[]>(`${this.endpointUrl}?sort=date:desc`, options);
   }
 }
