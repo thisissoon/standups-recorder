@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { RouterModule, Routes } from '@angular/router';
 
+import { DaysResolveService, providers } from './history/history-resolve.service';
+
 import { AppComponent } from './app.component';
 import { TodayComponent } from './today/today.component';
 import { HistoryComponent } from './history/history.component';
@@ -13,9 +15,19 @@ import { FooterNavComponent } from './footer-nav/footer-nav.component';
 import { ApiModule } from './api/api.module';
 
 const appRoutes: Routes = [
-  { path: 'today', component: TodayComponent},
-  { path: 'history', component: HistoryComponent},
-  { path: 'team', component: TeamComponent},
+  {
+    path: 'today',
+    component: TodayComponent
+  },
+  { path: 'history',
+    component: HistoryComponent,
+    resolve: {
+      days: DaysResolveService
+    }
+  },
+  { path: 'team',
+    component: TeamComponent
+  }
 ];
 
 @NgModule({
@@ -32,7 +44,9 @@ const appRoutes: Routes = [
     HttpClientModule,
     ApiModule
   ],
-  providers: [],
+  providers: [
+    ...providers
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
