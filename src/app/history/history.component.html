@@ -41,17 +41,20 @@
 
       
   
-      <div *ngFor="let week of days; let i = index" ng-if="i % 5 === 0" class="calendar-row mt-4">
+      <div *ngFor="let week of calendarArray; let i = index" ng-if="i % 5 === 0" class="calendar-row mt-4">
         <div class="row no-gutters">
 
-          <div *ngFor="let day of days.slice(i, i + 5); let j = index" class="col">
-            <div *ngIf="days[(i*5) + j]">
+          <div *ngFor="let day of calendarArray.slice(i, i + 5); let j = index" class="col">
+            <div *ngIf="calendarArray[(i*5) + j]">
               <div class="calendar-cell calendar-day">
                 <div class="calendar-day__content">
                   <div class="calendar-day__diagram"></div>
                 </div>
                 <div class="calendar-day__date mt-2">
-                  <span>{{days[(i*5) + j].date.split('-')[1]}}/{{days[(i*5) + j].date.split('-')[2]}}</span>
+                  <span>
+                    {{calendarArray[(i*5) + j].date.toISOString().split('-')[1]}}
+                    /
+                    {{calendarArray[(i*5) + j].date.toISOString().split('-')[2].split('T')[0]}}</span>
                 </div>
               </div>
             </div>
