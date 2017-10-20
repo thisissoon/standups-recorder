@@ -1,6 +1,6 @@
 export interface DayItem {
   ID: string;
-  date: string;
+  date: string | Date;
 }
 
 export interface DaysResponse {
