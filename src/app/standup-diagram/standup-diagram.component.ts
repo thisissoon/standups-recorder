@@ -61,6 +61,13 @@ export class StandupDiagramComponent implements OnInit {
   public outerCircleRadius: number;
 
   /**
+   * Radius of diagrams outer circle
+   *
+   * @memberof StandupDetailComponent
+   */
+  public nameCircleRadius: number;
+
+  /**
    * angular svg element
    *
    * @memberof StandupDetailComponent
@@ -74,7 +81,8 @@ export class StandupDiagramComponent implements OnInit {
   ngOnInit() {
     this.originX = this.width / 2;
     this.originY = this.width / 2;
-    this.outerCircleRadius = this.width * (2 / 4);
+    this.outerCircleRadius = this.width * (4 / 12);
+    this.nameCircleRadius = this.width * (5 / 12);
     this.renderDiagram();
   }
 
@@ -93,7 +101,12 @@ export class StandupDiagramComponent implements OnInit {
       const coodX = Math.round(this.originX + ((this.outerCircleRadius) * Math.sin(((2 * Math.PI) / array.length) * index)));
       const coodY = Math.round(this.originY - ((this.outerCircleRadius) * Math.cos(((2 * Math.PI) / array.length) * index)));
       const coordinate = [coodX, coodY];
+      const names: any = this.DBStaffMembers.find(DBStaffMember => {
+        return DBStaffMember.ID === staffMember.staffID;
+      });
       staffMember['coordinate'] = coordinate;
+      staffMember['firstName'] = names.firstName;
+      staffMember['lastName'] = names.lastName;
       return staffMember;
     });
 
@@ -121,6 +134,24 @@ export class StandupDiagramComponent implements OnInit {
     const line = d3Svg.append('path')
       .attr('d', pathData)
       .classed('standup-diagram__path', true);
+
+    const start = d3Svg.append('circle')
+      .attr('cx', order[0].coordinate[0])
+      .attr('cy', order[0].coordinate[1])
+      .attr('opacity', 1)
+      .attr('r', 5)
+      .attr('fill', 'white');
+
+    formation.forEach((staffMember, index, array) => {
+      const coodX = Math.round(this.originX + ((this.nameCircleRadius) * Math.sin(((2 * Math.PI) / array.length) * index)));
+      const coodY = Math.round(this.originY - ((this.nameCircleRadius) * Math.cos(((2 * Math.PI) / array.length) * index)));
+      const nameOnOuterCircle = d3Svg.append('text')
+        .attr('x', coodX)
+        .attr('y', coodY)
+        .attr('text-anchor', 'middle')
+        .classed('standup-diagram__initials', true)
+        .text(`${staffMember.firstName.toUpperCase().split('')[0]}${staffMember.lastName.toUpperCase().split('')[0]}`);
+    });
 
   }
 
