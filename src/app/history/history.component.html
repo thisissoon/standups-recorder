@@ -50,16 +50,16 @@
 
                 <div class="calendar-day__content">
 
-                  <div *ngIf="calendarArray[(i*5) + (4-j)].ID">
+                  <div *ngIf="calendarArray[(i*5) + (4-j)]?.ID">
                     <div class="calendar-day__diagram"></div>
                   </div>
 
-                  <div *ngIf="!calendarArray[(i*5) + (4-j)].ID">
+                  <div *ngIf="!calendarArray[(i*5) + (4-j)]?.ID">
 
                       <button 
                         class="button-add button-add--sm button-add--black"
                          *ngIf="
-                          calendarArray[(i*5) + (4-j)].date.toISOString().split('T')[0]
+                          calendarArray[(i*5) + (4-j)]?.date.toISOString().split('T')[0]
                           !=
                           todayDate.toISOString().split('T')[0]"
                       >
@@ -69,7 +69,7 @@
                       <button 
                         class="button-add button-add--sm"
                         *ngIf="
-                          calendarArray[(i*5) + (4-j)].date.toISOString().split('T')[0] 
+                          calendarArray[(i*5) + (4-j)]?.date.toISOString().split('T')[0] 
                           ===
                           todayDate.toISOString().split('T')[0]"
                       >
@@ -82,9 +82,9 @@
                 
                 <div class="calendar-day__date mt-2">
                   <span>
-                    {{calendarArray[(i*5) + (4-j)].date.toISOString().split('-')[1]}}
+                    {{calendarArray[(i*5) + (4-j)]?.date.toISOString().split('-')[1]}}
                     /
-                    {{calendarArray[(i*5) + (4-j)].date.toISOString().split('-')[2].split('T')[0]}}
+                    {{calendarArray[(i*5) + (4-j)]?.date.toISOString().split('-')[2].split('T')[0]}}
                   </span>
                 </div>
 
