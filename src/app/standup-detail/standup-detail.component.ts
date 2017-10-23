@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { PositionsResponse, PositionItem, SummariesResponse, SummaryItem } from '../api/models';
+import { PositionsResponse, PositionItem, SummariesResponse, SummaryItem, StaffMemberItem, StaffMembersResponse } from '../api/models';
 
 @Component({
   selector: 'app-standup-detail',
@@ -35,6 +35,13 @@ export class StandupDetailComponent implements OnInit {
     public DBSummaries: SummaryItem[];
 
   /**
+   * List of staff members from the backend
+   *
+   * @memberof StandupDetailComponent
+   */
+    public DBStaffMembers: StaffMemberItem[];
+
+  /**
    * Creates an instance of StandupDetailComponent.
    * @param {ActivatedRoute} route
    *
@@ -47,10 +54,15 @@ export class StandupDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data.forEach((data: { positions: PositionsResponse, summaries: SummariesResponse }) => {
-      this.DBPositions = data.positions._embedded.positions;
-      this.DBSummaries = data.summaries._embedded.summaries;
-    });
+    this.route.data.forEach((data: {
+      positions: PositionsResponse,
+      summaries: SummariesResponse,
+      staffMembers: StaffMembersResponse
+    }) => {
+        this.DBPositions = data.positions._embedded.positions;
+        this.DBSummaries = data.summaries._embedded.summaries;
+        this.DBStaffMembers = data.staffMembers._embedded.staffMembers;
+      });
   }
 
 }
