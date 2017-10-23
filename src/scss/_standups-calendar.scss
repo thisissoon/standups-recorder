@@ -14,8 +14,8 @@
 }
 
 .calendar-day__diagram {
-  width: 100%;
-  height: 100%;
+  width: $calendar-day-width;
+  height: $calendar-day-width;
   border: solid $white 1px;
   border-radius: 50%;
 }

@@ -13,456 +13,85 @@
   
           <div class="col">
             <div class="calendar-cell calendar-title">
-              <span>Mon</span>
+              <span>Tue</span>
             </div>
           </div>
   
           <div class="col">
             <div class="calendar-cell calendar-title">
-              <span>Mon</span>
+              <span>Wed</span>
             </div>
           </div>
   
           <div class="col">
             <div class="calendar-cell calendar-title">
-              <span>Mon</span>
+              <span>Thu</span>
             </div>
           </div>
   
           <div class="col">
             <div class="calendar-cell calendar-title">
-              <span>Mon</span>
+              <span>Fri</span>
             </div>
           </div>
   
         </div>
   
       </div>
+
+      
   
-      <div class="calendar-row mt-4">
+      <div *ngFor="let week of calendarArray; let i = index" ng-if="i % 5 === 0" class="calendar-row mt-4">
         <div class="row no-gutters">
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__add calendar-day__add--today">
-                  <button class="button-add button-add--sm">
-                    <span>+</span>
-                  </button>
+
+          <div *ngFor="let day of (calendarArray.slice(i, i + 5).reverse()); let j = index" class="col">
+            <div *ngIf="calendarArray[(i*5) + j]">
+              <div class="calendar-cell calendar-day">
+
+                <div class="calendar-day__content">
+
+                  <div *ngIf="calendarArray[(i*5) + (4-j)]?.ID">
+                    <div class="calendar-day__diagram"></div>
+                  </div>
+
+                  <div *ngIf="!calendarArray[(i*5) + (4-j)]?.ID">
+
+                      <button 
+                        class="button-add button-add--sm button-add--black"
+                         *ngIf="
+                          calendarArray[(i*5) + (4-j)]?.date.toISOString().split('T')[0]
+                          !=
+                          todayDate.toISOString().split('T')[0]"
+                      >
+                        <span>+</span>
+                      </button>
+      
+                      <button 
+                        class="button-add button-add--sm"
+                        *ngIf="
+                          calendarArray[(i*5) + (4-j)]?.date.toISOString().split('T')[0] 
+                          ===
+                          todayDate.toISOString().split('T')[0]"
+                      >
+                        <span>+</span>
+                      </button>
+
+                  </div>
+
                 </div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-          </div>
-  
-        </div>
-      </div>
-  
-      <div class="calendar-row mt-4">
-        <div class="row no-gutters">
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__add">
-                  <button class="button-add button-add--sm button-add--black">
-                    <span>+</span>
-                  </button>
+                
+                <div class="calendar-day__date mt-2">
+                  <span>
+                    {{calendarArray[(i*5) + (4-j)]?.date.toISOString().split('-')[1]}}
+                    /
+                    {{calendarArray[(i*5) + (4-j)]?.date.toISOString().split('-')[2].split('T')[0]}}
+                  </span>
                 </div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
+
               </div>
             </div>
           </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-        </div>
-      </div>
-  
-      <div class="calendar-row mt-4">
-        <div class="row no-gutters">
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-        </div>
-      </div>
-  
-      <div class="calendar-row mt-4">
-        <div class="row no-gutters">
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-        </div>
-      </div>
-  
-      <div class="calendar-row mt-4">
-        <div class="row no-gutters">
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-        </div>
-      </div>
-  
-      <div class="calendar-row mt-4">
-        <div class="row no-gutters">
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-        </div>
-      </div>
-  
-      <div class="calendar-row mt-4">
-        <div class="row no-gutters">
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="calendar-cell calendar-day">
-              <div class="calendar-day__content">
-                <div class="calendar-day__diagram"></div>
-              </div>
-              <div class="calendar-day__date mt-2">
-                <span>01/01</span>
-              </div>
-            </div>
-          </div>
-  
+
         </div>
       </div>
   
