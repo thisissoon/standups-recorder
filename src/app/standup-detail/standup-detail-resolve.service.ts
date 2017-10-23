@@ -3,16 +3,16 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import { PositionService, SummaryService, StaffMemberService } from '../api/services';
+import { PositionService, SummaryService, StaffMemberService, DayService } from '../api/services';
 
-import { PositionsResponse, SummariesResponse, StaffMembersResponse } from '../api/models';
+import { PositionsResponse, SummariesResponse, StaffMembersResponse, DayItem } from '../api/models';
 
 
 @Injectable()
 export class PositionsResolver implements Resolve<PositionsResponse[]> {
   /**
    * Creates an instance of PositionsResolver.
-   * @param {QuestionsService} positionService
+   * @param {PositionService} positionService
    * @memberof PositionsResolver
    */
   constructor(private positionService: PositionService) { }
@@ -36,7 +36,7 @@ export class PositionsResolver implements Resolve<PositionsResponse[]> {
 export class SummariesResolver implements Resolve<SummariesResponse[]> {
   /**
    * Creates an instance of SummariesResolver.
-   * @param {QuestionsService} summaryService
+   * @param {SummaryService} summaryService
    * @memberof SummariesResolver
    */
   constructor(private summaryService: SummaryService) { }
@@ -60,7 +60,7 @@ export class SummariesResolver implements Resolve<SummariesResponse[]> {
 export class StaffMembersResolver implements Resolve<StaffMembersResponse[]> {
   /**
    * Creates an instance of StaffMembersResolver.
-   * @param {QuestionsService} staffMemberService
+   * @param {StaffMemberService} staffMemberService
    * @memberof StaffMembersResolver
    */
   constructor(private staffMemberService: StaffMemberService) { }
@@ -72,6 +72,26 @@ export class StaffMembersResolver implements Resolve<StaffMembersResponse[]> {
    */
   resolve(): Observable<StaffMembersResponse[]> {
     return this.staffMemberService.list();
+  }
+
+}
+
+@Injectable()
+export class DayResolver implements Resolve<DayItem> {
+  /**
+   * Creates an instance of DayResolver.
+   * @param {DayService} dayService
+   * @memberof DayResolver
+   */
+  constructor(private dayService: DayService) { }
+  /**
+   * make request to staff member service to get list of staff members
+   *
+   * @returns {Observable<DayItem[]>}
+   * @memberof DayResolver
+   */
+  resolve(route: ActivatedRouteSnapshot): Observable<DayItem> {
+    return this.dayService.get(route.params['dayID']);
   }
 
 }

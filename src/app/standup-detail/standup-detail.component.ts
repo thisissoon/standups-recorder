@@ -2,7 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { PositionsResponse, PositionItem, SummariesResponse, SummaryItem, StaffMemberItem, StaffMembersResponse } from '../api/models';
+import { 
+  PositionsResponse,
+  PositionItem,
+  SummariesResponse,
+  SummaryItem,
+  StaffMemberItem,
+  StaffMembersResponse,
+  DayItem
+} from '../api/models';
 
 @Component({
   selector: 'app-standup-detail',
@@ -42,6 +50,13 @@ export class StandupDetailComponent implements OnInit {
     public DBStaffMembers: StaffMemberItem[];
 
   /**
+   * Currently selected day from backend
+   *
+   * @memberof StandupDetailComponent
+   */
+    public DBDay: DayItem;
+
+  /**
    * Creates an instance of StandupDetailComponent.
    * @param {ActivatedRoute} route
    *
@@ -57,11 +72,13 @@ export class StandupDetailComponent implements OnInit {
     this.route.data.forEach((data: {
       positions: PositionsResponse,
       summaries: SummariesResponse,
-      staffMembers: StaffMembersResponse
+      staffMembers: StaffMembersResponse,
+      day: DayItem
     }) => {
         this.DBPositions = data.positions._embedded.positions;
         this.DBSummaries = data.summaries._embedded.summaries;
         this.DBStaffMembers = data.staffMembers._embedded.staffMembers;
+        this.DBDay = data.day;
       });
   }
 
