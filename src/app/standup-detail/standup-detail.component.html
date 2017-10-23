@@ -1,0 +1,63 @@
+<main>
+  
+  <div class="nav-other__back">
+    <a routerLink="/history">back</a>
+  </div>
+
+  <div class="container">
+    <div class="pt-5">
+
+
+      <div class="pt-2 pb-2">
+        <div class="row">
+          <div class="col">
+            <app-standup-diagram
+              [width]="300"
+              [DBPositions]="DBPositions"
+              [DBSummaries]="DBSummaries"
+              [DBStaffMembers]="DBStaffMembers"
+            ></app-standup-diagram>
+          </div>
+        </div>
+      </div>
+
+      <div class="table">
+      
+        <div class="row">
+      
+          <div class="col">
+            <div class="table__keys">
+              <p class="text-right">date</p>
+              <p class="text-right">staff</p>
+              <p class="text-right">duration</p>
+            </div>
+          </div>
+      
+          <div class="col">
+            <div class="table__values">
+              <p class="text-left">
+                {{DBDay.date.split('-')[2]}}/
+                 {{DBDay.date.split('-')[1]}}/
+                 {{DBDay.date.split('-')[0]}}
+              </p>
+              <p class="text-left">{{DBPositions.length}}</p>
+              <p class="text-left">N/A</p>
+            </div>
+          </div>
+      
+        </div>
+      
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <a href="">
+            <h5 class="cta mt-3">edit</h5>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <app-footer-nav></app-footer-nav>
+</footer>

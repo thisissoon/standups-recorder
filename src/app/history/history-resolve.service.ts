@@ -7,25 +7,21 @@ import { DaysResponse } from '../api/models';
 
 
 @Injectable()
-export class DaysResolveService implements Resolve<DaysResponse[]> {
+export class DaysResolver implements Resolve<DaysResponse[]> {
   /**
-   * Creates an instance of DaysResolveService.
+   * Creates an instance of DaysResolver.
    * @param {QuestionsService} dayService
-   * @memberof DaysResolveService
+   * @memberof DaysResolver
    */
   constructor(private dayService: DayService) { }
   /**
    * make request to day service to get list of days
    *
    * @returns {Observable<DaysResponse[]>}
-   * @memberof DaysResolveService
+   * @memberof DaysResolver
    */
   resolve(): Observable<DaysResponse[]> {
     return this.dayService.list();
   }
 
 }
-
-export const providers: any[] = [
-  DaysResolveService
-];

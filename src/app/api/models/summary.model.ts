@@ -3,6 +3,7 @@ export interface SummaryItem {
   orderIndex: number;
   staffID: string;
   dayID: string;
+  coordinate?: number[];
 }
 
 export interface SummariesResponse {

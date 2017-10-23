@@ -18,6 +18,7 @@
 .standup-diagram__initials {
   fill: $gray-666;
   text-align: left;
+  stroke: none;
   &.active {
     fill: $white;
   }

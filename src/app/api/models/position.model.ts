@@ -3,6 +3,9 @@ export interface PositionItem {
   placeIndex: number;
   staffID: string;
   dayID: string;
+  coordinate?: number[];
+  firstName?: string;
+  lastName?: string;
 }
 
 export interface PositionsResponse {
