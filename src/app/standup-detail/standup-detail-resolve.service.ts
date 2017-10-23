@@ -3,9 +3,9 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import { PositionService, SummaryService } from '../api/services';
+import { PositionService, SummaryService, StaffMemberService } from '../api/services';
 
-import { PositionsResponse, SummariesResponse } from '../api/models';
+import { PositionsResponse, SummariesResponse, StaffMembersResponse } from '../api/models';
 
 
 @Injectable()
@@ -52,6 +52,26 @@ export class SummariesResolver implements Resolve<SummariesResponse[]> {
       .set('dayID', route.params['dayID'])
       .set('sort', 'orderIndex:asc');
     return this.summaryService.list(params);
+  }
+
+}
+
+@Injectable()
+export class StaffMembersResolver implements Resolve<StaffMembersResponse[]> {
+  /**
+   * Creates an instance of StaffMembersResolver.
+   * @param {QuestionsService} staffMemberService
+   * @memberof StaffMembersResolver
+   */
+  constructor(private staffMemberService: StaffMemberService) { }
+  /**
+   * make request to staff member service to get list of staff members
+   *
+   * @returns {Observable<StaffMembersResponse[]>}
+   * @memberof StaffMembersResolver
+   */
+  resolve(): Observable<StaffMembersResponse[]> {
+    return this.staffMemberService.list();
   }
 
 }
