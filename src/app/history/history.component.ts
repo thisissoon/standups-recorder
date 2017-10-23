@@ -18,6 +18,13 @@ export class HistoryComponent implements OnInit {
   public DBDays: DayItem[];
 
   /**
+   * Date object of today's date
+   *
+   * @memberof HomeComponent
+   */
+  public todayDate: Date = new Date();
+
+  /**
    * List of all weekdays enriched with
    * dayIDs where possible
    *
@@ -71,6 +78,7 @@ export class HistoryComponent implements OnInit {
         return day;
       });
   }
+
   /**
    * get resolved data and save data as component property.
    * Generate calendarArray from DBDays.

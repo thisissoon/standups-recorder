@@ -44,18 +44,50 @@
       <div *ngFor="let week of calendarArray; let i = index" ng-if="i % 5 === 0" class="calendar-row mt-4">
         <div class="row no-gutters">
 
-          <div *ngFor="let day of calendarArray.slice(i, i + 5); let j = index" class="col">
+          <div *ngFor="let day of (calendarArray.slice(i, i + 5).reverse()); let j = index" class="col">
             <div *ngIf="calendarArray[(i*5) + j]">
               <div class="calendar-cell calendar-day">
+
                 <div class="calendar-day__content">
-                  <div class="calendar-day__diagram"></div>
+
+                  <div *ngIf="calendarArray[(i*5) + (4-j)].ID">
+                    <div class="calendar-day__diagram"></div>
+                  </div>
+
+                  <div *ngIf="!calendarArray[(i*5) + (4-j)].ID">
+
+                      <button 
+                        class="button-add button-add--sm button-add--black"
+                         *ngIf="
+                          calendarArray[(i*5) + (4-j)].date.toISOString().split('T')[0]
+                          !=
+                          todayDate.toISOString().split('T')[0]"
+                      >
+                        <span>+</span>
+                      </button>
+      
+                      <button 
+                        class="button-add button-add--sm"
+                        *ngIf="
+                          calendarArray[(i*5) + (4-j)].date.toISOString().split('T')[0] 
+                          ===
+                          todayDate.toISOString().split('T')[0]"
+                      >
+                        <span>+</span>
+                      </button>
+
+                  </div>
+
                 </div>
+                
                 <div class="calendar-day__date mt-2">
                   <span>
-                    {{calendarArray[(i*5) + j].date.toISOString().split('-')[1]}}
+                    {{calendarArray[(i*5) + (4-j)].date.toISOString().split('-')[1]}}
                     /
-                    {{calendarArray[(i*5) + j].date.toISOString().split('-')[2].split('T')[0]}}</span>
+                    {{calendarArray[(i*5) + (4-j)].date.toISOString().split('-')[2].split('T')[0]}}
+                  </span>
                 </div>
+
               </div>
             </div>
           </div>
