@@ -4,7 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { RouterModule, Routes } from '@angular/router';
 
-import { DaysResolveService, providers } from './history/history-resolve.service';
+import { DaysResolver } from './history/history-resolve.service';
+import { PositionsResolver, SummariesResolver } from './standup-detail/standup-detail-resolve.service';
 
 import { AppComponent } from './app.component';
 import { TodayComponent } from './today/today.component';
@@ -20,17 +21,24 @@ const appRoutes: Routes = [
     path: 'today',
     component: TodayComponent
   },
-  { path: 'history',
+  {
+    path: 'history',
     component: HistoryComponent,
     resolve: {
-      days: DaysResolveService
+      days: DaysResolver
     }
   },
-  { path: 'team',
+  {
+    path: 'team',
     component: TeamComponent
   },
-  { path: 'standups/:id',
-    component: StandupDetailComponent
+  {
+    path: 'standups/:dayID',
+    component: StandupDetailComponent,
+    resolve: {
+      positions: PositionsResolver,
+      summaries: SummariesResolver
+    }
   }
 ];
 
@@ -50,7 +58,9 @@ const appRoutes: Routes = [
     ApiModule
   ],
   providers: [
-    ...providers
+    DaysResolver,
+    PositionsResolver,
+    SummariesResolver
   ],
   bootstrap: [AppComponent]
 })
