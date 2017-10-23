@@ -1,12 +1,18 @@
 <main>
+  
+  <div class="nav-other__back">
+    <a routerLink="/history">back</a>
+  </div>
+
   <div class="container">
     <div class="pt-5">
+
 
       <div class="pt-2 pb-2">
         <div class="row">
           <div class="col">
             <app-standup-diagram
-              [width]="200"
+              [width]="300"
               [DBPositions]="DBPositions"
               [DBSummaries]="DBSummaries"
               [DBStaffMembers]="DBStaffMembers"
