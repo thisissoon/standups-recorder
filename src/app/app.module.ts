@@ -11,6 +11,7 @@ import { TodayComponent } from './today/today.component';
 import { HistoryComponent } from './history/history.component';
 import { TeamComponent } from './team/team.component';
 import { FooterNavComponent } from './footer-nav/footer-nav.component';
+import { StandupDetailComponent } from './standup-detail/standup-detail.component';
 
 import { ApiModule } from './api/api.module';
 
@@ -27,6 +28,9 @@ const appRoutes: Routes = [
   },
   { path: 'team',
     component: TeamComponent
+  },
+  { path: 'standups/:id',
+    component: StandupDetailComponent
   }
 ];
 
@@ -36,7 +40,8 @@ const appRoutes: Routes = [
     TodayComponent,
     HistoryComponent,
     TeamComponent,
-    FooterNavComponent
+    FooterNavComponent,
+    StandupDetailComponent
   ],
   imports: [
     BrowserModule,

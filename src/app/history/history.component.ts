@@ -90,7 +90,6 @@ export class HistoryComponent implements OnInit {
       this.DBDays = data.days._embedded.days;
     });
     this.calendarArray = this.generateCalendarArray(this.DBDays);
-    console.log(this.calendarArray);
   }
 
 }

@@ -51,7 +51,9 @@
                 <div class="calendar-day__content">
 
                   <div *ngIf="calendarArray[(i*5) + (4-j)]?.ID">
-                    <div class="calendar-day__diagram"></div>
+                    <a routerLink="/standups/{{calendarArray[(i*5) + (4-j)]?.ID}}">
+                      <div class="calendar-day__diagram"></div>
+                    </a>
                   </div>
 
                   <div *ngIf="!calendarArray[(i*5) + (4-j)]?.ID">
