@@ -54,10 +54,11 @@ export class TodayPositionsResolver implements Resolve<Observable<PositionsRespo
       .set('date', new Date().toISOString().split('T')[0]);
     return this.dayService.list(params)
       .flatMap((response: DaysResponse) => {
-        params = new HttpParams();
-        if (response._embedded) {
-          params.set('dayID', response._embedded.days[0].ID);
+        if (!response._embedded) {
+          return Observable.of(null);
         }
+        params = new HttpParams()
+          .set('dayID', response._embedded.days[0].ID);
         return this.positionService.list(params);
       });
   }
@@ -87,11 +88,12 @@ export class TodaySummariesResolver implements Resolve<Observable<SummariesRespo
       .set('date', new Date().toISOString().split('T')[0]);
     return this.dayService.list(params)
       .flatMap((response: DaysResponse) => {
-        params = new HttpParams();
-        if (response._embedded) {
-          params.set('dayID', response._embedded.days[0].ID);
+        if (!response._embedded) {
+          return Observable.of(null);
         }
-        return this.summaryService.list(params);
+        params = new HttpParams()
+          .set('dayID', response._embedded.days[0].ID);
+          return this.summaryService.list(params);
       });
   }
 }
