@@ -44,7 +44,7 @@
       <div *ngFor="let week of calendarArray; let i = index" ng-if="i % 5 === 0" class="calendar-row mt-4">
         <div class="row no-gutters">
 
-          <div *ngFor="let day of (calendarArray.slice(i, i + 5).reverse()); let j = index" class="col">
+          <div class="col" *ngFor="let day of (calendarArray.slice(i, i + 5).reverse()); let j = index">
             <div *ngIf="calendarArray[(i*5) + j]">
               <div class="calendar-cell calendar-day">
 
@@ -61,9 +61,9 @@
                       <button 
                         class="button-add button-add--sm button-add--black"
                          *ngIf="
-                          calendarArray[(i*5) + (4-j)]?.date.toISOString().split('T')[0]
-                          !=
-                          todayDate.toISOString().split('T')[0]"
+                          calendarArray[(i*5) + (4-j)]?.date.getTime()
+                          <
+                          todayDate.getTime()"
                       >
                         <span>+</span>
                       </button>
@@ -84,9 +84,7 @@
                 
                 <div class="calendar-day__date mt-2">
                   <span>
-                    {{calendarArray[(i*5) + (4-j)]?.date.toISOString().split('-')[2].split('T')[0]}}
-                    /
-                    {{calendarArray[(i*5) + (4-j)]?.date.toISOString().split('-')[1]}}
+                    {{calendarArray[(i*5) + (4-j)]?.date | date:'d/M'}}
                   </span>
                 </div>
 

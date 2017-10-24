@@ -47,20 +47,25 @@ export class HistoryComponent implements OnInit {
    * and enrich with day IDs where possible.
    *
    * Makes null array of suitable length, populates with
-   * date objects seperated by 24hours in milliseconds,
-   * removes weekends, checks each day against
-   * the first day from the DBdays array, if match
+   * date objects seperated by 24hours in milliseconds from the
+   * next future friday, removes weekends, checks each day
+   * against the first day from the DBdays array, if match
    * ID used.
    *
    * @param {DBDays: DayItem[]} DBDays
    * @memberof HistoryComponent
    */
-  public generateCalendarArray(DBDays: DayItem[]): DayItem[] {
+  public generateCalendarArray(DBDays: DayItem[], todayDate: Date): DayItem[] {
     DBDays = Array.from(DBDays);
+    const daysUntilFriday = 5 - todayDate.getDay();
     return Array(DBDays.length)
       .fill(null)
       .map((element, index) => {
-        return new Date(Date.now() - index * (86400000));
+        return new Date(
+          Date.now()
+          + (daysUntilFriday * 86400000)
+          - (index * 86400000)
+        );
       })
       .filter(date => {
         const day = date.toUTCString().split(',')[0];
@@ -89,7 +94,7 @@ export class HistoryComponent implements OnInit {
     this.route.data.forEach((data: { days: DaysResponse }) => {
       this.DBDays = data.days._embedded.days;
     });
-    this.calendarArray = this.generateCalendarArray(this.DBDays);
+    this.calendarArray = this.generateCalendarArray(this.DBDays, this.todayDate);
   }
 
 }
