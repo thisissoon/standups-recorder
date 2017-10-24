@@ -1,7 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
-import { DayItem, DaysResponse } from '../api/models';
+import {
+  DayItem,
+  DaysResponse,
+  PositionItem,
+  PositionsResponse,
+  SummaryItem,
+  SummariesResponse,
+  StaffMemberItem,
+  StaffMembersResponse
+} from '../api/models';
 
 @Component({
   selector: 'app-today',
@@ -9,6 +19,7 @@ import { DayItem, DaysResponse } from '../api/models';
   styleUrls: ['./today.component.scss']
 })
 export class TodayComponent implements OnInit {
+
   /**
    * Today's Date
    *
@@ -17,12 +28,59 @@ export class TodayComponent implements OnInit {
    */
   public today: Date = new Date();
 
-  constructor() {
+  /**
+   * Today's day object from DB if exists
+   *
+   * @type {DayItem}
+   * @memberof TodayComponent
+   */
+  public DBToday: DayItem | null = null;
 
-  }
+  /**
+   * Positions with today's day ID
+   *
+   * @type {PositionItem[] | null}
+   * @memberof TodayComponent
+   */
+  public DBTodayPositions: PositionItem[] | null = null;
+
+  /**
+   * Summaries with today's day ID
+   *
+   * @type {SummaryItem[] | null}
+   * @memberof TodayComponent
+   */
+  public DBTodaySummaries: SummaryItem[] | null = null;
+
+  /**
+   * List of staff members from the backend
+   *
+   * @memberof StandupDetailComponent
+   */
+  public DBStaffMembers: StaffMemberItem[];
+
+  /**
+   * Creates an instance of HistoryComponent.
+   * @param {ActivatedRoute} route
+   *
+   * @memberof HistoryComponent
+   */
+  constructor(
+    protected route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
-
+    this.route.data.forEach((data: {
+        today: DaysResponse,
+        positions: PositionsResponse,
+        summaries: SummariesResponse,
+        staffMembers: StaffMembersResponse
+      }) => {
+      this.DBToday = data.today._embedded ? data.today._embedded.days[0] : null;
+      this.DBTodayPositions = data.positions._embedded ? data.positions._embedded.positions : null;
+      this.DBTodaySummaries = data.summaries._embedded ? data.summaries._embedded.summaries : null;
+      this.DBStaffMembers = data.staffMembers._embedded ? data.staffMembers._embedded.staffMembers : null;
+    });
   }
 
 }
