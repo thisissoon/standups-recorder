@@ -36,9 +36,7 @@
           <div class="col">
             <div class="table__values">
               <p class="text-left">
-                {{DBDay.date.split('-')[2]}}/
-                 {{DBDay.date.split('-')[1]}}/
-                 {{DBDay.date.split('-')[0]}}
+                {{DBDay.date | date:'d/M/y'}}
               </p>
               <p class="text-left">{{DBPositions.length}}</p>
               <p class="text-left">N/A</p>
