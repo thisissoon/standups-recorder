@@ -42,6 +42,11 @@ const appRoutes: Routes = [
       staffMembers: StaffMembersResolver,
       day: DayResolver
     }
+  },
+  {
+    path: '**',
+    redirectTo: 'today',
+    pathMatch: 'full'
   }
 ];
 
