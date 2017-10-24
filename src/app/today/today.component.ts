@@ -77,9 +77,9 @@ export class TodayComponent implements OnInit {
         staffMembers: StaffMembersResponse
       }) => {
       this.DBToday = data.today._embedded ? data.today._embedded.days[0] : null;
-      this.DBTodayPositions = data.positions._embedded ? data.positions._embedded.positions : null;
-      this.DBTodaySummaries = data.summaries._embedded ? data.summaries._embedded.summaries : null;
-      this.DBStaffMembers = data.staffMembers._embedded ? data.staffMembers._embedded.staffMembers : null;
+      this.DBTodayPositions = data.positions ? data.positions._embedded.positions : null;
+      this.DBTodaySummaries = data.summaries ? data.summaries._embedded.summaries : null;
+      this.DBStaffMembers = data.staffMembers ? data.staffMembers._embedded.staffMembers : null;
     });
   }
 
