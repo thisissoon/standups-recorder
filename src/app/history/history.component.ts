@@ -11,6 +11,13 @@ import { DaysResponse, DayItem } from '../api/models';
 export class HistoryComponent implements OnInit {
 
   /**
+   * Get keys of an object
+   *
+   * @memberof HomeComponent
+   */
+  public objectKeys = Object.keys;
+
+  /**
    * List of days from the backend
    *
    * @memberof HomeComponent
@@ -30,7 +37,7 @@ export class HistoryComponent implements OnInit {
    *
    * @memberof HomeComponent
    */
-  public calendarArray: DayItem[];
+  public calendarArray: DayItem[][];
 
   /**
    * Creates an instance of HistoryComponent.
@@ -43,58 +50,16 @@ export class HistoryComponent implements OnInit {
   ) { }
 
   /**
-   * Generate an array with all weekdays from now back
-   * and enrich with day IDs where possible.
-   *
-   * Makes null array of suitable length, populates with
-   * date objects seperated by 24hours in milliseconds from the
-   * next future friday, removes weekends, checks each day
-   * against the first day from the DBdays array, if match
-   * ID used.
-   *
-   * @param {DBDays: DayItem[]} DBDays
-   * @memberof HistoryComponent
-   */
-  public generateCalendarArray(DBDays: DayItem[], todayDate: Date): DayItem[] {
-    DBDays = Array.from(DBDays);
-    const daysUntilFriday = 5 - todayDate.getDay();
-    return Array(DBDays.length)
-      .fill(null)
-      .map((element, index) => {
-        return new Date(
-          Date.now()
-          + (daysUntilFriday * 86400000)
-          - (index * 86400000)
-        );
-      })
-      .filter(date => {
-        const day = date.toUTCString().split(',')[0];
-        return !(day.includes('Sat') || day.includes('Sun'));
-      })
-      .map(date => {
-        const ISOString = date.toISOString().split('T')[0];
-        const day = {
-          date,
-          ID: null
-        };
-        if (DBDays[0].date === ISOString) {
-          day.ID = DBDays.shift().ID;
-        }
-        return day;
-      });
-  }
-
-  /**
    * get resolved data and save data as component property.
-   * Generate calendarArray from DBDays.
+   * Generate calendarObject from DBDays.
    *
    * @memberof HistoryComponent
    */
   ngOnInit() {
-    this.route.data.forEach((data: { days: DaysResponse }) => {
+    this.route.data.forEach((data: { days: DaysResponse, calendarArray: DayItem[][] }) => {
       this.DBDays = data.days._embedded.days;
+      this.calendarArray = data.calendarArray;
     });
-    this.calendarArray = this.generateCalendarArray(this.DBDays, this.todayDate);
   }
 
 }
