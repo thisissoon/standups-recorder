@@ -43,7 +43,7 @@ const appRoutes: Routes = [
     component: TeamComponent
   },
   {
-    path: 'standups/:dayID',
+    path: 'history/:dayID',
     component: StandupDetailComponent,
     resolve: {
       positions: PositionsResolver,
