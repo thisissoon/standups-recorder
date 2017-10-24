@@ -41,29 +41,28 @@
 
       
   
-      <div *ngFor="let week of calendarArray; let i = index" ng-if="i % 5 === 0" class="calendar-row mt-4">
+      <div class="calendar-row mt-4" *ngFor="let week of calendarArray; let i = index">
         <div class="row no-gutters">
 
-          <div class="col" *ngFor="let day of (calendarArray.slice(i, i + 5).reverse()); let j = index">
-            <div *ngIf="calendarArray[(i*5) + j]">
+          <div class="col" *ngFor="let day of week; let j = index">
+            <div>
               <div class="calendar-cell calendar-day">
 
                 <div class="calendar-day__content">
 
-                  <div *ngIf="calendarArray[(i*5) + (4-j)]?.ID">
-                    <a routerLink="/standups/{{calendarArray[(i*5) + (4-j)]?.ID}}">
+                  <div *ngIf="week[j].ID">
+                    <a routerLink="/standups/{{week[j].ID}}">
                       <div class="calendar-day__diagram"></div>
                     </a>
                   </div>
 
-                  <div *ngIf="!calendarArray[(i*5) + (4-j)]?.ID">
+                  <div *ngIf="!week[j].ID">
 
                       <button 
                         class="button-add button-add--sm button-add--black"
-                         *ngIf="
-                          calendarArray[(i*5) + (4-j)]?.date.getTime()
-                          <
-                          todayDate.getTime()"
+                        *ngIf="
+                          week[j].date.toISOString().split('T')[0] != todayDate.toISOString().split('T')[0] &&
+                          week[j].date.getTime() < todayDate.getTime()"
                       >
                         <span>+</span>
                       </button>
@@ -71,7 +70,7 @@
                       <button 
                         class="button-add button-add--sm"
                         *ngIf="
-                          calendarArray[(i*5) + (4-j)]?.date.toISOString().split('T')[0] 
+                           week[j].date.toISOString().split('T')[0] 
                           ===
                           todayDate.toISOString().split('T')[0]"
                       >
@@ -84,7 +83,7 @@
                 
                 <div class="calendar-day__date mt-2">
                   <span>
-                    {{calendarArray[(i*5) + (4-j)]?.date | date:'d/M'}}
+                    {{week[j].date | date:'d/M'}}
                   </span>
                 </div>
 
@@ -99,5 +98,7 @@
   </div>
 </main>
 <footer>
-  <app-footer-nav></app-footer-nav>
+  <app-footer-nav
+    [gradient]="true"
+  ></app-footer-nav>
 </footer>
