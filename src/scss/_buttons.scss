@@ -6,6 +6,7 @@
   padding: 0;
   border: none;
   position: relative;
+  overflow: hidden;
   & > span {
     display: inline-block;
     position: absolute;
@@ -47,8 +48,8 @@
   height: $button-add-lg-width;
   & > span {
     font-size: 100px;
-    top: -30px;
-    left: 24px;
+    top: -45px;
+    left: 9px;
   }
 }
 

@@ -1,15 +1,18 @@
-<main>
-  <div class="container">
+<main [ngSwitch]="true">
+  <div 
+    class="container"
+    *ngSwitchCase="!DBToday"
+  >
     <div class="pt-5">
       <div class="row">
         <div class="col">
-          <h3 class="mb-3 text-center">10/10/1991</h3>
+          <h5 class="text-center">{{today | date:'d/M/y'}}</h5>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <h4 class="text-center">add today's stand-up</h4>
-          <p class="text-center">Bacon ipsum dolor amet <br> t-bone shank shoulder</p>
+          <h5 class="text-center mt-5">add today's stand-up</h5>
+          <p class="text-center">tap below to add a new standup.</p>
         </div>
       </div>
       <div class="row">
@@ -23,7 +26,63 @@
       </div>
     </div>
   </div>
+
+  <div 
+    class="container" 
+    *ngSwitchCase="!!DBToday"
+  >
+    <div class="pt-5">
+  
+  
+      <div class="pt-2 pb-2">
+        <div class="row">
+          <div class="col">
+            <app-standup-diagram 
+              [width]="300" 
+              [DBPositions]="DBTodayPositions" 
+              [DBSummaries]="DBTodaySummaries" 
+              [DBStaffMembers]="DBStaffMembers"
+            ></app-standup-diagram>
+          </div>
+        </div>
+      </div>
+  
+      <div class="table">
+  
+        <div class="row">
+  
+          <div class="col">
+            <div class="table__keys">
+              <p class="text-right">date</p>
+              <p class="text-right">staff</p>
+              <p class="text-right">duration</p>
+            </div>
+          </div>
+  
+          <div class="col">
+            <div class="table__values">
+              <p class="text-left">
+                 {{today | date:'d/M/y'}}
+              </p>
+              <p class="text-left">{{DBTodayPositions.length}}</p>
+              <p class="text-left">N/A</p>
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <a href="">
+            <h5 class="cta mt-3">edit</h5>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
+
 <footer>
   <app-footer-nav></app-footer-nav>
 </footer>

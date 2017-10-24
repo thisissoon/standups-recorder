@@ -1,9 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
-import { PositionService, SummaryService, StaffMemberService, DayService } from '../api/services';
-
-import { DayItem, DaysResponse } from '../api/models';
+import {
+  DayItem,
+  DaysResponse,
+  PositionItem,
+  PositionsResponse,
+  SummaryItem,
+  SummariesResponse,
+  StaffMemberItem,
+  StaffMembersResponse
+} from '../api/models';
 
 @Component({
   selector: 'app-today',
@@ -11,60 +19,68 @@ import { DayItem, DaysResponse } from '../api/models';
   styleUrls: ['./today.component.scss']
 })
 export class TodayComponent implements OnInit {
+
   /**
-   * Today's day from backend API.
-   * Null if day doesn't exist yet
+   * Today's Date
    *
-   * @type {number}
+   * @type {Date}
    * @memberof TodayComponent
    */
-  public today: DayItem;
+  public today: Date = new Date();
 
+  /**
+   * Today's day object from DB if exists
+   *
+   * @type {DayItem}
+   * @memberof TodayComponent
+   */
+  public DBToday: DayItem | null = null;
+
+  /**
+   * Positions with today's day ID
+   *
+   * @type {PositionItem[] | null}
+   * @memberof TodayComponent
+   */
+  public DBTodayPositions: PositionItem[] | null = null;
+
+  /**
+   * Summaries with today's day ID
+   *
+   * @type {SummaryItem[] | null}
+   * @memberof TodayComponent
+   */
+  public DBTodaySummaries: SummaryItem[] | null = null;
+
+  /**
+   * List of staff members from the backend
+   *
+   * @memberof StandupDetailComponent
+   */
+  public DBStaffMembers: StaffMemberItem[];
+
+  /**
+   * Creates an instance of HistoryComponent.
+   * @param {ActivatedRoute} route
+   *
+   * @memberof HistoryComponent
+   */
   constructor(
-    private positionService: PositionService,
-    private summaryService: SummaryService,
-    private staffMemberService: StaffMemberService,
-    private dayService: DayService
-  ) {
-    // positionService.get('be774180-9a2a-11e7-979c-cb40e3c89a8d')
-    // .subscribe(value => console.log(value));
-    // positionService.list(new HttpParams().set('dayID', 'bd76e880-9a2a-11e7-979c-cb40e3c89a8d'))
-    // .subscribe(value => console.log(value));
-    // summaryService.get('be7ee2a2-9a2a-11e7-979c-cb40e3c89a8d')
-    // .subscribe(value => console.log(value));
-    // summaryService.list(new HttpParams().set('dayID', 'bd76e880-9a2a-11e7-979c-cb40e3c89a8d'))
-    // .subscribe(value => console.log(value));
-    // staffMemberService.get('bd53f730-9a2a-11e7-979c-cb40e3c89a8d')
-    // .subscribe(value => console.log(value));
-    // staffMemberService.list(new HttpParams().set('current', 'true'))
-    // .subscribe(value => console.log(value));
-    // dayService.get('bd76e880-9a2a-11e7-979c-cb40e3c89a8d')
-    // .subscribe(value => console.log(value));
-    // dayService.list(new HttpParams().set('date', new Date().toISOString().split('T')[0]))
-    //   .subscribe((value: DaysResponse) => {
-    //     this.today = value._embedded ? value._embedded.days[0] : null;
-    //   });
-    // dayService.list(new HttpParams().set('date', '2017-04-12'))
-    //   .subscribe((value: DaysResponse) => {
-    //     this.today = value._embedded ? value._embedded.days[0] : null;
-    //     if (this.today) {
-    //       this.getStandup(this.today.ID);
-    //     }
-    //   });
-  }
+    protected route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
-
-  }
-  /**
-   * Returns standup object
-   *
-   * @readonly
-   * @type {void}
-   * @memberof TodayComponent
-   */
-  public getStandup(dayID: string): void {
-    console.log(dayID);
+    this.route.data.forEach((data: {
+        today: DaysResponse,
+        positions: PositionsResponse,
+        summaries: SummariesResponse,
+        staffMembers: StaffMembersResponse
+      }) => {
+      this.DBToday = data.today._embedded ? data.today._embedded.days[0] : null;
+      this.DBTodayPositions = data.positions._embedded ? data.positions._embedded.positions : null;
+      this.DBTodaySummaries = data.summaries._embedded ? data.summaries._embedded.summaries : null;
+      this.DBStaffMembers = data.staffMembers._embedded ? data.staffMembers._embedded.staffMembers : null;
+    });
   }
 
 }

@@ -4,8 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { RouterModule, Routes } from '@angular/router';
 
+import { TodayResolver, TodayPositionsResolver, TodaySummariesResolver } from './today/today-resolve.service';
 import { DaysResolver } from './history/history-resolve.service';
-import { PositionsResolver, SummariesResolver, StaffMembersResolver, DayResolver } from './standup-detail/standup-detail-resolve.service';
+import { PositionsResolver, SummariesResolver, DayResolver } from './standup-detail/standup-detail-resolve.service';
+import { StaffMembersResolver } from './api/staff-member-resolve.service';
 
 import { AppComponent } from './app.component';
 import { TodayComponent } from './today/today.component';
@@ -20,7 +22,13 @@ import { ApiModule } from './api/api.module';
 const appRoutes: Routes = [
   {
     path: 'today',
-    component: TodayComponent
+    component: TodayComponent,
+    resolve: {
+      today: TodayResolver,
+      positions: TodayPositionsResolver,
+      summaries: TodaySummariesResolver,
+      staffMembers: StaffMembersResolver,
+    }
   },
   {
     path: 'history',
@@ -42,6 +50,11 @@ const appRoutes: Routes = [
       staffMembers: StaffMembersResolver,
       day: DayResolver
     }
+  },
+  {
+    path: '**',
+    redirectTo: 'today',
+    pathMatch: 'full'
   }
 ];
 
@@ -66,7 +79,10 @@ const appRoutes: Routes = [
     PositionsResolver,
     SummariesResolver,
     StaffMembersResolver,
-    DayResolver
+    DayResolver,
+    TodayResolver,
+    TodayPositionsResolver,
+    TodaySummariesResolver
   ],
   bootstrap: [AppComponent]
 })
