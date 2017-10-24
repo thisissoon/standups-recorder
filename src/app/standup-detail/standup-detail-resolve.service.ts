@@ -57,26 +57,6 @@ export class SummariesResolver implements Resolve<SummariesResponse[]> {
 }
 
 @Injectable()
-export class StaffMembersResolver implements Resolve<StaffMembersResponse[]> {
-  /**
-   * Creates an instance of StaffMembersResolver.
-   * @param {StaffMemberService} staffMemberService
-   * @memberof StaffMembersResolver
-   */
-  constructor(private staffMemberService: StaffMemberService) { }
-  /**
-   * make request to staff member service to get list of staff members
-   *
-   * @returns {Observable<StaffMembersResponse[]>}
-   * @memberof StaffMembersResolver
-   */
-  resolve(): Observable<StaffMembersResponse[]> {
-    return this.staffMemberService.list();
-  }
-
-}
-
-@Injectable()
 export class DayResolver implements Resolve<DayItem> {
   /**
    * Creates an instance of DayResolver.
