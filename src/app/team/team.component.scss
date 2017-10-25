@@ -1,0 +1,21 @@
+@import "../../scss/main";
+
+$translate: calc(50vh - #{$nav-item-height / 2} - #{$item-height-staff / 2});
+
+.staff-member-list__container {
+  position: fixed;
+  left: 80px;
+}
+
+.staff-member-list {
+  transform: translateY($translate);
+}
+
+.staff-member-selector {
+  width: 30px;
+  height: 3px;
+  background: white;
+  position: fixed;
+  top: calc(50vh - #{$nav-item-height / 2});
+  left: 27px;
+}

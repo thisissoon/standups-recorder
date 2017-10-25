@@ -1,4 +1,24 @@
-<p>
-  team works!
-</p>
-<app-footer-nav></app-footer-nav>
+<main>
+  <div class="container">
+    <div class="staff-member-selector"></div>
+    <div class="staff-member-list__container">
+      <ul 
+        class="staff-member-list">
+        <li 
+          class="staff-member-list__item"
+          *ngFor="let staffMember of DBStaffMembers; let i = index"
+        >
+          {{staffMember.firstName}} {{staffMember.lastName.split('')[0]}}
+        </li>
+      </ul>
+      <div 
+        class="scroll-height-staff" 
+        [ngStyle]="{'height': 'calc(100vh + ' + (DBStaffMembers.length *  100) + 'px - 100px)'}"
+      >
+      </div>
+    </div>
+  </div>
+</main>
+<app-footer-nav
+  [gradient]="true"
+></app-footer-nav>

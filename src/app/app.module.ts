@@ -40,7 +40,10 @@ const appRoutes: Routes = [
   },
   {
     path: 'team',
-    component: TeamComponent
+    component: TeamComponent,
+    resolve: {
+      staffMembers: StaffMembersResolver
+    }
   },
   {
     path: 'history/:dayID',
