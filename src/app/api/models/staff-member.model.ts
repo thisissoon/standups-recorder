@@ -5,6 +5,8 @@ export interface StaffMemberItem {
   role: string;
   current: boolean;
   selected?: boolean;
+  firstStandup?: any;
+  totalStandups?: any;
 }
 
 export interface StaffMembersResponse {
