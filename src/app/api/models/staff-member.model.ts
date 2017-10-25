@@ -4,6 +4,7 @@ export interface StaffMemberItem {
   lastName: string;
   role: string;
   current: boolean;
+  selected?: boolean;
 }
 
 export interface StaffMembersResponse {
