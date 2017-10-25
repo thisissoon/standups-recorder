@@ -2,6 +2,12 @@
 
 $translate: calc(50vh - #{$nav-item-height / 2} - #{$item-height-staff / 2});
 
+.button-add {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+}
+
 .staff-member-list__container {
   position: fixed;
   left: 80px;
