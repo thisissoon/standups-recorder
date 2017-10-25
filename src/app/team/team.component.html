@@ -11,8 +11,23 @@
           class="staff-member-list__item"
           *ngFor="let staffMember of staffMembers; let i = index"
           [ngClass]="{ 'selected': staffMember.selected }"
+          [ngSwitch]="true"
+        >
+
+        <a 
+          routerLink="/team/{{staffMember.ID}}"
+          class="cta"
+          *ngSwitchCase="!!staffMember.selected"
         >
           {{staffMember.firstName}} {{staffMember.lastName.split('')[0]}}
+        </a>
+
+        <span
+          *ngSwitchCase="!staffMember.selected"
+        >
+          {{staffMember.firstName}} {{staffMember.lastName.split('')[0]}}
+        </span>
+
         </li>
       </ul>
       <div 
