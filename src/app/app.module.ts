@@ -7,7 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TodayResolver, TodayPositionsResolver, TodaySummariesResolver } from './today/today-resolve.service';
 import { DaysResolver, CalendarArrayResolver } from './history/history-resolve.service';
 import { PositionsResolver, SummariesResolver, DayResolver } from './standup-detail/standup-detail-resolve.service';
-import { StaffMembersResolver } from './api/staff-member-resolve.service';
+import { StaffMembersResolver, StaffMemberResolver } from './api/staff-member-resolve.service';
 
 import { AppComponent } from './app.component';
 import { TodayComponent } from './today/today.component';
@@ -16,6 +16,7 @@ import { TeamComponent } from './team/team.component';
 import { FooterNavComponent } from './footer-nav/footer-nav.component';
 import { StandupDetailComponent } from './standup-detail/standup-detail.component';
 import { StandupDiagramComponent } from './standup-diagram/standup-diagram.component';
+import { StaffMemberDetailComponent } from './staff-member-detail/staff-member-detail.component';
 
 import { ApiModule } from './api/api.module';
 
@@ -46,6 +47,13 @@ const appRoutes: Routes = [
     }
   },
   {
+    path: 'team/:staffMemberID',
+    component: StaffMemberDetailComponent,
+    resolve: {
+      staffMember: StaffMemberResolver
+    }
+  },
+  {
     path: 'history/:dayID',
     component: StandupDetailComponent,
     resolve: {
@@ -70,7 +78,8 @@ const appRoutes: Routes = [
     TeamComponent,
     FooterNavComponent,
     StandupDetailComponent,
-    StandupDiagramComponent
+    StandupDiagramComponent,
+    StaffMemberDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +96,8 @@ const appRoutes: Routes = [
     TodayResolver,
     TodayPositionsResolver,
     TodaySummariesResolver,
-    CalendarArrayResolver
+    CalendarArrayResolver,
+    StaffMemberResolver
   ],
   bootstrap: [AppComponent]
 })
