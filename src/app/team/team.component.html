@@ -1,19 +1,23 @@
 <main>
   <div class="container">
     <div class="staff-member-selector"></div>
-    <div class="staff-member-list__container">
+    <div 
+      class="staff-member-list__container"
+      (scroll)="onStaffScroll($event)"
+    >
       <ul 
         class="staff-member-list">
         <li 
           class="staff-member-list__item"
-          *ngFor="let staffMember of DBStaffMembers; let i = index"
+          *ngFor="let staffMember of staffMembers; let i = index"
+          [ngClass]="{ 'selected': staffMember.selected }"
         >
           {{staffMember.firstName}} {{staffMember.lastName.split('')[0]}}
         </li>
       </ul>
       <div 
         class="scroll-height-staff" 
-        [ngStyle]="{'height': 'calc(100vh + ' + (DBStaffMembers.length *  100) + 'px - 100px)'}"
+        [ngStyle]="{'height': 'calc(100vh + ' + (staffMembers.length *  100) + 'px - 100px)'}"
       >
       </div>
     </div>
