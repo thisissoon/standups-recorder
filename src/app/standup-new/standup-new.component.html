@@ -1,0 +1,55 @@
+<main>
+  <div 
+    class="nav-other__close"
+    [ngClass]="{'adding-staff' : addingStaff }"
+  >
+    <a routerLink="/today">
+      <span>x</span>
+    </a>
+  </div>
+  <div 
+    class="positions-line__container"
+    [ngClass]="{'adding-staff' : addingStaff }"
+  >
+    <div class="scroll-height"></div>
+    <ul class="positions-line" id="positions-line">
+      <li class="positions-line__item positions-line__item--first">
+        <div class="positions-line__segment">
+          <div class="positions-line__node positions-line__node--add">
+            <button 
+            class="button-add button-add--sm"
+            (click)="onAddClick($event, firstNode)"
+            [ngClass]="{'active': !!firstNode.pickingNext }"
+            >
+            <span>+</span>
+          </button>
+        </div>
+        <div 
+          class="positions-line__indicator"
+          [ngClass]="{'active': !!firstNode.pickingNext }"
+        ></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</main>
+<aside>
+  <div class="staff-member-list__container">
+    <ul class="staff-member-list">
+      <li class="staff-member-list__item" *ngFor="let staffMember of staffMembers; let i = index" [ngClass]="{ 'selected': staffMember.selected }"
+        [ngSwitch]="true">
+  
+        <a routerLink="/team/{{staffMember.ID}}" class="cta" *ngSwitchCase="!!staffMember.selected">
+          {{staffMember.firstName}} {{staffMember.lastName.split('')[0]}}
+        </a>
+  
+        <span *ngSwitchCase="!staffMember.selected">
+          {{staffMember.firstName}} {{staffMember.lastName.split('')[0]}}
+        </span>
+  
+      </li>
+    </ul>
+    <div class="scroll-height-staff" [ngStyle]="{'height': 'calc(100vh + ' + (staffMembers.length *  100) + 'px - 100px)'}">
+    </div>
+  </div>
+</aside>

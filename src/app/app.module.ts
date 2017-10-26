@@ -17,6 +17,7 @@ import { FooterNavComponent } from './footer-nav/footer-nav.component';
 import { StandupDetailComponent } from './standup-detail/standup-detail.component';
 import { StandupDiagramComponent } from './standup-diagram/standup-diagram.component';
 import { StaffMemberDetailComponent } from './staff-member-detail/staff-member-detail.component';
+import { StandupNewComponent } from './standup-new/standup-new.component';
 
 import { ApiModule } from './api/api.module';
 
@@ -64,6 +65,13 @@ const appRoutes: Routes = [
     }
   },
   {
+    path: 'standups/new',
+    component: StandupNewComponent,
+    resolve: {
+      staffMembers: StaffMembersResolver
+    }
+  },
+  {
     path: '**',
     redirectTo: 'today',
     pathMatch: 'full'
@@ -79,7 +87,8 @@ const appRoutes: Routes = [
     FooterNavComponent,
     StandupDetailComponent,
     StandupDiagramComponent,
-    StaffMemberDetailComponent
+    StaffMemberDetailComponent,
+    StandupNewComponent
   ],
   imports: [
     BrowserModule,
