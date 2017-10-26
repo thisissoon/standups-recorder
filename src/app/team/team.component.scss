@@ -1,20 +1,14 @@
 @import "../../scss/main";
 
-$translate: calc(50vh - #{$nav-item-height / 2} - #{$item-height-staff / 2});
-
 .button-add {
   position: fixed;
   top: 50px;
   right: 50px;
 }
 
-.staff-member-list__container {
+.app-staff-members-list {
   position: fixed;
   left: 80px;
-}
-
-.staff-member-list {
-  transform: translateY($translate);
 }
 
 .staff-member-selector {

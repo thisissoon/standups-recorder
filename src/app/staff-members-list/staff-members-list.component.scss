@@ -1,0 +1,7 @@
+@import "../../scss/main";
+
+$translate: calc(50vh - #{$nav-item-height / 2} - #{$item-height-staff / 2});
+
+.staff-member-list {
+  transform: translateY($translate);
+}

@@ -18,6 +18,7 @@ import { StandupDetailComponent } from './standup-detail/standup-detail.componen
 import { StandupDiagramComponent } from './standup-diagram/standup-diagram.component';
 import { StaffMemberDetailComponent } from './staff-member-detail/staff-member-detail.component';
 import { StandupNewComponent } from './standup-new/standup-new.component';
+import { StaffMembersListComponent } from './staff-members-list/staff-members-list.component';
 
 import { ApiModule } from './api/api.module';
 
@@ -88,7 +89,8 @@ const appRoutes: Routes = [
     StandupDetailComponent,
     StandupDiagramComponent,
     StaffMemberDetailComponent,
-    StandupNewComponent
+    StandupNewComponent,
+    StaffMembersListComponent
   ],
   imports: [
     BrowserModule,
