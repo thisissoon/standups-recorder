@@ -25,6 +25,21 @@ export class StaffMembersListComponent implements OnInit {
   public staffMembers: StaffMemberItem[];
 
   /**
+   * How much to shift list down by to align with selector
+   *
+   * @memberof StaffMembersListComponent
+   */
+  @Input() selectorY: number;
+
+  /**
+   * Height of item in list. Used with selectorY to position list inline
+   * with selector of parent element.
+   *
+   * @memberof TeamComponent
+   */
+  public staffItemHeight = 100;
+
+  /**
    * Observable for staff member list scroll events
    *
    * @memberof TeamComponent

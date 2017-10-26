@@ -1,4 +1,8 @@
-@import "../../scss/main";
+// Bootstrap functions
+@import "~bootstrap/scss/functions";
+
+// Core variables and mixins
+@import "../../scss/helpers";
 
 $translate: calc(50vh - #{$nav-item-height / 2} - #{$item-height-staff / 2});
 

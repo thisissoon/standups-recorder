@@ -40,6 +40,13 @@ export class StandupNewComponent implements OnInit {
   public addingStaff = false;
 
   /**
+   * tells staff membmer list component where to positions list
+   *
+   * @memberof StandupNewComponent
+   */
+  public selectorY: number;
+
+  /**
    * First node on screen in absense of any elements in the list.
    *
    * @memberof StandupNewComponent
@@ -68,6 +75,7 @@ export class StandupNewComponent implements OnInit {
   public onAddClick($event, node: Node) {
     this.addingStaff = !this.addingStaff;
     node.pickingNext = !node.pickingNext;
+    this.selectorY = $event.clientY;
   }
 
   /**

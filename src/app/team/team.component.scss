@@ -1,4 +1,8 @@
-@import "../../scss/main";
+// Bootstrap functions
+@import "~bootstrap/scss/functions";
+
+// Core variables and mixins
+@import "../../scss/helpers";
 
 .button-add {
   position: fixed;
