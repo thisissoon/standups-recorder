@@ -13,6 +13,7 @@
 .app-staff-members-list {
   position: fixed;
   left: 80px;
+
 }
 
 .staff-member-selector {
@@ -20,6 +21,6 @@
   height: 3px;
   background: white;
   position: fixed;
-  top: calc(50vh - #{$nav-item-height / 2});
+  top: 50vh;
   left: 27px;
 }

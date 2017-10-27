@@ -21,6 +21,13 @@ export class TeamComponent implements OnInit {
   public DBStaffMembers: StaffMemberItem[];
 
   /**
+   * tells staff membmer list component where to positions list
+   *
+   * @memberof StandupNewComponent
+   */
+  public selectorY = window.screen.height / 2;
+
+  /**
    * Creates an instance of TeamComponent.
    * @param {ActivatedRoute} route
    *
@@ -39,7 +46,6 @@ export class TeamComponent implements OnInit {
     this.route.data.forEach((data: { staffMembers: StaffMembersResponse }) => {
       this.DBStaffMembers = data.staffMembers ? data.staffMembers._embedded.staffMembers : null;
     });
-
   }
 
 }
