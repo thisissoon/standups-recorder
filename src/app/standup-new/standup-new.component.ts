@@ -7,6 +7,9 @@ export interface Node {
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/Rx';
+
 import { StaffMemberItem, StaffMembersResponse } from '../api/models';
 
 @Component({
@@ -40,6 +43,13 @@ export class StandupNewComponent implements OnInit {
   public addingStaff = false;
 
   /**
+   * tells staff membmer list component where to positions list
+   *
+   * @memberof StandupNewComponent
+   */
+  public selectorY: number;
+
+  /**
    * First node on screen in absense of any elements in the list.
    *
    * @memberof StandupNewComponent
@@ -49,6 +59,14 @@ export class StandupNewComponent implements OnInit {
     inViewport: false,
     pickingNext: false
   };
+
+  /**
+   * Observable for selected members of staff in
+   * staff list child component.
+   *
+   * @memberof StandupNewComponent
+   */
+  public selectedStaffMembers = new Subject();
 
   /**
    * Creates an instance of StandupNewComponent.
@@ -68,6 +86,7 @@ export class StandupNewComponent implements OnInit {
   public onAddClick($event, node: Node) {
     this.addingStaff = !this.addingStaff;
     node.pickingNext = !node.pickingNext;
+    this.selectorY = $event.clientY;
   }
 
   /**
@@ -81,6 +100,11 @@ export class StandupNewComponent implements OnInit {
       this.staffMembers = this.DBStaffMembers.map(staffMember => {
         staffMember.selected = false;
         return staffMember;
+      });
+    });
+    this.selectedStaffMembers.subscribe((value: StaffMemberItem) => {
+      this.staffMembers = this.staffMembers.filter(staffMember => {
+        return staffMember.ID !== value.ID;
       });
     });
   }

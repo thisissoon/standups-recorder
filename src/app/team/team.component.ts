@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/Rx';
@@ -21,25 +21,27 @@ export class TeamComponent implements OnInit {
   public DBStaffMembers: StaffMemberItem[];
 
   /**
-   * List of staff members
+   * List of staff members augmented with selected
+   * values
    *
    * @memberof TeamComponent
    */
   public staffMembers: StaffMemberItem[];
 
   /**
-   * Observable for staff member list scroll events
+   * tells staff membmer list component where to positions list
    *
-   * @memberof TeamComponent
+   * @memberof StandupNewComponent
    */
-  public nameScroll = new Subject();
+  public selectorY = window.screen.height / 2;
 
   /**
-   * Height of staff member list items
+   * Observable for selected members of staff in
+   * staff list child component.
    *
-   * @memberof TeamComponent
+   * @memberof StandupNewComponent
    */
-  public staffMemberListItemHeight = 100;
+  public selectedStaffMembers = new Subject();
 
   /**
    * Creates an instance of TeamComponent.
@@ -47,38 +49,10 @@ export class TeamComponent implements OnInit {
    *
    * @memberof TeamComponent
    */
-  constructor(private route: ActivatedRoute) { }
-
-  /**
-   * Event listener for staffmember list scroll event.
-   * Scroll value rebased to
-   * --0--staff-name,
-   * --25,
-   * --50
-   * --75,
-   * --0--staff-name,
-   * --25,
-   * --50
-   * --75,
-   * --0--staff-name
-   * If 0 push scroll event rebased to match index of a staff member list item.
-   * If 25 push null so all staff deselected.
-   * If 75 push scroll event to match index of staff list item.
-   *
-   * @method onStaffScroll
-   * @param {$event} $event
-   *
-   * @memberof TeamComponent
-   */
-  onStaffScroll($event) {
-    if (Math.floor(($event.target.scrollTop - $event.target.scrollTop % 25) % this.staffMemberListItemHeight) === 0) {
-      this.nameScroll.next(Math.floor(($event.target.scrollTop + (this.staffMemberListItemHeight / 2)) / this.staffMemberListItemHeight));
-    } else if (Math.floor(($event.target.scrollTop - $event.target.scrollTop % 25) % this.staffMemberListItemHeight) === 25) {
-      this.nameScroll.next(null);
-    } else if (Math.floor(($event.target.scrollTop - $event.target.scrollTop % 25) % this.staffMemberListItemHeight) === 75) {
-      this.nameScroll.next(Math.floor(($event.target.scrollTop + (this.staffMemberListItemHeight / 2)) / this.staffMemberListItemHeight));
-    }
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   /**
    * On init sets staffmembers on component scope.
@@ -94,23 +68,10 @@ export class TeamComponent implements OnInit {
         staffMember.selected = false;
         return staffMember;
       });
-      this.staffMembers[0].selected = true;
     });
-
-  /**
-   * Value is scroll event value rebased to appropriate index.
-   * If value matches index set selected to true
-   *
-   */
-  this.nameScroll
-    .distinctUntilChanged()
-    .subscribe(value => {
-      this.staffMembers = this.staffMembers.map((staffMember, index) => {
-        staffMember.selected = (index === value);
-        return staffMember;
-      });
+    this.selectedStaffMembers.subscribe((value: StaffMemberItem) => {
+      this.router.navigateByUrl(`team/${value.ID}`);
     });
-
   }
 
 }

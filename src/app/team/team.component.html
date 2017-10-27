@@ -7,41 +7,13 @@
   </button>
   <div class="container">
     <div class="staff-member-selector"></div>
-    <div 
-      class="staff-member-list__container"
-      (scroll)="onStaffScroll($event)"
+    <app-staff-members-list
+      class="app-staff-members-list"
+      [staffMembers]="staffMembers"
+      [selectorY]="selectorY"
+      [selectedStaffMembers]="selectedStaffMembers"
     >
-      <ul 
-        class="staff-member-list">
-        <li 
-          class="staff-member-list__item"
-          *ngFor="let staffMember of staffMembers; let i = index"
-          [ngClass]="{ 'selected': staffMember.selected }"
-          [ngSwitch]="true"
-        >
-
-        <a 
-          routerLink="/team/{{staffMember.ID}}"
-          class="cta"
-          *ngSwitchCase="!!staffMember.selected"
-        >
-          {{staffMember.firstName}} {{staffMember.lastName.split('')[0]}}
-        </a>
-
-        <span
-          *ngSwitchCase="!staffMember.selected"
-        >
-          {{staffMember.firstName}} {{staffMember.lastName.split('')[0]}}
-        </span>
-
-        </li>
-      </ul>
-      <div 
-        class="scroll-height-staff" 
-        [ngStyle]="{'height': 'calc(100vh + ' + (staffMembers.length *  100) + 'px - 100px)'}"
-      >
-      </div>
-    </div>
+    </app-staff-members-list>
   </div>
 </main>
 <app-footer-nav

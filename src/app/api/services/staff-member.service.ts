@@ -37,7 +37,7 @@ export class StaffMemberService {
    * @returns {Observable<StaffMembersResponse>}
    * @memberof CurrentService
    */
-  public list(params: HttpParams = new HttpParams()): Observable<any> {
+  public list(params: HttpParams): Observable<any> {
     const options: any = { params, observe: 'body' };
     return this.http.get<StaffMembersResponse[]>(this.endpointUrl, options);
   }

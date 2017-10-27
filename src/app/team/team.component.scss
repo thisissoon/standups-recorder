@@ -1,6 +1,8 @@
-@import "../../scss/main";
+// Bootstrap functions
+@import "~bootstrap/scss/functions";
 
-$translate: calc(50vh - #{$nav-item-height / 2} - #{$item-height-staff / 2});
+// Core variables and mixins
+@import "../../scss/helpers";
 
 .button-add {
   position: fixed;
@@ -8,13 +10,10 @@ $translate: calc(50vh - #{$nav-item-height / 2} - #{$item-height-staff / 2});
   right: 50px;
 }
 
-.staff-member-list__container {
+.app-staff-members-list {
   position: fixed;
   left: 80px;
-}
 
-.staff-member-list {
-  transform: translateY($translate);
 }
 
 .staff-member-selector {
@@ -22,6 +21,6 @@ $translate: calc(50vh - #{$nav-item-height / 2} - #{$item-height-staff / 2});
   height: 3px;
   background: white;
   position: fixed;
-  top: calc(50vh - #{$nav-item-height / 2});
+  top: 50vh;
   left: 27px;
 }

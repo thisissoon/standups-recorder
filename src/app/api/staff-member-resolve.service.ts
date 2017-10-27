@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { HttpParams } from '@angular/common/http';
 
 import { StaffMemberService } from './services';
 
@@ -21,7 +22,9 @@ export class StaffMembersResolver implements Resolve<StaffMembersResponse> {
    * @memberof StaffMembersResolver
    */
   resolve(): Observable<StaffMembersResponse> {
-    return this.staffMemberService.list();
+    const params = new HttpParams()
+      .set('sort', 'firstName:asc');
+    return this.staffMemberService.list(params);
   }
 
 }

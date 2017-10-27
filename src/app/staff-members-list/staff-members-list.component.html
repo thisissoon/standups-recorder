@@ -1,0 +1,28 @@
+<div 
+  class="staff-member-list__container" 
+  (scroll)="onStaffScroll($event)"
+>
+  <ul 
+    class="staff-member-list"
+    [ngStyle]="{'transform': 'translateY(' + (selectorY - (staffItemHeight / 2)) + 'px)'}"
+  >
+    <li 
+      class="staff-member-list__item" 
+      *ngFor="let staffMember of staffMembers; let i = index" 
+      [ngClass]="{ 'selected': staffMember.selected }"
+    >
+
+      <span
+        (click)="staffMemberClickHandler($event, staffMember)"
+      >
+        {{staffMember.firstName}} {{staffMember.lastName.split('')[0]}}
+      </span>
+
+    </li>
+  </ul>
+  <div 
+    class="scroll-height-staff" 
+    [ngStyle]="{'height': 'calc(100vh + ' + (staffMembers.length *  100) + 'px - 100px)'}"
+  >
+  </div>
+</div>
