@@ -31,7 +31,7 @@ export class TeamComponent implements OnInit {
   /**
    * tells staff membmer list component where to positions list
    *
-   * @memberof StandupNewComponent
+   * @memberof TeamComponent
    */
   public selectorY = window.screen.height / 2;
 
@@ -39,7 +39,7 @@ export class TeamComponent implements OnInit {
    * Observable for selected members of staff in
    * staff list child component.
    *
-   * @memberof StandupNewComponent
+   * @memberof TeamComponent
    */
   public selectedStaffMembers = new Subject();
 

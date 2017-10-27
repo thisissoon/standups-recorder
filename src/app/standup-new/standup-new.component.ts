@@ -17,7 +17,7 @@ import { StaffMemberItem, StaffMembersResponse } from '../api/models';
   templateUrl: './standup-new.component.html',
   styleUrls: ['./standup-new.component.scss']
 })
-export class StandupNewComponent implements OnInit {
+export class StandupNewEditComponent implements OnInit {
 
   /**
    * List of staff members from the backend
@@ -36,21 +36,21 @@ export class StandupNewComponent implements OnInit {
   /**
    * Tracks state of view
    *
-   * @memberof StandupNewComponent
+   * @memberof StandupNewEditComponent
    */
   public addingStaff = false;
 
   /**
    * tells staff membmer list component where to positions list
    *
-   * @memberof StandupNewComponent
+   * @memberof StandupNewEditComponent
    */
   public selectorY: number;
 
   /**
    * First node on screen in absense of any elements in the list.
    *
-   * @memberof StandupNewComponent
+   * @memberof StandupNewEditComponent
    */
   public firstNode: Node = {
     firstEvent: true,
@@ -61,14 +61,14 @@ export class StandupNewComponent implements OnInit {
   /**
    * list of staff members in order of speaking.
    *
-   * @memberof StandupNewComponent
+   * @memberof StandupNewEditComponent
    */
   public summaries: StaffMemberItem[] = [];
 
   /**
    * list of staff members in order of standing.
    *
-   * @memberof StandupNewComponent
+   * @memberof StandupNewEditComponent
    */
   public positions: StaffMemberItem[] = [];
 
@@ -76,14 +76,14 @@ export class StandupNewComponent implements OnInit {
    * Observable for selected members of staff in
    * staff list child component.
    *
-   * @memberof StandupNewComponent
+   * @memberof StandupNewEditComponent
    */
   public selectedStaffMembers = new Subject();
 
   /**
-   * Creates an instance of StandupNewComponent.
+   * Creates an instance of StandupNewEditComponent.
    *
-   * @memberof StandupNewComponent
+   * @memberof StandupNewEditComponent
    */
   constructor(private route: ActivatedRoute) { }
 
@@ -91,7 +91,7 @@ export class StandupNewComponent implements OnInit {
    * Handle add click event
    *
    * @param {$event} $event
-   * @memberof StandupNewComponent
+   * @memberof StandupNewEditComponent
    *
    * @method onAddClick
    */
