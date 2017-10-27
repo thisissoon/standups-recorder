@@ -19,14 +19,12 @@ import { StaffMemberItem, StaffMembersResponse } from '../api/models';
 })
 export class StandupNewComponent implements OnInit {
 
-
   /**
    * List of staff members from the backend
    *
    * @memberof TeamComponent
    */
   public DBStaffMembers: StaffMemberItem[];
-
 
   /**
    * List of staff members
@@ -61,6 +59,20 @@ export class StandupNewComponent implements OnInit {
   };
 
   /**
+   * list of staff members in order of speaking.
+   *
+   * @memberof StandupNewComponent
+   */
+  public summaries: StaffMemberItem[] = [];
+
+  /**
+   * list of staff members in order of standing.
+   *
+   * @memberof StandupNewComponent
+   */
+  public positions: StaffMemberItem[] = [];
+
+  /**
    * Observable for selected members of staff in
    * staff list child component.
    *
@@ -76,17 +88,19 @@ export class StandupNewComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   /**
-   * Handel add click event
+   * Handle add click event
    *
    * @param {$event} $event
    * @memberof StandupNewComponent
    *
    * @method onAddClick
    */
-  public onAddClick($event, node: Node) {
-    this.addingStaff = !this.addingStaff;
-    node.pickingNext = !node.pickingNext;
-    this.selectorY = $event.clientY;
+  public onAddClick($event, node: StaffMemberItem) {
+    if (!this.addingStaff) {
+      this.addingStaff = !this.addingStaff;
+      node.pickingNext = !node.pickingNext;
+      this.selectorY = $event.clientY;
+    }
   }
 
   /**
@@ -102,11 +116,36 @@ export class StandupNewComponent implements OnInit {
         return staffMember;
       });
     });
+
     this.selectedStaffMembers.subscribe((value: StaffMemberItem) => {
       this.staffMembers = this.staffMembers.filter(staffMember => {
         return staffMember.ID !== value.ID;
       });
+      this.summaries.push(value);
+      if (!this.positions.length) {
+        this.positions.push(value);
+      } else {
+        const pickingNextIndex = this.positions.findIndex(element => {
+          return element.pickingNext;
+        });
+        this.positions = this.positions.reduce((acc, element, index) => {
+          if (index !== pickingNextIndex) {
+            acc.push(element);
+            return acc;
+          } else {
+            acc.push(element, value);
+            return acc;
+          }
+        }, []);
+      }
+      this.summaries.map(staffMember => {
+        staffMember.pickingNext = false;
+        return staffMember;
+      });
+      this.addingStaff = !this.addingStaff;
+      this.firstNode.pickingNext = false;
     });
+
   }
 
 }

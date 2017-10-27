@@ -13,23 +13,70 @@
   >
     <div class="scroll-height"></div>
     <ul class="positions-line" id="positions-line">
-      <li class="positions-line__item positions-line__item--first">
+
+      <li 
+        class="positions-line__item" 
+        *ngFor="let staffMember of positions; index as i; first as isFirst, last as isLast"
+      >
         <div class="positions-line__segment">
-          <div class="positions-line__node positions-line__node--add">
-            <button 
-            class="button-add button-add--sm"
-            (click)="onAddClick($event, firstNode)"
-            [ngClass]="{'active': !!firstNode.pickingNext }"
-            >
-            <span>+</span>
-          </button>
+
+          <div class="positions-line__index">
+            <span>1</span>
+          </div>
+
+          <div 
+            class="positions-line__node positions-line__node--staff"
+          >
+            <span>{{staffMember.firstName[0].toUpperCase()}}{{staffMember.lastName[0].toUpperCase()}}</span>
+          </div>
+
         </div>
+
         <div 
-          class="positions-line__indicator"
-          [ngClass]="{'active': !!firstNode.pickingNext }"
-        ></div>
+          class="positions-line__segment"
+          *ngIf="positions.length > 2 || isLast"
+        >
+
+          <div 
+            class="positions-line__node positions-line__node--add" 
+            (click)="onAddClick($event, staffMember)"
+          >
+            <button 
+              class="button-add button-add--sm"
+              [ngClass]="{
+                'active': !!staffMember.pickingNext, 
+                'inactive': !staffMember.pickingNext && addingStaff
+              }"
+            >
+              <span>+</span>
+            </button>
+          </div>
+
+          <div 
+            class="positions-line__indicator" 
+            [ngClass]="{'active': !!staffMember.pickingNext }"
+          ></div>
+
         </div>
       </li>
+
+      <li 
+        class="positions-line__item"
+        *ngIf="!positions.length"
+      >
+        <div class="positions-line__segment">
+          <div class="positions-line__node positions-line__node--add">
+            <button class="button-add button-add--sm" (click)="onAddClick($event, firstNode)" [ngClass]="{
+                    'active': !!firstNode.pickingNext,
+                    'inactive': !firstNode.pickingNext && addingStaff
+                  }">
+              <span>+</span>
+            </button>
+          </div>
+          <div class="positions-line__indicator" [ngClass]="{'active': !!firstNode.pickingNext }"></div>
+        </div>
+      </li>
+      
     </ul>
   </div>
 </main>
