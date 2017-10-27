@@ -7,6 +7,7 @@ export interface StaffMemberItem {
   selected?: boolean;
   firstStandup?: any;
   totalStandups?: any;
+  pickingNext?: boolean;
 }
 
 export interface StaffMembersResponse {

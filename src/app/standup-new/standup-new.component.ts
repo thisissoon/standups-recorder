@@ -17,8 +17,7 @@ import { StaffMemberItem, StaffMembersResponse } from '../api/models';
   templateUrl: './standup-new.component.html',
   styleUrls: ['./standup-new.component.scss']
 })
-export class StandupNewComponent implements OnInit {
-
+export class StandupNewEditComponent implements OnInit {
 
   /**
    * List of staff members from the backend
@@ -26,7 +25,6 @@ export class StandupNewComponent implements OnInit {
    * @memberof TeamComponent
    */
   public DBStaffMembers: StaffMemberItem[];
-
 
   /**
    * List of staff members
@@ -38,21 +36,21 @@ export class StandupNewComponent implements OnInit {
   /**
    * Tracks state of view
    *
-   * @memberof StandupNewComponent
+   * @memberof StandupNewEditComponent
    */
   public addingStaff = false;
 
   /**
    * tells staff membmer list component where to positions list
    *
-   * @memberof StandupNewComponent
+   * @memberof StandupNewEditComponent
    */
   public selectorY: number;
 
   /**
    * First node on screen in absense of any elements in the list.
    *
-   * @memberof StandupNewComponent
+   * @memberof StandupNewEditComponent
    */
   public firstNode: Node = {
     firstEvent: true,
@@ -61,32 +59,48 @@ export class StandupNewComponent implements OnInit {
   };
 
   /**
+   * list of staff members in order of speaking.
+   *
+   * @memberof StandupNewEditComponent
+   */
+  public summaries: StaffMemberItem[] = [];
+
+  /**
+   * list of staff members in order of standing.
+   *
+   * @memberof StandupNewEditComponent
+   */
+  public positions: StaffMemberItem[] = [];
+
+  /**
    * Observable for selected members of staff in
    * staff list child component.
    *
-   * @memberof StandupNewComponent
+   * @memberof StandupNewEditComponent
    */
   public selectedStaffMembers = new Subject();
 
   /**
-   * Creates an instance of StandupNewComponent.
+   * Creates an instance of StandupNewEditComponent.
    *
-   * @memberof StandupNewComponent
+   * @memberof StandupNewEditComponent
    */
   constructor(private route: ActivatedRoute) { }
 
   /**
-   * Handel add click event
+   * Handle add click event
    *
    * @param {$event} $event
-   * @memberof StandupNewComponent
+   * @memberof StandupNewEditComponent
    *
    * @method onAddClick
    */
-  public onAddClick($event, node: Node) {
-    this.addingStaff = !this.addingStaff;
-    node.pickingNext = !node.pickingNext;
-    this.selectorY = $event.clientY;
+  public onAddClick($event, node: StaffMemberItem) {
+    if (!this.addingStaff) {
+      this.addingStaff = !this.addingStaff;
+      node.pickingNext = !node.pickingNext;
+      this.selectorY = $event.clientY;
+    }
   }
 
   /**
@@ -102,11 +116,36 @@ export class StandupNewComponent implements OnInit {
         return staffMember;
       });
     });
+
     this.selectedStaffMembers.subscribe((value: StaffMemberItem) => {
       this.staffMembers = this.staffMembers.filter(staffMember => {
         return staffMember.ID !== value.ID;
       });
+      this.summaries.push(value);
+      if (!this.positions.length) {
+        this.positions.push(value);
+      } else {
+        const pickingNextIndex = this.positions.findIndex(element => {
+          return element.pickingNext;
+        });
+        this.positions = this.positions.reduce((acc, element, index) => {
+          if (index !== pickingNextIndex) {
+            acc.push(element);
+            return acc;
+          } else {
+            acc.push(element, value);
+            return acc;
+          }
+        }, []);
+      }
+      this.summaries.map(staffMember => {
+        staffMember.pickingNext = false;
+        return staffMember;
+      });
+      this.addingStaff = !this.addingStaff;
+      this.firstNode.pickingNext = false;
     });
+
   }
 
 }
