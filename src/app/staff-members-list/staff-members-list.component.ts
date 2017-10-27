@@ -11,18 +11,11 @@ import { StaffMemberItem } from '../api/models';
 export class StaffMembersListComponent implements OnInit {
 
   /**
-   * List of staff members from DB
-   *
-   * @memberof StaffMembersListComponent
-   */
-  @Input() DBStaffMembers: StaffMemberItem[];
-
-  /**
    * List of staff members
    *
    * @memberof TeamComponent
    */
-  public staffMembers: StaffMemberItem[];
+  @Input() staffMembers: StaffMemberItem[];
 
   /**
    * How much to shift list down by to align with selector
@@ -30,6 +23,14 @@ export class StaffMembersListComponent implements OnInit {
    * @memberof StaffMembersListComponent
    */
   @Input() selectorY: number;
+
+  /**
+   * Parent component observable for selected members of staff in
+   * staff list.
+   *
+   * @memberof StaffMembersListComponent
+   */
+  @Input() selectedStaffMembers: Subject<any>;
 
   /**
    * Height of item in list. Used with selectorY to position list inline
@@ -84,13 +85,27 @@ export class StaffMembersListComponent implements OnInit {
     }
   }
 
+  /**
+   * Click event listener for staff members.
+   * If staff member selected pushed staffMember ocject
+   * into parent component observable stream.
+   *
+   * @method staffMemberClickHandler
+   * @param {$event} $event
+   * @param {staffMember} staffMember
+   *
+   * @memberof TeamComponent
+   */
+  staffMemberClickHandler($event, staffMember: StaffMemberItem) {
+    if (staffMember.selected) {
+      this.selectedStaffMembers.next(staffMember);
+    }
+  }
+
   constructor() { }
 
   ngOnInit() {
-    this.staffMembers = this.DBStaffMembers.map(staffMember => {
-      staffMember.selected = false;
-      return staffMember;
-    });
+
     this.staffMembers[0].selected = true;
 
     /**

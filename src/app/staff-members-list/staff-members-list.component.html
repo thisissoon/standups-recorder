@@ -6,14 +6,15 @@
     class="staff-member-list"
     [ngStyle]="{'transform': 'translateY(' + (selectorY - (staffItemHeight / 2)) + 'px)'}"
   >
-    <li class="staff-member-list__item" *ngFor="let staffMember of staffMembers; let i = index" [ngClass]="{ 'selected': staffMember.selected }"
-      [ngSwitch]="true">
+    <li 
+      class="staff-member-list__item" 
+      *ngFor="let staffMember of staffMembers; let i = index" 
+      [ngClass]="{ 'selected': staffMember.selected }"
+    >
 
-      <a routerLink="/team/{{staffMember.ID}}" class="cta" *ngSwitchCase="!!staffMember.selected">
-        {{staffMember.firstName}} {{staffMember.lastName.split('')[0]}}
-      </a>
-
-      <span *ngSwitchCase="!staffMember.selected">
+      <span
+        (click)="staffMemberClickHandler($event, staffMember)"
+      >
         {{staffMember.firstName}} {{staffMember.lastName.split('')[0]}}
       </span>
 

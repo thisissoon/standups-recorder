@@ -7,6 +7,9 @@ export interface Node {
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/Rx';
+
 import { StaffMemberItem, StaffMembersResponse } from '../api/models';
 
 @Component({
@@ -58,6 +61,14 @@ export class StandupNewComponent implements OnInit {
   };
 
   /**
+   * Observable for selected members of staff in
+   * staff list child component.
+   *
+   * @memberof StandupNewComponent
+   */
+  public selectedStaffMembers = new Subject();
+
+  /**
    * Creates an instance of StandupNewComponent.
    *
    * @memberof StandupNewComponent
@@ -89,6 +100,11 @@ export class StandupNewComponent implements OnInit {
       this.staffMembers = this.DBStaffMembers.map(staffMember => {
         staffMember.selected = false;
         return staffMember;
+      });
+    });
+    this.selectedStaffMembers.subscribe((value: StaffMemberItem) => {
+      this.staffMembers = this.staffMembers.filter(staffMember => {
+        return staffMember.ID !== value.ID;
       });
     });
   }
