@@ -17,7 +17,7 @@ import { FooterNavComponent } from './footer-nav/footer-nav.component';
 import { StandupDetailComponent } from './standup-detail/standup-detail.component';
 import { StandupDiagramComponent } from './standup-diagram/standup-diagram.component';
 import { StaffMemberDetailComponent } from './staff-member-detail/staff-member-detail.component';
-import { StandupNewEditComponent } from './standup-new/standup-new.component';
+import { StandupsNewEditComponent } from './standups-new-edit/standups-new-edit.component';
 import { StaffMembersListComponent } from './staff-members-list/staff-members-list.component';
 
 import { ApiModule } from './api/api.module';
@@ -67,7 +67,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'standups/new/edit',
-    component: StandupNewEditComponent,
+    component: StandupsNewEditComponent,
     resolve: {
       staffMembers: StaffMembersResolver
     }
@@ -89,7 +89,7 @@ const appRoutes: Routes = [
     StandupDetailComponent,
     StandupDiagramComponent,
     StaffMemberDetailComponent,
-    StandupNewEditComponent,
+    StandupsNewEditComponent,
     StaffMembersListComponent
   ],
   imports: [

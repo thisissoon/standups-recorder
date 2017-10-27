@@ -13,11 +13,11 @@ import 'rxjs/Rx';
 import { StaffMemberItem, StaffMembersResponse } from '../api/models';
 
 @Component({
-  selector: 'app-standup-new',
-  templateUrl: './standup-new.component.html',
-  styleUrls: ['./standup-new.component.scss']
+  selector: 'app-standups-new',
+  templateUrl: './standups-new-edit.component.html',
+  styleUrls: ['./standups-new-edit.component.scss']
 })
-export class StandupNewEditComponent implements OnInit {
+export class StandupsNewEditComponent implements OnInit {
 
   /**
    * List of staff members from the backend
@@ -36,21 +36,21 @@ export class StandupNewEditComponent implements OnInit {
   /**
    * Tracks state of view
    *
-   * @memberof StandupNewEditComponent
+   * @memberof StandupsNewEditComponent
    */
   public addingStaff = false;
 
   /**
    * tells staff membmer list component where to positions list
    *
-   * @memberof StandupNewEditComponent
+   * @memberof StandupsNewEditComponent
    */
   public selectorY: number;
 
   /**
    * First node on screen in absense of any elements in the list.
    *
-   * @memberof StandupNewEditComponent
+   * @memberof StandupsNewEditComponent
    */
   public firstNode: Node = {
     firstEvent: true,
@@ -61,14 +61,14 @@ export class StandupNewEditComponent implements OnInit {
   /**
    * list of staff members in order of speaking.
    *
-   * @memberof StandupNewEditComponent
+   * @memberof StandupsNewEditComponent
    */
   public summaries: StaffMemberItem[] = [];
 
   /**
    * list of staff members in order of standing.
    *
-   * @memberof StandupNewEditComponent
+   * @memberof StandupsNewEditComponent
    */
   public positions: StaffMemberItem[] = [];
 
@@ -76,14 +76,14 @@ export class StandupNewEditComponent implements OnInit {
    * Observable for selected members of staff in
    * staff list child component.
    *
-   * @memberof StandupNewEditComponent
+   * @memberof StandupsNewEditComponent
    */
   public selectedStaffMembers = new Subject();
 
   /**
-   * Creates an instance of StandupNewEditComponent.
+   * Creates an instance of StandupsNewEditComponent.
    *
-   * @memberof StandupNewEditComponent
+   * @memberof StandupsNewEditComponent
    */
   constructor(private route: ActivatedRoute) { }
 
@@ -91,7 +91,7 @@ export class StandupNewEditComponent implements OnInit {
    * Handle add click event
    *
    * @param {$event} $event
-   * @memberof StandupNewEditComponent
+   * @memberof StandupsNewEditComponent
    *
    * @method onAddClick
    */
