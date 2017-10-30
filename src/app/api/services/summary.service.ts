@@ -41,4 +41,14 @@ export class SummaryService {
     const options: any = { params, observe: 'body' };
     return this.http.get<SummariesResponse>(this.endpointUrl, options);
   }
+  /**
+   * Submit summary.
+   *
+   * @param {*} data
+   * @returns {Observable<any>}
+   * @memberof CurrentService
+   */
+  public post(data: any): Observable<any> {
+    return this.http.post(`${this.endpointUrl}`, data);
+  }
 }

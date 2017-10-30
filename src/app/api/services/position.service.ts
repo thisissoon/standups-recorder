@@ -32,7 +32,7 @@ export class PositionService {
     return this.http.get<PositionItem>(`${this.endpointUrl}/${positionID}`);
   }
   /**
-   * Returns the matching positions
+   * Returns the matching positions.
    *
    * @returns {Observable<PositionsResponse>}
    * @memberof CurrentService
@@ -40,5 +40,15 @@ export class PositionService {
   public list(params: HttpParams = new HttpParams()): Observable<any> {
     const options: any = { params, observe: 'body' };
     return this.http.get<PositionsResponse[]>(this.endpointUrl, options);
+  }
+  /**
+   * Submit position.
+   *
+   * @param {*} data
+   * @returns {Observable<any>}
+   * @memberof CurrentService
+   */
+  public post(data: any): Observable<any> {
+    return this.http.post(`${this.endpointUrl}`, data);
   }
 }
