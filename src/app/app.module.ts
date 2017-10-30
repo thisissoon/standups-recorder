@@ -8,6 +8,11 @@ import { TodayResolver, TodayPositionsResolver, TodaySummariesResolver } from '.
 import { DaysResolver, CalendarArrayResolver } from './history/history-resolve.service';
 import { PositionsResolver, SummariesResolver, DayResolver } from './standup-detail/standup-detail-resolve.service';
 import { StaffMembersResolver, StaffMemberResolver } from './api/staff-member-resolve.service';
+import {
+  NewStandupPositionsResolver,
+  NewStandupSummariesResolver,
+  NewStandupDateResolver
+} from './local-store/new-standup-resolve.service';
 
 import { AppComponent } from './app.component';
 import { TodayComponent } from './today/today.component';
@@ -19,8 +24,10 @@ import { StandupDiagramComponent } from './standup-diagram/standup-diagram.compo
 import { StaffMemberDetailComponent } from './staff-member-detail/staff-member-detail.component';
 import { StandupsNewEditComponent } from './standups-new-edit/standups-new-edit.component';
 import { StaffMembersListComponent } from './staff-members-list/staff-members-list.component';
+import { StandupsNewPreviewComponent } from './standups-new-preview/standups-new-preview.component';
 
 import { ApiModule } from './api/api.module';
+import { LocalStoreModule } from './local-store/local-store.module';
 
 const appRoutes: Routes = [
   {
@@ -31,6 +38,26 @@ const appRoutes: Routes = [
       positions: TodayPositionsResolver,
       summaries: TodaySummariesResolver,
       staffMembers: StaffMembersResolver,
+    }
+  },
+  {
+    path: 'standups/new/edit',
+    component: StandupsNewEditComponent,
+    resolve: {
+      staffMembers: StaffMembersResolver,
+      positions: NewStandupPositionsResolver,
+      summaries: NewStandupSummariesResolver,
+      date: NewStandupDateResolver
+    }
+  },
+  {
+    path: 'standups/new/preview',
+    component: StandupsNewPreviewComponent,
+    resolve: {
+      staffMembers: StaffMembersResolver,
+      positions: NewStandupPositionsResolver,
+      summaries: NewStandupSummariesResolver,
+      date: NewStandupDateResolver
     }
   },
   {
@@ -66,13 +93,6 @@ const appRoutes: Routes = [
     }
   },
   {
-    path: 'standups/new/edit',
-    component: StandupsNewEditComponent,
-    resolve: {
-      staffMembers: StaffMembersResolver
-    }
-  },
-  {
     path: '**',
     redirectTo: 'today',
     pathMatch: 'full'
@@ -90,13 +110,15 @@ const appRoutes: Routes = [
     StandupDiagramComponent,
     StaffMemberDetailComponent,
     StandupsNewEditComponent,
-    StaffMembersListComponent
+    StaffMembersListComponent,
+    StandupsNewPreviewComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
-    ApiModule
+    ApiModule,
+    LocalStoreModule
   ],
   providers: [
     DaysResolver,
@@ -108,7 +130,10 @@ const appRoutes: Routes = [
     TodayPositionsResolver,
     TodaySummariesResolver,
     CalendarArrayResolver,
-    StaffMemberResolver
+    StaffMemberResolver,
+    NewStandupPositionsResolver,
+    NewStandupSummariesResolver,
+    NewStandupDateResolver
   ],
   bootstrap: [AppComponent]
 })
