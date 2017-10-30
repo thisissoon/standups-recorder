@@ -1,33 +1,41 @@
 <main>
-  <div 
-    class="nav-other__close"
-    [ngClass]="{'adding-staff' : addingStaff }"
-  >
-    <a routerLink="/today">
+  <div class="nav-other__close">
+    <a
+      *ngIf="!addingStaff"
+      (click)="newStandupService.clearNewStandup()"
+      routerLink="/today">
       <span>x</span>
     </a>
+    <span 
+      *ngIf="addingStaff"
+      (click)="notAddingStaff()"
+    >x</span>
   </div>
   <div 
     class="positions-line__container"
     [ngClass]="{'adding-staff' : addingStaff }"
   >
     <div class="scroll-height"></div>
-    <ul class="positions-line" id="positions-line">
+    <ul 
+      class="positions-line" 
+      id="positions-line"
+      [ngStyle]="{'height': ((positions.length * 200) + 150) + 'px' }"
+    >
 
       <li 
         class="positions-line__item" 
-        *ngFor="let staffMember of positions; index as i; first as isFirst, last as isLast"
+        *ngFor="let position of positions; index as i; first as isFirst, last as isLast"
       >
         <div class="positions-line__segment">
 
           <div class="positions-line__index">
-            <span>1</span>
+            <span></span>
           </div>
 
           <div 
             class="positions-line__node positions-line__node--staff"
           >
-            <span>{{staffMember.firstName[0].toUpperCase()}}{{staffMember.lastName[0].toUpperCase()}}</span>
+            <span>{{position.initials.toUpperCase()}}</span>
           </div>
 
         </div>
@@ -39,13 +47,13 @@
 
           <div 
             class="positions-line__node positions-line__node--add" 
-            (click)="onAddClick($event, staffMember)"
+            (click)="onAddClick($event, position)"
           >
             <button 
               class="button-add button-add--sm"
               [ngClass]="{
-                'active': !!staffMember.pickingNext, 
-                'inactive': !staffMember.pickingNext && addingStaff
+                'active': !!position.pickingNext, 
+                'inactive': !position.pickingNext && addingStaff
               }"
             >
               <span>+</span>
@@ -54,7 +62,7 @@
 
           <div 
             class="positions-line__indicator" 
-            [ngClass]="{'active': !!staffMember.pickingNext }"
+            [ngClass]="{'active': !!position.pickingNext }"
           ></div>
 
         </div>
@@ -66,14 +74,14 @@
       >
         <div class="positions-line__segment">
           <div class="positions-line__node positions-line__node--add">
-            <button class="button-add button-add--sm" (click)="onAddClick($event, firstNode)" [ngClass]="{
-                    'active': !!firstNode.pickingNext,
-                    'inactive': !firstNode.pickingNext && addingStaff
+            <button class="button-add button-add--sm" (click)="onAddClick($event, firstPositionItem)" [ngClass]="{
+                    'active': !!firstPositionItem.pickingNext,
+                    'inactive': !firstPositionItem.pickingNext && addingStaff
                   }">
               <span>+</span>
             </button>
           </div>
-          <div class="positions-line__indicator" [ngClass]="{'active': !!firstNode.pickingNext }"></div>
+          <div class="positions-line__indicator" [ngClass]="{'active': !!firstPositionItem.pickingNext }"></div>
         </div>
       </li>
       
@@ -86,7 +94,7 @@
   >
   <app-staff-members-list 
     class="app-staff-members-list" 
-    [staffMembers]="staffMembers"
+    [staffMembers]="DBStaffMembers"
     [selectorY]="selectorY"
     [selectedStaffMembers]="selectedStaffMembers"
   ></app-staff-members-list>
@@ -103,7 +111,8 @@
         <div class="nav__item">
           <div class="nav__divider">
             <a 
-              routerLink="standups/new/preview" 
+              routerLink="/standups/new/preview"
+              (click)="updateNewStandupService()"
               class="nav__link lighten"
             >
               <span>preview</span>
