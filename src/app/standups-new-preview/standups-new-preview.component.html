@@ -1,8 +1,4 @@
 <main>
-  
-  <div class="nav-other__back">
-    <a routerLink="/history">back</a>
-  </div>
 
   <div class="container">
     <div class="pt-5">
@@ -13,8 +9,8 @@
           <div class="col">
             <app-standup-diagram
               [width]="300"
-              [positions]="DBPositions"
-              [summaries]="DBSummaries"
+              [positions]="positions"
+              [summaries]="summaries"
               [staffMembers]="DBStaffMembers"
             ></app-standup-diagram>
           </div>
@@ -22,7 +18,6 @@
       </div>
 
       <div class="table">
-      
         <div class="row">
       
           <div class="col">
@@ -36,26 +31,48 @@
           <div class="col">
             <div class="table__values">
               <p class="text-left">
-                {{DBDay.date | date:'d/M/y'}}
+                {{date | date:'d/M/y'}}
               </p>
-              <p class="text-left">{{DBPositions.length}}</p>
+              <p class="text-left">{{positions.length}}</p>
               <p class="text-left">N/A</p>
             </div>
           </div>
       
         </div>
-      
       </div>
-      <div class="row">
-        <div class="col text-center">
-          <a routerLink="/history/{{DBDay.ID}}/edit">
-            <h5 class="cta mt-3">edit</h5>
-          </a>
-        </div>
-      </div>
+
     </div>
   </div>
 </main>
 <footer>
-  <app-footer-nav></app-footer-nav>
+  <div class="nav nav--gradient">
+  
+    <div class="nav__gradient"></div>
+  
+    <div class="row no-gutters">
+  
+  
+      <div class="col">
+        <div class="nav__item">
+          <div class="nav__divider">
+            <a 
+              routerLink="/standups/new/edit"
+              class="nav__link lighten"
+            >
+              <span>edit</span>
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col">
+        <div class="nav__item">
+          <a href="#" class="nav__link cta">
+            <span>save</span>
+          </a>
+        </div>
+      </div>
+  
+    </div>
+  </div>
 </footer>

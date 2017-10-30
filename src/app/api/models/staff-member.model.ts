@@ -1,6 +1,6 @@
 export interface StaffMemberItem {
   ID: string;
-  firstName: number;
+  firstName: string;
   lastName: string;
   role: string;
   current: boolean;

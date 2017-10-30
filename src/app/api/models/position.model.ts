@@ -1,11 +1,11 @@
 export interface PositionItem {
-  ID: string;
+  ID?: string;
   placeIndex: number;
   staffID: string;
-  dayID: string;
-  coordinate?: number[];
-  firstName?: string;
-  lastName?: string;
+  dayID?: string;
+  coordinates?: number[];
+  initials?: string;
+  pickingNext?: boolean;
 }
 
 export interface PositionsResponse {

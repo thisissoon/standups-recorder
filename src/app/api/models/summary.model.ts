@@ -1,9 +1,9 @@
 export interface SummaryItem {
-  ID: string;
+  ID?: string;
   orderIndex: number;
   staffID: string;
-  dayID: string;
-  coordinate?: number[];
+  dayID?: string;
+  coordinates?: number[];
 }
 
 export interface SummariesResponse {
