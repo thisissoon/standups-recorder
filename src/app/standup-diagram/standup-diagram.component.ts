@@ -19,25 +19,25 @@ export class StandupDiagramComponent implements OnInit {
   @Input() width: number;
 
   /**
-   * List of positions filtered on dayID from the backend
+   * List of positions
    *
    * @memberof StandupDetailComponent
    */
-  @Input() DBPositions: PositionItem[];
+  @Input() positions: PositionItem[];
 
   /**
-   * List of summaries filtered on dayID from the backend
+   * List of summaries
    *
    * @memberof StandupDetailComponent
    */
-  @Input() DBSummaries: SummaryItem[];
+  @Input() summaries: SummaryItem[];
 
   /**
    * List of staff members from the backend
    *
    * @memberof StandupDetailComponent
    */
-  @Input() DBStaffMembers: StaffMemberItem[];
+  @Input() staffMembers: StaffMemberItem[];
 
   /**
    * Coordinates of the middle of the SVG
@@ -89,40 +89,39 @@ export class StandupDiagramComponent implements OnInit {
   /**
    * Render stand-up dagram as SVG to DOM.
    *
-   * @param {DBPositions} DBPositions
-   * @param {DBSummaries} DBSummaries
+   * @param {positions} positions
+   * @param {summaries} summaries
    * @memberof HistoryComponent
    *
    * @method renderDiagram
    */
   public renderDiagram(): void {
 
-    const formation = this.DBPositions.map((staffMember, index, array) => {
+    this.positions = this.positions.map((position, index, array) => {
       const coodX = Math.round(this.originX + ((this.outerCircleRadius) * Math.sin(((2 * Math.PI) / array.length) * index)));
       const coodY = Math.round(this.originY - ((this.outerCircleRadius) * Math.cos(((2 * Math.PI) / array.length) * index)));
-      const coordinate = [coodX, coodY];
-      const names: any = this.DBStaffMembers.find(DBStaffMember => {
-        return DBStaffMember.ID === staffMember.staffID;
+      const coordinates = [coodX, coodY];
+      const names: any = this.staffMembers.find(DBStaffMember => {
+        return DBStaffMember.ID === position.staffID;
       });
-      staffMember['coordinate'] = coordinate;
-      staffMember['firstName'] = names.firstName;
-      staffMember['lastName'] = names.lastName;
-      return staffMember;
+      position.coordinates = coordinates;
+      position.initials = `${names.firstName.split('')[0]}${names.lastName.split('')[0]}`;
+      return position;
     });
 
-    const order = this.DBSummaries.map((staffMember, index, array) => {
-      const coordinate = formation.find(staff => {
-        return staff.staffID === staffMember.staffID;
-      })['coordinate'];
-      staffMember['coordinate'] = coordinate;
-      return staffMember;
+    this.summaries = this.summaries.map((summary, index, array) => {
+      const coordinates = this.positions.find(staff => {
+        return staff.staffID === summary.staffID;
+      }).coordinates;
+      summary.coordinates = coordinates;
+      return summary;
     });
 
     const lineGenerator = d3.line()
-      .x(summary => summary.coordinate[0])
-      .y(summary => summary.coordinate[1]);
+      .x(summary => summary.coordinates[0])
+      .y(summary => summary.coordinates[1]);
 
-    const pathData = lineGenerator(order);
+    const pathData = lineGenerator(this.summaries);
 
     const d3Svg = d3.select(this.svg.nativeElement)
       .attr('version', 1.1)
@@ -136,13 +135,13 @@ export class StandupDiagramComponent implements OnInit {
       .classed('standup-diagram__path', true);
 
     const start = d3Svg.append('circle')
-      .attr('cx', order[0].coordinate[0])
-      .attr('cy', order[0].coordinate[1])
+      .attr('cx', this.summaries[0].coordinates[0])
+      .attr('cy', this.summaries[0].coordinates[1])
       .attr('opacity', 1)
       .attr('r', 5)
       .attr('fill', 'white');
 
-    formation.forEach((staffMember, index, array) => {
+    this.positions.forEach((position, index, array) => {
       const coodX = Math.round(this.originX + ((this.nameCircleRadius) * Math.sin(((2 * Math.PI) / array.length) * index)));
       const coodY = Math.round(this.originY - ((this.nameCircleRadius) * Math.cos(((2 * Math.PI) / array.length) * index)));
       const nameOnOuterCircle = d3Svg.append('text')
@@ -150,7 +149,7 @@ export class StandupDiagramComponent implements OnInit {
         .attr('y', coodY)
         .attr('text-anchor', 'middle')
         .classed('standup-diagram__initials', true)
-        .text(`${staffMember.firstName.toUpperCase().split('')[0]}${staffMember.lastName.toUpperCase().split('')[0]}`);
+        .text(position.initials.toUpperCase());
     });
 
   }
