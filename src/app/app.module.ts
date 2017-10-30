@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { TodayResolver, TodayPositionsResolver, TodaySummariesResolver } from './today/today-resolve.service';
 import { DaysResolver, CalendarArrayResolver } from './history/history-resolve.service';
@@ -25,6 +25,8 @@ import { StaffMemberDetailComponent } from './staff-member-detail/staff-member-d
 import { StandupsNewEditComponent } from './standups-new-edit/standups-new-edit.component';
 import { StaffMembersListComponent } from './staff-members-list/staff-members-list.component';
 import { StandupsNewPreviewComponent } from './standups-new-preview/standups-new-preview.component';
+import { StaffMemberEditComponent } from './staff-member-edit/staff-member-edit.component';
+import { StaffMemberDetailsFormComponent } from './staff-member-details-form/staff-member-details-form.component';
 
 import { ApiModule } from './api/api.module';
 import { LocalStoreModule } from './local-store/local-store.module';
@@ -83,6 +85,13 @@ const appRoutes: Routes = [
     }
   },
   {
+    path: 'team/:staffMemberID/edit',
+    component: StaffMemberEditComponent,
+    resolve: {
+      staffMember: StaffMemberResolver
+    }
+  },
+  {
     path: 'history/:dayID',
     component: StandupDetailComponent,
     resolve: {
@@ -111,14 +120,17 @@ const appRoutes: Routes = [
     StaffMemberDetailComponent,
     StandupsNewEditComponent,
     StaffMembersListComponent,
-    StandupsNewPreviewComponent
+    StandupsNewPreviewComponent,
+    StaffMemberEditComponent,
+    StaffMemberDetailsFormComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     ApiModule,
-    LocalStoreModule
+    LocalStoreModule,
+    FormsModule
   ],
   providers: [
     DaysResolver,

@@ -1,0 +1,47 @@
+<main>
+
+  <div 
+    class="nav-other__close"
+    routerLink="/team/{{staffMember.ID}}"
+  >
+    <span>x</span>
+  </div>
+
+  <div class="container">
+    <div class="pt-2">
+
+
+      <div class="pt-5 pb-5">
+        <div class="row">
+          <div class="col">
+            <div class="staff-member-pic__container">
+              <div class="staff-member-pic__head"></div>
+              <div class="staff-member-pic__body"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <app-staff-member-details-form [staffMember]="staffMember"></app-staff-member-details-form>
+
+    </div>
+  </div>
+</main>
+<footer>
+  <div class="nav">
+  
+    <div class="nav__gradient"></div>
+  
+    <div class="row no-gutters">
+  
+      <div class="col">
+        <div class="nav__item">
+          <a href="#" class="nav__link cta">
+            <span>update</span>
+          </a>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+</footer>
