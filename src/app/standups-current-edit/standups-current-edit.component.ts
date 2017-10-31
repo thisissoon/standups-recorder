@@ -152,13 +152,16 @@ export class StandupsCurrentEditComponent implements OnInit {
       } else {
         element.pickingNext = false;
         acc.push(element, {
-          placeIndex: this.positions.length,
           staffID: value.ID,
           initials: `${value.firstName.split('')[0]}${value.lastName.split('')[0]}`
         });
         return acc;
       }
-    }, []);
+    }, [])
+    .map((position, index) => {
+      position.placeIndex = index;
+      return position;
+    });
   }
 
   /**
@@ -201,7 +204,6 @@ export class StandupsCurrentEditComponent implements OnInit {
       this.positions = data.positions;
       this.summaries = data.summaries;
       this.date = data.date ? data.date : new Date();
-      console.log(this.date);
     });
 
     this.route.params.subscribe((params: HttpParams) => {
