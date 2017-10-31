@@ -124,7 +124,11 @@
   
       <div class="col">
         <div class="nav__item">
-          <a href="#" class="nav__link cta">
+          <a 
+            class="nav__link cta"
+            (click)="currentStandupService.clearCurrentStandup()"
+            (click)="saveStandup()" 
+          >
             <span>save</span>
           </a>
         </div>

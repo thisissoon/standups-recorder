@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import { StaffMemberItem, StaffMembersResponse, PositionItem, SummaryItem } from '../api/models';
+import { DayService, PositionService, SummaryService } from '../api/services';
 
 import { CurrentStandupService } from '../local-store/services';
 
@@ -68,6 +70,13 @@ export class StandupsNewEditComponent implements OnInit {
    * @memberof StandupsNewEditComponent
    */
   public date: Date;
+
+  /**
+   * day ID of stand-up after saving;
+   *
+   * @memberof StandupsNewEditComponent
+   */
+  public dayID: string;
 
   /**
    * Observable for selected members of staff in
@@ -134,7 +143,7 @@ export class StandupsNewEditComponent implements OnInit {
    * @param {$event} StaffMemberItem
    * @memberof StandupsNewEditComponent
    *
-   * @method onAddClick
+   * @method insertStaffMemberIntoPosition
    */
   public insertStaffMemberIntoPosition(value: StaffMemberItem, pickingNextIndex: number) {
     this.positions = this.positions.reduce((acc, element, index) => {
@@ -144,13 +153,51 @@ export class StandupsNewEditComponent implements OnInit {
       } else {
         element.pickingNext = false;
         acc.push(element, {
-          placeIndex: this.positions.length,
           staffID: value.ID,
           initials: `${value.firstName.split('')[0]}${value.lastName.split('')[0]}`
         });
         return acc;
       }
-    }, []);
+    }, [])
+      .map((position, index) => {
+        position.placeIndex = index;
+        return position;
+      });
+  }
+
+  /**
+   * Saves standup and redirects to detail page
+   *
+   * @memberof StandupsNewEditComponent
+   *
+   * @method saveStandup
+   */
+  public saveStandup() {
+    this.dayService.post({date: this.date.toISOString().split('T')[0]})
+      .flatMap(response => {
+        this.dayID = response._links.day.href.split('/')[2];
+        const positions = this.positions.map(position => {
+          return this.positionService.post({
+            placeIndex: position.placeIndex,
+            staffID: position.staffID,
+            dayID: this.dayID
+          });
+        });
+        const summaries = this.summaries.map(summary => {
+          return this.summaryService.post({
+            orderIndex: summary.orderIndex,
+            staffID: summary.staffID,
+            dayID: this.dayID
+          });
+        });
+        const all = positions.concat(summaries);
+        return Observable.merge(...all);
+      })
+      .subscribe(value => {}, err => {
+        console.log(err);
+      }, () => {
+        this.router.navigateByUrl(`history/${this.dayID}`);
+      });
   }
 
   /**
@@ -160,8 +207,12 @@ export class StandupsNewEditComponent implements OnInit {
    */
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     public currentStandupService: CurrentStandupService,
-    public location: Location
+    public location: Location,
+    private dayService: DayService,
+    private positionService: PositionService,
+    private summaryService: SummaryService
   ) { }
 
   /**
@@ -193,7 +244,6 @@ export class StandupsNewEditComponent implements OnInit {
       this.positions = data.positions;
       this.summaries = data.summaries;
       this.date = data.date ? data.date : new Date();
-      console.log(this.date);
     });
 
     this.selectedStaffMembers.subscribe((value: StaffMemberItem) => {
