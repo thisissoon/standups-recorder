@@ -44,11 +44,22 @@ export class StaffMemberService {
   /**
    * update a staff member.
    *
+   * @param {string} ID
    * @param {*} data
    * @returns {Observable<any>}
    * @memberof CurrentService
    */
   public update(ID: string, data: any): Observable<any> {
     return this.http.put(`${this.endpointUrl}/${ID}`, data);
+  }
+  /**
+   * create a staff member.
+   *
+   * @param {*} data
+   * @returns {Observable<any>}
+   * @memberof CurrentService
+   */
+  public create(data: any): Observable<any> {
+    return this.http.post(`${this.endpointUrl}`, data);
   }
 }

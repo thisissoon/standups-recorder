@@ -1,5 +1,5 @@
 export interface StaffMemberItem {
-  ID: string;
+  ID?: string;
   firstName: string;
   lastName: string;
   role: string;

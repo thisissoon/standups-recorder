@@ -27,6 +27,7 @@ import { StaffMembersListComponent } from './staff-members-list/staff-members-li
 import { StandupsNewPreviewComponent } from './standups-new-preview/standups-new-preview.component';
 import { StaffMemberEditComponent } from './staff-member-edit/staff-member-edit.component';
 import { StaffMemberDetailsFormComponent } from './staff-member-details-form/staff-member-details-form.component';
+import { StaffMemberNewComponent } from './staff-member-new/staff-member-new.component';
 
 import { ApiModule } from './api/api.module';
 import { LocalStoreModule } from './local-store/local-store.module';
@@ -78,6 +79,10 @@ const appRoutes: Routes = [
     }
   },
   {
+    path: 'team/new',
+    component: StaffMemberNewComponent
+  },
+  {
     path: 'team/:staffMemberID',
     component: StaffMemberDetailComponent,
     resolve: {
@@ -122,7 +127,8 @@ const appRoutes: Routes = [
     StaffMembersListComponent,
     StandupsNewPreviewComponent,
     StaffMemberEditComponent,
-    StaffMemberDetailsFormComponent
+    StaffMemberDetailsFormComponent,
+    StaffMemberNewComponent
   ],
   imports: [
     BrowserModule,
