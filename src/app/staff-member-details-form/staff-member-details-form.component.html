@@ -1,4 +1,7 @@
-<form #staffMemberDetailForm="ngForm" class="staff-member-form">
+<form 
+  class="staff-member-form"
+  [formGroup]="form"
+>
   <div class="row">
 
     <div class="col">
@@ -21,16 +24,15 @@
     <div class="col">
       <div class="staff-member-form__values">
         <p>
-          <input type="text" name="firstName" id="firstName" value="ryan" [(ngModel)]="staffMember.firstName">
+          <input type="text" name="firstName" id="firstName" value="ryan" formControlName="firstName">
         </p>
         <p>
-          <input type="text" name="lastName" id="lastName" value="french" [(ngModel)]="staffMember.lastName">
+          <input type="text" name="lastName" id="lastName" value="french" formControlName="lastName">
         </p>
         <p>
-          <input type="text" name="role" id="role" value="designer" [(ngModel)]="staffMember.role">
+          <input type="text" name="role" id="role" value="designer" formControlName="role">
         </p>
-        <p>
-          <input type="checkbox" name="active" id="active" value="active" checked hidden [(ngModel)]="staffMember.current">true</p>
+        <p><span (click)="form.value.current = !form.value.current">{{form.value.current}}</span></p>
       </div>
     </div>
 
