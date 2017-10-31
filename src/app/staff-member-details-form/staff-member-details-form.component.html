@@ -1,0 +1,40 @@
+<form 
+  class="staff-member-form"
+  [formGroup]="form"
+>
+  <div class="row">
+
+    <div class="col">
+      <div class="staff-member-form__labels text-right">
+        <p>
+          <label for="firstName">first name</label>
+        </p>
+        <p>
+          <label for="lastName">last name</label>
+        </p>
+        <p>
+          <label for="role">role</label>
+        </p>
+        <p>
+          <label for="active">active</label>
+        </p>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="staff-member-form__values">
+        <p>
+          <input type="text" name="firstName" id="firstName" value="ryan" formControlName="firstName">
+        </p>
+        <p>
+          <input type="text" name="lastName" id="lastName" value="french" formControlName="lastName">
+        </p>
+        <p>
+          <input type="text" name="role" id="role" value="designer" formControlName="role">
+        </p>
+        <p><span (click)="form.value.current = !form.value.current">{{form.value.current}}</span></p>
+      </div>
+    </div>
+
+  </div>
+</form>
