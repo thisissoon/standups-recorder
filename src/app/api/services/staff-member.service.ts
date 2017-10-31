@@ -41,4 +41,14 @@ export class StaffMemberService {
     const options: any = { params, observe: 'body' };
     return this.http.get<StaffMembersResponse[]>(this.endpointUrl, options);
   }
+  /**
+   * update a staff member.
+   *
+   * @param {*} data
+   * @returns {Observable<any>}
+   * @memberof CurrentService
+   */
+  public update(ID: string, data: any): Observable<any> {
+    return this.http.put(`${this.endpointUrl}/${ID}`, data);
+  }
 }
