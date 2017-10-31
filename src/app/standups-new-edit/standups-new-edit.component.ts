@@ -153,13 +153,16 @@ export class StandupsNewEditComponent implements OnInit {
       } else {
         element.pickingNext = false;
         acc.push(element, {
-          placeIndex: this.positions.length,
           staffID: value.ID,
           initials: `${value.firstName.split('')[0]}${value.lastName.split('')[0]}`
         });
         return acc;
       }
-    }, []);
+    }, [])
+      .map((position, index) => {
+        position.placeIndex = index;
+        return position;
+      });
   }
 
   /**
