@@ -22,7 +22,10 @@
         </div>
       </div>
 
-      <app-staff-member-details-form [staffMember]="staffMember"></app-staff-member-details-form>
+      <app-staff-member-details-form 
+        [(form)]="staffMemberDetailsForm"
+        [staffMember]="staffMember"
+      ></app-staff-member-details-form>
 
     </div>
   </div>
@@ -36,7 +39,9 @@
   
       <div class="col">
         <div class="nav__item">
-          <a href="#" class="nav__link cta">
+          <a
+            (click)="onSubmit()" 
+            class="nav__link">
             <span>update</span>
           </a>
         </div>
