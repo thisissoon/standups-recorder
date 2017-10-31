@@ -1,1 +1,1 @@
-export * from './new-standup.service';
+export * from './current-standup.service';

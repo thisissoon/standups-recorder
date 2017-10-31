@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { DaysResponse, DayItem } from '../api/models';
+import { CurrentStandupService } from '../local-store/services';
 
 @Component({
   selector: 'app-history',
@@ -47,6 +48,7 @@ export class HistoryComponent implements OnInit {
    */
   constructor(
     protected route: ActivatedRoute,
+    public currentStandupService: CurrentStandupService
   ) { }
 
   /**

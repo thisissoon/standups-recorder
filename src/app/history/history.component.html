@@ -63,6 +63,8 @@
                         *ngIf="
                           week[j].date.toISOString().split('T')[0] != todayDate.toISOString().split('T')[0] &&
                           week[j].date.getTime() < todayDate.getTime()"
+                          (click)="currentStandupService.setDate(week[j].date)"
+                          routerLink="/standups/new/edit"
                       >
                         <span>+</span>
                       </button>
@@ -73,6 +75,8 @@
                            week[j].date.toISOString().split('T')[0] 
                           ===
                           todayDate.toISOString().split('T')[0]"
+                        (click)="currentStandupService.setDate(week[j].date)"
+                        routerLink="/standups/new/edit"
                       >
                         <span>+</span>
                       </button>

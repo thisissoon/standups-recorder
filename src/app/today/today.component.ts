@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
+import { CurrentStandupService } from '../local-store/services';
+
 import {
   DayItem,
   DaysResponse,
@@ -67,6 +69,7 @@ export class TodayComponent implements OnInit {
    */
   constructor(
     protected route: ActivatedRoute,
+    public currentStandupService: CurrentStandupService
   ) { }
 
   ngOnInit() {

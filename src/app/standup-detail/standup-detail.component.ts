@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
+import { CurrentStandupService } from '../local-store/services';
+
 import {
   PositionsResponse,
   PositionItem,
@@ -57,13 +59,36 @@ export class StandupDetailComponent implements OnInit {
     public DBDay: DayItem;
 
   /**
+   * Date object with this stand-up's date
+   *
+   * @memberof StandupDetailComponent
+   */
+    public date: Date;
+
+  /**
+   * Update current standup service on click of edit.
+   *
+   * @param {positions} positions
+   * @param {summaries} summaries
+   * @memberof HistoryComponent
+   *
+   * @method renderDiagram
+   */
+  public updateCurrentStandupService() {
+    this.currentStandupService.setDate(this.date);
+    this.currentStandupService.setPositions(this.DBPositions);
+    this.currentStandupService.setSummaries(this.DBSummaries);
+  }
+
+  /**
    * Creates an instance of StandupDetailComponent.
    * @param {ActivatedRoute} route
    *
    * @memberof StandupDetailComponent
    */
   constructor(
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
+    private currentStandupService: CurrentStandupService
   ) {
     route.paramMap.subscribe((value: any) => this.params = value.params);
   }
@@ -79,6 +104,7 @@ export class StandupDetailComponent implements OnInit {
         this.DBSummaries = data.summaries._embedded.summaries;
         this.DBStaffMembers = data.staffMembers._embedded.staffMembers;
         this.DBDay = data.day;
+        this.date = new Date(`${this.DBDay.date}`);
       });
   }
 
