@@ -9,10 +9,10 @@ import { DaysResolver, CalendarArrayResolver } from './history/history-resolve.s
 import { PositionsResolver, SummariesResolver, DayResolver } from './standup-detail/standup-detail-resolve.service';
 import { StaffMembersResolver, StaffMemberResolver } from './api/staff-member-resolve.service';
 import {
-  NewStandupPositionsResolver,
-  NewStandupSummariesResolver,
-  NewStandupDateResolver
-} from './local-store/new-standup-resolve.service';
+  CurrentStandupPositionsResolver,
+  CurrentStandupSummariesResolver,
+  CurrentStandupDateResolver
+} from './local-store/current-standup-resolve.service';
 
 import { AppComponent } from './app.component';
 import { TodayComponent } from './today/today.component';
@@ -22,8 +22,10 @@ import { FooterNavComponent } from './footer-nav/footer-nav.component';
 import { StandupDetailComponent } from './standup-detail/standup-detail.component';
 import { StandupDiagramComponent } from './standup-diagram/standup-diagram.component';
 import { StaffMemberDetailComponent } from './staff-member-detail/staff-member-detail.component';
+import { StandupsCurrentEditComponent } from './standups-current-edit/standups-current-edit.component';
 import { StandupsNewEditComponent } from './standups-new-edit/standups-new-edit.component';
 import { StaffMembersListComponent } from './staff-members-list/staff-members-list.component';
+import { StandupsCurrentPreviewComponent } from './standups-current-preview/standups-current-preview.component';
 import { StandupsNewPreviewComponent } from './standups-new-preview/standups-new-preview.component';
 import { StaffMemberEditComponent } from './staff-member-edit/staff-member-edit.component';
 import { StaffMemberDetailsFormComponent } from './staff-member-details-form/staff-member-details-form.component';
@@ -48,9 +50,9 @@ const appRoutes: Routes = [
     component: StandupsNewEditComponent,
     resolve: {
       staffMembers: StaffMembersResolver,
-      positions: NewStandupPositionsResolver,
-      summaries: NewStandupSummariesResolver,
-      date: NewStandupDateResolver
+      positions: CurrentStandupPositionsResolver,
+      summaries: CurrentStandupSummariesResolver,
+      date: CurrentStandupDateResolver
     }
   },
   {
@@ -58,9 +60,9 @@ const appRoutes: Routes = [
     component: StandupsNewPreviewComponent,
     resolve: {
       staffMembers: StaffMembersResolver,
-      positions: NewStandupPositionsResolver,
-      summaries: NewStandupSummariesResolver,
-      date: NewStandupDateResolver
+      positions: CurrentStandupPositionsResolver,
+      summaries: CurrentStandupSummariesResolver,
+      date: CurrentStandupDateResolver
     }
   },
   {
@@ -107,6 +109,26 @@ const appRoutes: Routes = [
     }
   },
   {
+    path: 'history/:dayID/edit',
+    component: StandupsCurrentEditComponent,
+    resolve: {
+      staffMembers: StaffMembersResolver,
+      positions: CurrentStandupPositionsResolver,
+      summaries: CurrentStandupSummariesResolver,
+      date: CurrentStandupDateResolver
+    }
+  },
+  {
+    path: 'history/:dayID/preview',
+    component: StandupsCurrentPreviewComponent,
+    resolve: {
+      staffMembers: StaffMembersResolver,
+      positions: CurrentStandupPositionsResolver,
+      summaries: CurrentStandupSummariesResolver,
+      date: CurrentStandupDateResolver
+    }
+  },
+  {
     path: '**',
     redirectTo: 'today',
     pathMatch: 'full'
@@ -123,8 +145,10 @@ const appRoutes: Routes = [
     StandupDetailComponent,
     StandupDiagramComponent,
     StaffMemberDetailComponent,
+    StandupsCurrentEditComponent,
     StandupsNewEditComponent,
     StaffMembersListComponent,
+    StandupsCurrentPreviewComponent,
     StandupsNewPreviewComponent,
     StaffMemberEditComponent,
     StaffMemberDetailsFormComponent,
@@ -150,9 +174,9 @@ const appRoutes: Routes = [
     TodaySummariesResolver,
     CalendarArrayResolver,
     StaffMemberResolver,
-    NewStandupPositionsResolver,
-    NewStandupSummariesResolver,
-    NewStandupDateResolver
+    CurrentStandupPositionsResolver,
+    CurrentStandupSummariesResolver,
+    CurrentStandupDateResolver
   ],
   bootstrap: [AppComponent]
 })

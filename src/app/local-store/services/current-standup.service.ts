@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { PositionItem, SummaryItem } from '../../api/models';
 
 @Injectable()
-export class NewStandupService {
+export class CurrentStandupService {
 
   /**
    * current new stand-up positions
    *
    * @private
-   * @memberof NewStandupService
+   * @memberof CurrentStandupService
    */
   private positions: PositionItem[] = [];
 
@@ -17,7 +17,7 @@ export class NewStandupService {
    * current new stand-up summaries
    *
    * @private
-   * @memberof NewStandupService
+   * @memberof CurrentStandupService
    */
   private summaries: SummaryItem[] = [];
 
@@ -25,7 +25,7 @@ export class NewStandupService {
    * current new stand-up date
    *
    * @private
-   * @memberof NewStandupService
+   * @memberof CurrentStandupService
    */
   private date: Date;
 
@@ -94,7 +94,7 @@ export class NewStandupService {
    * @returns {date}
    * @memberof CurrentService
    */
-  public clearNewStandup = function clearNewStandup() {
+  public clearCurrentStandup = function clearCurrentStandup() {
     this.positions = [];
     this.summaries = [];
     this.date = null;

@@ -1,0 +1,17 @@
+.nav-other__close {
+  position: fixed;
+  top: 25px;
+  right: 40px;
+  z-index: 1;
+}
+
+.standups-new-aside {
+  position: fixed;
+  top: 0;
+  left: 100vw;
+  transition: left 0.5s;
+  transition-timing-function: ease-in-out;
+  &.adding-staff {
+    left: 50vw;
+  }
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
 import { Location } from '@angular/common';
 
 import { Subject } from 'rxjs/Subject';
@@ -10,11 +11,11 @@ import { StaffMemberItem, StaffMembersResponse, PositionItem, SummaryItem } from
 import { CurrentStandupService } from '../local-store/services';
 
 @Component({
-  selector: 'app-standups-new-edit',
-  templateUrl: './standups-new-edit.component.html',
-  styleUrls: ['./standups-new-edit.component.scss']
+  selector: 'app-standups-current-edit',
+  templateUrl: './standups-current-edit.component.html',
+  styleUrls: ['./standups-current-edit.component.scss']
 })
-export class StandupsNewEditComponent implements OnInit {
+export class StandupsCurrentEditComponent implements OnInit {
 
   /**
    * List of staff members from the backend
@@ -26,21 +27,21 @@ export class StandupsNewEditComponent implements OnInit {
   /**
    * Tracks state of view
    *
-   * @memberof StandupsNewEditComponent
+   * @memberof StandupsCurrentEditComponent
    */
   public addingStaff = false;
 
   /**
    * tells staff membmer list component where to positions list
    *
-   * @memberof StandupsNewEditComponent
+   * @memberof StandupsCurrentEditComponent
    */
   public selectorY: number;
 
   /**
    * First position on screen in absense of any positions in the real list.
    *
-   * @memberof StandupsNewEditComponent
+   * @memberof StandupsCurrentEditComponent
    */
   public firstPositionItem: PositionItem = {
     placeIndex: 0,
@@ -51,29 +52,36 @@ export class StandupsNewEditComponent implements OnInit {
   /**
    * list of staff members in order of standing.
    *
-   * @memberof StandupsNewEditComponent
+   * @memberof StandupsCurrentEditComponent
    */
   public positions: PositionItem[] = [];
 
   /**
    * list of staff members in order of speaking.
    *
-   * @memberof StandupsNewEditComponent
+   * @memberof StandupsCurrentEditComponent
    */
   public summaries: SummaryItem[] = [];
 
   /**
    * date of stand-up.
    *
-   * @memberof StandupsNewEditComponent
+   * @memberof StandupsCurrentEditComponent
    */
   public date: Date;
+
+  /**
+   * dayID of date of standup
+   *
+   * @memberof StandupsCurrentEditComponent
+   */
+  public dayID: string;
 
   /**
    * Observable for selected members of staff in
    * staff list child component.
    *
-   * @memberof StandupsNewEditComponent
+   * @memberof StandupsCurrentEditComponent
    */
   public selectedStaffMembers = new Subject();
 
@@ -84,7 +92,7 @@ export class StandupsNewEditComponent implements OnInit {
    * Set all nodes.picking next to false apart from current node.
    *
    * @param {$event} $event
-   * @memberof StandupsNewEditComponent
+   * @memberof StandupsCurrentEditComponent
    *
    * @method onAddClick
    */
@@ -101,7 +109,7 @@ export class StandupsNewEditComponent implements OnInit {
   /**
    * Resets state of line, and posiitons in list.
    *
-   * @memberof StandupsNewEditComponent
+   * @memberof StandupsCurrentEditComponent
    *
    * @method notAddingStaff
    */
@@ -117,7 +125,7 @@ export class StandupsNewEditComponent implements OnInit {
   /**
    * Updates new standup service with current data
    *
-   * @memberof StandupsNewEditComponent
+   * @memberof StandupsCurrentEditComponent
    *
    * @method onAddClick
    */
@@ -132,7 +140,7 @@ export class StandupsNewEditComponent implements OnInit {
    * into index provided as argument.
    *
    * @param {$event} StaffMemberItem
-   * @memberof StandupsNewEditComponent
+   * @memberof StandupsCurrentEditComponent
    *
    * @method onAddClick
    */
@@ -154,9 +162,9 @@ export class StandupsNewEditComponent implements OnInit {
   }
 
   /**
-   * Creates an instance of StandupsNewEditComponent.
+   * Creates an instance of StandupsCurrentEditComponent.
    *
-   * @memberof StandupsNewEditComponent
+   * @memberof StandupsCurrentEditComponent
    */
   constructor(
     private route: ActivatedRoute,
@@ -194,6 +202,10 @@ export class StandupsNewEditComponent implements OnInit {
       this.summaries = data.summaries;
       this.date = data.date ? data.date : new Date();
       console.log(this.date);
+    });
+
+    this.route.params.subscribe((params: HttpParams) => {
+      this.dayID = params['dayID'];
     });
 
     this.selectedStaffMembers.subscribe((value: StaffMemberItem) => {

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewStandupService } from './services';
+import { CurrentStandupService } from './services';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [],
-  providers: [ NewStandupService ]
+  providers: [ CurrentStandupService ]
 })
 export class LocalStoreModule { }
