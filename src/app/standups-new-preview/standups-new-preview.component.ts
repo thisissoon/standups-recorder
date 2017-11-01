@@ -86,6 +86,22 @@ export class StandupsNewPreviewComponent implements OnInit {
       });
   }
 
+  /**
+   * Flips the order of positions to correct for them being
+   * recorded in a counter clockwise direction.
+   *
+   * @memberof StandupsNewEditComponent
+   *
+   * @method flipPositions
+   */
+  public flipPositions(): void {
+    this.positions.reverse();
+    this.positions = this.positions.map((element, index) => {
+      element.placeIndex = index;
+      return element;
+    });
+  }
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
