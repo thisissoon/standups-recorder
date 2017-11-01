@@ -3,7 +3,7 @@
     <a
       *ngIf="!addingStaff"
       (click)="currentStandupService.clearCurrentStandup()"
-      (click)="location.back()"
+       routerLink="/today"
     >
       <span>x</span>
     </a>
