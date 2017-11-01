@@ -201,6 +201,19 @@ export class StandupsNewEditComponent implements OnInit {
   }
 
   /**
+   * Finds summary with matching staff ID
+   *
+   * @memberof StandupsNewEditComponent
+   *
+   * @method summaryIndex
+   */
+  public getSummary(staffID: string) {
+    return this.summaries.find(summary => {
+      return summary.staffID === staffID;
+    });
+  }
+
+  /**
    * Creates an instance of StandupsNewEditComponent.
    *
    * @memberof StandupsNewEditComponent
