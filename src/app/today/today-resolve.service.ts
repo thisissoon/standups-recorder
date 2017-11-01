@@ -58,7 +58,8 @@ export class TodayPositionsResolver implements Resolve<Observable<PositionsRespo
           return Observable.of(null);
         }
         params = new HttpParams()
-          .set('dayID', response._embedded.days[0].ID);
+          .set('dayID', response._embedded.days[0].ID)
+          .set('sort', 'placeIndex:asc');
         return this.positionService.list(params);
       });
   }
@@ -92,7 +93,8 @@ export class TodaySummariesResolver implements Resolve<Observable<SummariesRespo
           return Observable.of(null);
         }
         params = new HttpParams()
-          .set('dayID', response._embedded.days[0].ID);
+          .set('dayID', response._embedded.days[0].ID)
+          .set('sort', 'orderIndex:asc');
           return this.summaryService.list(params);
       });
   }
