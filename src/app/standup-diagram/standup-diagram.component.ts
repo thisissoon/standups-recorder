@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 
 import * as d3 from 'd3';
 
@@ -9,7 +9,7 @@ import { PositionItem, SummaryItem, StaffMemberItem } from '../api/models';
   templateUrl: './standup-diagram.component.html',
   styleUrls: ['./standup-diagram.component.scss']
 })
-export class StandupDiagramComponent implements OnInit {
+export class StandupDiagramComponent implements OnInit, OnChanges {
 
   /**
    * Width of svg to be drawn
@@ -75,23 +75,12 @@ export class StandupDiagramComponent implements OnInit {
   @ViewChild('svg')
   private svg: ElementRef;
 
-  constructor() {
-  }
-
-  ngOnInit() {
-    this.originX = this.width / 2;
-    this.originY = this.width / 2;
-    this.outerCircleRadius = this.width * (4 / 12);
-    this.nameCircleRadius = this.width * (5 / 12);
-    this.renderDiagram();
-  }
-
   /**
    * Render stand-up dagram as SVG to DOM.
    *
    * @param {positions} positions
    * @param {summaries} summaries
-   * @memberof HistoryComponent
+   * @memberof StandupDiagramComponent
    *
    * @method renderDiagram
    */
@@ -152,6 +141,41 @@ export class StandupDiagramComponent implements OnInit {
         .text(position.initials.toUpperCase());
     });
 
+  }
+
+  constructor() {
+  }
+
+  /**
+   * Set variables required for digram from those provided to
+   * the component
+   *
+   * @memberof StandupDiagramComponent
+   *
+   * @method ngOnInit
+   */
+  ngOnInit() {
+    this.originX = this.width / 2;
+    this.originY = this.width / 2;
+    this.outerCircleRadius = this.width * (4 / 12);
+    this.nameCircleRadius = this.width * (5 / 12);
+    this.renderDiagram();
+  }
+
+  /**
+   * On change of input variable, if change
+   * is from positions and is not the first change
+   * then clear svg and re-render.
+   *
+   * @memberof StandupDiagramComponent
+   *
+   * @method ngOnChanges
+   */
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes.positions.firstChange) {
+      const d3Svg = d3.select(this.svg.nativeElement).selectAll('*').remove();
+      this.renderDiagram();
+    }
   }
 
 }
