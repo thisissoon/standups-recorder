@@ -1,14 +1,12 @@
-<main>
+<main class="pt-5">
   
   <div class="nav-other__back">
     <a routerLink="/history">back</a>
   </div>
 
   <div class="container">
-    <div class="pt-5">
 
-
-      <div class="pt-2 pb-2">
+      <div>
         <div class="row">
           <div class="col">
             <app-standup-diagram
@@ -29,7 +27,7 @@
             <div class="table__keys">
               <p class="text-right">date</p>
               <p class="text-right">staff</p>
-              <p class="text-right">duration</p>
+              <!-- <p class="text-right">duration</p> -->
             </div>
           </div>
       
@@ -39,7 +37,7 @@
                 {{DBDay.date | date:'d/M/y'}}
               </p>
               <p class="text-left">{{DBPositions.length}}</p>
-              <p class="text-left">N/A</p>
+              <!-- <p class="text-left">N/A</p> -->
             </div>
           </div>
       
@@ -56,7 +54,6 @@
           </a>
         </div>
       </div> -->
-    </div>
   </div>
 </main>
 <footer>
