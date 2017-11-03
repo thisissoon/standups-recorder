@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HistoryComponent } from './history/history.component';
+import { StandupsIndexComponent } from './standups-index/standups-index.component';
 import { StandupDetailComponent } from './standup-detail/standup-detail.component';
 import { StandupsNewEditComponent } from './standups-new-edit/standups-new-edit.component';
 import { StandupsNewPreviewComponent } from './standups-new-preview/standups-new-preview.component';
@@ -10,7 +10,7 @@ import { StandupsNewPreviewComponent } from './standups-new-preview/standups-new
 import {
   DaysResolver,
   CalendarArrayResolver
-} from './history/history-resolve.service';
+} from './standups-index/standups-index-resolve.service';
 import {
   PositionsResolver,
   SummariesResolver,
@@ -28,7 +28,7 @@ import {
 const standupRoutes: Routes = [
   {
     path: '',
-    component: HistoryComponent,
+    component: StandupsIndexComponent,
     resolve: {
       days: DaysResolver,
       calendarArray: CalendarArrayResolver
@@ -79,7 +79,7 @@ const standupRoutes: Routes = [
 export class StandupsRoutingModule { }
 
 export const routedComponents = [
-  HistoryComponent,
+  StandupsIndexComponent,
   StandupDetailComponent,
   StandupsNewEditComponent,
   StandupsNewPreviewComponent

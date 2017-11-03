@@ -70,7 +70,7 @@ export class StandupDetailComponent implements OnInit {
    *
    * @param {positions} positions
    * @param {summaries} summaries
-   * @memberof HistoryComponent
+   * @memberof StandupDetailComponent
    *
    * @method renderDiagram
    */

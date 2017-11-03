@@ -62,10 +62,10 @@ export class TodayComponent implements OnInit {
   public DBStaffMembers: StaffMemberItem[];
 
   /**
-   * Creates an instance of HistoryComponent.
+   * Creates an instance of TodayComponent.
    * @param {ActivatedRoute} route
    *
-   * @memberof HistoryComponent
+   * @memberof TodayComponent
    */
   constructor(
     protected route: ActivatedRoute,

@@ -196,7 +196,7 @@ export class StandupsNewEditComponent implements OnInit {
       .subscribe(value => {}, err => {
         console.log(err);
       }, () => {
-        this.router.navigateByUrl(`history/${this.dayID}`);
+        this.router.navigateByUrl(`standups/${this.dayID}`);
       });
   }
 
