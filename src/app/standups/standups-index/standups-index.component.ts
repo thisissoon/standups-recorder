@@ -5,11 +5,11 @@ import { DaysResponse, DayItem } from '../../api/models';
 import { CurrentStandupService } from '../../local-store/services';
 
 @Component({
-  selector: 'app-history',
-  templateUrl: './history.component.html',
-  styleUrls: ['./history.component.scss']
+  selector: 'app-standups-index',
+  templateUrl: './standups-index.component.html',
+  styleUrls: ['./standups-index.component.scss']
 })
-export class HistoryComponent implements OnInit {
+export class StandupsIndexComponent implements OnInit {
 
   /**
    * Get keys of an object
@@ -41,10 +41,10 @@ export class HistoryComponent implements OnInit {
   public calendarArray: DayItem[][];
 
   /**
-   * Creates an instance of HistoryComponent.
+   * Creates an instance of StandupsIndexComponent.
    * @param {ActivatedRoute} route
    *
-   * @memberof HistoryComponent
+   * @memberof StandupsIndexComponent
    */
   constructor(
     protected route: ActivatedRoute,
@@ -55,7 +55,7 @@ export class HistoryComponent implements OnInit {
    * get resolved data and save data as component property.
    * Generate calendarObject from DBDays.
    *
-   * @memberof HistoryComponent
+   * @memberof StandupsIndexComponent
    */
   ngOnInit() {
     this.route.data.forEach((data: { days: DaysResponse, calendarArray: DayItem[][] }) => {

@@ -62,7 +62,7 @@ export class CalendarArrayResolver implements Resolve<DayItem[][]> {
    *    and values of arrays of 5 days
    *
    * @param {DBDays: DayItem[]} DBDays
-   * @memberof HistoryComponent
+   * @memberof DaysResolver
    */
   public generateCalendarArray(DBDays: DayItem[], todayDate: Date): DayItem[][] {
     DBDays = Array.from(DBDays);
