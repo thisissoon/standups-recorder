@@ -16,7 +16,9 @@ export class TodayResolver implements Resolve<DaysResponse> {
    * @param {DayService} dayService
    * @memberof DayResolver
    */
-  constructor(private dayService: DayService) { }
+  constructor(
+    private dayService: DayService
+  ) { }
   /**
    * make request to staff member service to get list of staff members
    *
@@ -54,13 +56,13 @@ export class TodayPositionsResolver implements Resolve<Observable<PositionsRespo
       .set('date', new Date().toISOString().split('T')[0]);
     return this.dayService.list(params)
       .flatMap((response: DaysResponse) => {
-        if (!response._embedded) {
-          return Observable.of(null);
-        }
-        params = new HttpParams()
+        if (response._embedded) {
+          params = new HttpParams()
           .set('dayID', response._embedded.days[0].ID)
           .set('sort', 'placeIndex:asc');
-        return this.positionService.list(params);
+          return this.positionService.list(params);
+        }
+        return Observable.throw('no days');
       });
   }
 }
@@ -89,13 +91,13 @@ export class TodaySummariesResolver implements Resolve<Observable<SummariesRespo
       .set('date', new Date().toISOString().split('T')[0]);
     return this.dayService.list(params)
       .flatMap((response: DaysResponse) => {
-        if (!response._embedded) {
-          return Observable.of(null);
-        }
-        params = new HttpParams()
+        if (response._embedded) {
+          params = new HttpParams()
           .set('dayID', response._embedded.days[0].ID)
           .set('sort', 'orderIndex:asc');
           return this.summaryService.list(params);
+        }
+        return Observable.throw('no days');
       });
   }
 }
