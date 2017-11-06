@@ -21,7 +21,7 @@ import { SharedModule } from './shared/shared.module';
     ApiModule,
     LocalStoreModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule.forRoot(),
   ],
   providers: [...resolvers],
   bootstrap: [AppComponent]
