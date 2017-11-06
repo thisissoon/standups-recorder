@@ -44,9 +44,7 @@ export class AlertService {
    * @memberOf AlertService
    */
   public add(alert: Alert) {
-    console.log(alert);
     this.alerts.push(alert);
-    console.log(this.alerts);
     this.setAlertToClose(alert);
   }
   /**
