@@ -1,0 +1,41 @@
+// Alerts
+
+.alert {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  font-size: 20px;
+  z-index: 5;
+}
+
+.alert__gradient {
+  display: none;
+}
+
+.alert__item {
+  background: $black;
+  height: $nav-item-height;
+  text-align: center;
+  padding-top: ($nav-item-height - $nav-divider-height)  * (1/2);
+}
+
+.alert__message {
+  line-height: $nav-divider-height;
+}
+
+.alert__message--error {
+  color: $red;
+}
+
+.alert__message--info {
+  color: $white;
+}
+
+.alert__message--warning {
+  color: $orange;
+}
+
+.alert__message--success {
+  color: $green;
+}

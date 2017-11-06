@@ -9,6 +9,8 @@ import { StandupService } from '../../api/services';
 
 import { CurrentStandupService } from '../../local-store/services';
 
+import { AlertService } from '../../shared/alerts/alert.service';
+
 @Component({
   selector: 'app-standups-new-preview',
   templateUrl: './standups-new-preview.component.html',
@@ -59,24 +61,30 @@ export class StandupsNewPreviewComponent implements OnInit {
    * @method saveStandup
    */
   public saveStandup() {
-    this.standupService
-    .post({
-      date: this.date.toISOString().split('T')[0],
-      positions: this.positions.map(position => {
-        return {
-          placeIndex: position.placeIndex,
-          staffID: position.staffID
-        };
-      }),
-      summaries: this.summaries.map(summary => {
-        return {
-          orderIndex: summary.orderIndex,
-          staffID: summary.staffID
-        };
-      })
-    })
-    .subscribe(value => {
-      this.router.navigateByUrl(`standups-index/${this.dayID}`);
+    console.log('click');
+    // this.standupService
+    // .post({
+    //   date: this.date.toISOString().split('T')[0],
+    //   positions: this.positions.map(position => {
+    //     return {
+    //       placeIndex: position.placeIndex,
+    //       staffID: position.staffID
+    //     };
+    //   }),
+    //   summaries: this.summaries.map(summary => {
+    //     return {
+    //       orderIndex: summary.orderIndex,
+    //       staffID: summary.staffID
+    //     };
+    //   })
+    // })
+    // .subscribe(value => {
+    //   this.router.navigateByUrl(`standups-index/${this.dayID}`);
+    // });
+    this.alertService.add({
+      type: 'error',
+      msg: 'stand-up not saved',
+      duration: 5000
     });
   }
 
@@ -100,7 +108,8 @@ export class StandupsNewPreviewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public standupService: StandupService,
-    public currentStandupService: CurrentStandupService
+    public currentStandupService: CurrentStandupService,
+    public alertService: AlertService
   ) { }
 
   ngOnInit() {
