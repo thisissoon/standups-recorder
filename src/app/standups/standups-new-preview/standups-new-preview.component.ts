@@ -61,30 +61,30 @@ export class StandupsNewPreviewComponent implements OnInit {
    * @method saveStandup
    */
   public saveStandup() {
-    console.log('click');
-    // this.standupService
-    // .post({
-    //   date: this.date.toISOString().split('T')[0],
-    //   positions: this.positions.map(position => {
-    //     return {
-    //       placeIndex: position.placeIndex,
-    //       staffID: position.staffID
-    //     };
-    //   }),
-    //   summaries: this.summaries.map(summary => {
-    //     return {
-    //       orderIndex: summary.orderIndex,
-    //       staffID: summary.staffID
-    //     };
-    //   })
-    // })
-    // .subscribe(value => {
-    //   this.router.navigateByUrl(`standups-index/${this.dayID}`);
-    // });
-    this.alertService.add({
-      type: 'error',
-      msg: 'stand-up not saved',
-      duration: 5000
+    this.standupService
+    .post({
+      date: this.date.toISOString().split('T')[0],
+      positions: this.positions.map(position => {
+        return {
+          placeIndex: position.placeIndex,
+          staffID: position.staffID
+        };
+      }),
+      summaries: this.summaries.map(summary => {
+        return {
+          orderIndex: summary.orderIndex,
+          staffID: summary.staffID
+        };
+      })
+    })
+    .subscribe(value => {
+      this.router.navigateByUrl(`standups-index/${this.dayID}`);
+    }, err => {
+      this.alertService.add({
+        type: 'error',
+        msg: 'stand-up not saved',
+        duration: 5000
+      });
     });
   }
 
