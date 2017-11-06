@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import { StaffMemberItem, StaffMembersResponse, PositionItem, SummaryItem } from '../../api/models';
-import { DayService, PositionService, SummaryService } from '../../api/services';
+import { StandupService } from '../../api/services';
 
 import { CurrentStandupService } from '../../local-store/services';
 
@@ -59,31 +59,25 @@ export class StandupsNewPreviewComponent implements OnInit {
    * @method saveStandup
    */
   public saveStandup() {
-    this.dayService.post({ date: this.date.toISOString().split('T')[0] })
-      .flatMap(response => {
-        this.dayID = response._links.day.href.split('/')[2];
-        const positions = this.positions.map(position => {
-          return this.positionService.post({
-            placeIndex: position.placeIndex,
-            staffID: position.staffID,
-            dayID: this.dayID
-          });
-        });
-        const summaries = this.summaries.map(summary => {
-          return this.summaryService.post({
-            orderIndex: summary.orderIndex,
-            staffID: summary.staffID,
-            dayID: this.dayID
-          });
-        });
-        const all = positions.concat(summaries);
-        return Observable.merge(...all);
+    this.standupService
+    .post({
+      date: this.date.toISOString().split('T')[0],
+      positions: this.positions.map(position => {
+        return {
+          placeIndex: position.placeIndex,
+          staffID: position.staffID
+        };
+      }),
+      summaries: this.summaries.map(summary => {
+        return {
+          orderIndex: summary.orderIndex,
+          staffID: summary.staffID
+        };
       })
-      .subscribe(value => { }, err => {
-        console.log(err);
-      }, () => {
-        this.router.navigateByUrl(`standups-index/${this.dayID}`);
-      });
+    })
+    .subscribe(value => {
+      this.router.navigateByUrl(`standups-index/${this.dayID}`);
+    });
   }
 
   /**
@@ -105,9 +99,7 @@ export class StandupsNewPreviewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private dayService: DayService,
-    private positionService: PositionService,
-    private summaryService: SummaryService,
+    public standupService: StandupService,
     public currentStandupService: CurrentStandupService
   ) { }
 
