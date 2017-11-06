@@ -6,6 +6,8 @@ import { environment } from '../../../environments/environment';
 
 import { SummaryItem, SummariesResponse } from '../models';
 
+import { AlertService } from '../../shared/alerts/alert.service';
+
 @Injectable()
 export class SummaryService {
   /**
@@ -21,7 +23,10 @@ export class SummaryService {
    *
    * @memberof SummaryService
    */
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private alertService: AlertService
+  ) { }
   /**
    * Returns the matching summary
    *
@@ -39,7 +44,15 @@ export class SummaryService {
    */
   public list(params: HttpParams = new HttpParams()): Observable<any> {
     const options: any = { params, observe: 'body' };
-    return this.http.get<SummariesResponse>(this.endpointUrl, options);
+    return this.http.get<SummariesResponse>(this.endpointUrl, options)
+      .catch(err => {
+        this.alertService.add({
+          type: 'error',
+          duration: 10000,
+          msg: 'db unreachable'
+        });
+        return Observable.throw(err);
+      });
   }
   /**
    * Submit summary.
