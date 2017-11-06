@@ -45,7 +45,6 @@ export class StaffMembersNewComponent implements OnInit {
   public onSubmit() {
     this.staffMemberService.create(this.staffMemberDetailsForm.value)
       .subscribe(value => {
-        console.log(value._links.staffMember.href.split('/')[2]);
         this.router.navigateByUrl(`staff-members/${value._links.staffMember.href.split('/')[2]}`);
       });
   }
