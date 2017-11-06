@@ -44,7 +44,9 @@ export class CalendarArrayResolver implements Resolve<DayItem[][]> {
     return this.dayService
       .list()
       .map((response: DaysResponse) => {
-        return this.generateCalendarArray(response._embedded.days, new Date());
+        if (response._embedded) {
+          return this.generateCalendarArray(response._embedded.days, new Date());
+        }
       });
   }
 

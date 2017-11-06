@@ -63,7 +63,7 @@ export class StaffMembersIndexComponent implements OnInit {
    */
   ngOnInit() {
     this.route.data.forEach((data: { staffMembers: StaffMembersResponse }) => {
-      this.DBStaffMembers = data.staffMembers ? data.staffMembers._embedded.staffMembers : null;
+      this.DBStaffMembers = data.staffMembers._embedded ? data.staffMembers._embedded.staffMembers : [];
       this.staffMembers = this.DBStaffMembers.map(staffMember => {
         staffMember.selected = false;
         return staffMember;
