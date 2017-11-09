@@ -78,7 +78,7 @@ export class StandupsNewPreviewComponent implements OnInit {
       })
     })
     .subscribe(value => {
-      this.router.navigateByUrl(`standups-index/${this.dayID}`);
+      this.router.navigateByUrl(`standups/${this.dayID}`);
     }, err => {
       this.alertService.add({
         type: 'error',
