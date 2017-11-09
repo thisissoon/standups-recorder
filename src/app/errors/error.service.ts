@@ -20,12 +20,12 @@ export class ErrorService {
    * @memberof ErrorService
    */
   handleError(error: Response | any): Observable<any> {
-    console.error(error);
-    if (error.status === 404) {
-      this.router.navigate(['/404']);
-    } else {
-      this.router.navigate(['/500']);
-    }
+    console.error('error service', error);
+    // if (error.status === 404) {
+    //   this.router.navigate(['/404']);
+    // } else {
+    //   this.router.navigate(['/500']);
+    // }
     return Observable.throw(error);
   }
 }
