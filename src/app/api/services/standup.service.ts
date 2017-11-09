@@ -5,8 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 import { StandupItem } from '../models';
 
-import { AlertService } from '../../shared/alerts/alert.service';
-
 @Injectable()
 export class StandupService {
   /**
@@ -18,8 +16,7 @@ export class StandupService {
   private endpointUrl = `${environment.apiUrl}/standups`;
 
   constructor(
-    private http: HttpClient,
-    private alertService: AlertService
+    private http: HttpClient
   ) { }
 
   /**
@@ -31,13 +28,6 @@ export class StandupService {
    */
   public post(data: StandupItem): Observable<any> {
     return this.http.post(`${this.endpointUrl}`, data)
-      .catch(err => {
-        this.alertService.add({
-          type: 'error',
-          duration: 10000,
-          msg: 'stand-up not saved'
-        });
-        return Observable.throw(err);
-      });
+      .catch(err => Observable.throw(err));
   }
 }

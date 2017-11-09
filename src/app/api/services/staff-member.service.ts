@@ -6,8 +6,6 @@ import { environment } from '../../../environments/environment';
 
 import { StaffMemberItem, StaffMembersResponse } from '../models';
 
-import { AlertService } from '../../shared/alerts/alert.service';
-
 @Injectable()
 export class StaffMemberService {
   /**
@@ -24,8 +22,7 @@ export class StaffMemberService {
    * @memberof StaffMemberService
    */
   constructor(
-    private http: HttpClient,
-    private alertService: AlertService
+    private http: HttpClient
   ) { }
   /**
    * Returns the matching position
@@ -45,14 +42,7 @@ export class StaffMemberService {
   public list(params: HttpParams): Observable<any> {
     const options: any = { params, observe: 'body' };
     return this.http.get<StaffMembersResponse[]>(this.endpointUrl, options)
-      .catch(err => {
-        this.alertService.add({
-          type: 'error',
-          duration: 10000,
-          msg: 'db unreachable'
-        });
-        return Observable.throw(err);
-      });
+      .catch(err => Observable.throw(err));
   }
   /**
    * update a staff member.
@@ -74,13 +64,6 @@ export class StaffMemberService {
    */
   public create(data: any): Observable<any> {
     return this.http.post(`${this.endpointUrl}`, data)
-      .catch(err => {
-        this.alertService.add({
-          type: 'error',
-          duration: 5000,
-          msg: 'staff member not saved'
-        });
-        return Observable.throw(err);
-      });
+      .catch(err => Observable.throw(err));
   }
 }

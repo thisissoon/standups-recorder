@@ -6,8 +6,6 @@ import { environment } from '../../../environments/environment';
 
 import { DayItem, DaysResponse } from '../models';
 
-import { AlertService } from '../../shared/alerts/alert.service';
-
 @Injectable()
 export class DayService {
   /**
@@ -24,8 +22,7 @@ export class DayService {
    * @memberof DayService
    */
   constructor(
-    private http: HttpClient,
-    private alertService: AlertService
+    private http: HttpClient
   ) { }
   /**
    * Returns the matching position
@@ -35,14 +32,7 @@ export class DayService {
    */
   public get(dayID): Observable<any> {
     return this.http.get<DayItem>(`${this.endpointUrl}/${dayID}`)
-      .catch(err => {
-        this.alertService.add({
-          type: 'error',
-          duration: 10000,
-          msg: 'db unreachable'
-        });
-        return Observable.throw(err);
-      });
+      .catch(err => Observable.throw(err));
   }
   /**
    * Returns the matching positions
@@ -53,14 +43,7 @@ export class DayService {
   public list(params: HttpParams = new HttpParams()): Observable<any> {
     const options: any = { params, observe: 'body' };
     return this.http.get(`${this.endpointUrl}?sort=date:desc`, options)
-      .catch(err => {
-        this.alertService.add({
-          type: 'error',
-          duration: 10000,
-          msg: 'db unreachable'
-        });
-        return Observable.throw(err);
-      });
+      .catch(err => Observable.throw(err));
   }
   /**
    * Submit day.
