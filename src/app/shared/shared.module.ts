@@ -7,7 +7,6 @@ import { FooterNavComponent } from './footer-nav/footer-nav.component';
 import { StandupDiagramComponent } from './standup-diagram/standup-diagram.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { AlertService } from './alerts/alert.service';
-import { ErrorService } from './errors/error.service';
 
 @NgModule({
   imports: [
@@ -31,7 +30,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [AlertService, ErrorService]
+      providers: [AlertService]
     };
   }
 }
