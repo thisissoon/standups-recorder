@@ -13,6 +13,16 @@ import { StaffMembersResolver } from './staff-members/staff-members-resolve.serv
 
 const appRoutes: Routes = [
   {
+    path: '',
+    component: TodayComponent,
+    resolve: {
+      today: TodayResolver,
+      positions: TodayPositionsResolver,
+      summaries: TodaySummariesResolver,
+      staffMembers: StaffMembersResolver,
+    }
+  },
+  {
     path: 'today',
     component: TodayComponent,
     resolve: {
@@ -31,10 +41,10 @@ const appRoutes: Routes = [
     loadChildren: './standups/standups.module#StandupsModule'
   },
   {
-    path: '**',
-    redirectTo: 'today',
-    pathMatch: 'full'
-  }
+    path: 'errors',
+    loadChildren: './errors/errors.module#ErrorsModule'
+  },
+  { path: '**', redirectTo: 'errors/404' }
 ];
 
 @NgModule({

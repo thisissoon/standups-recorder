@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { ApiModule } from './api/api.module';
 import { LocalStoreModule } from './local-store/local-store.module';
 import { SharedModule } from './shared/shared.module';
+import { ErrorsModule } from './errors/errors.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SharedModule } from './shared/shared.module';
     LocalStoreModule,
     AppRoutingModule,
     SharedModule.forRoot(),
+    ErrorsModule.forRoot()
   ],
   providers: [...resolvers],
   bootstrap: [AppComponent]
