@@ -9,6 +9,8 @@ import { DayService, PositionService, SummaryService } from '../api/services';
 
 import { DaysResponse, PositionsResponse, SummariesResponse } from '../api/models';
 
+import { ErrorService } from '../errors/error.service';
+
 @Injectable()
 export class TodayResolver implements Resolve<DaysResponse> {
   /**
@@ -17,7 +19,8 @@ export class TodayResolver implements Resolve<DaysResponse> {
    * @memberof DayResolver
    */
   constructor(
-    private dayService: DayService
+    private dayService: DayService,
+    private errorService: ErrorService
   ) { }
   /**
    * make request to staff member service to get list of staff members
@@ -28,7 +31,8 @@ export class TodayResolver implements Resolve<DaysResponse> {
   resolve(): Observable<DaysResponse> {
     const params = new HttpParams()
       .set('date', new Date().toISOString().split('T')[0]);
-    return this.dayService.list(params);
+    return this.dayService.list(params)
+      .catch(err => this.errorService.handleError(err));
   }
 }
 
@@ -42,7 +46,8 @@ export class TodayPositionsResolver implements Resolve<Observable<PositionsRespo
    */
   constructor(
     private dayService: DayService,
-    private positionService: PositionService
+    private positionService: PositionService,
+    private errorService: ErrorService
   ) { }
   /**
    * make request to positions service for positions with
@@ -56,14 +61,15 @@ export class TodayPositionsResolver implements Resolve<Observable<PositionsRespo
       .set('date', new Date().toISOString().split('T')[0]);
     return this.dayService.list(params)
       .flatMap((response: DaysResponse) => {
-        if (response._embedded) {
-          params = new HttpParams()
-          .set('dayID', response._embedded.days[0].ID)
-          .set('sort', 'placeIndex:asc');
-          return this.positionService.list(params);
+        if (!response._embedded) {
+          return Observable.of(null);
         }
-        return Observable.throw('no days');
-      });
+        params = new HttpParams()
+        .set('dayID', response._embedded.days[0].ID)
+        .set('sort', 'placeIndex:asc');
+        return this.positionService.list(params);
+        })
+      .catch(err => this.errorService.handleError(err));
   }
 }
 
@@ -77,7 +83,8 @@ export class TodaySummariesResolver implements Resolve<Observable<SummariesRespo
    */
   constructor(
     private dayService: DayService,
-    private summaryService: SummaryService
+    private summaryService: SummaryService,
+    private errorService: ErrorService
   ) { }
   /**
    * make request to summary service for summaries with
@@ -91,14 +98,17 @@ export class TodaySummariesResolver implements Resolve<Observable<SummariesRespo
       .set('date', new Date().toISOString().split('T')[0]);
     return this.dayService.list(params)
       .flatMap((response: DaysResponse) => {
+        if (!response._embedded) {
+          return Observable.of(null);
+        }
         if (response._embedded) {
           params = new HttpParams()
           .set('dayID', response._embedded.days[0].ID)
           .set('sort', 'orderIndex:asc');
           return this.summaryService.list(params);
         }
-        return Observable.throw('no days');
-      });
+      })
+      .catch(err => this.errorService.handleError(err));
   }
 }
 
