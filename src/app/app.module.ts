@@ -21,9 +21,9 @@ import { ErrorsModule } from './errors/errors.module';
     HttpClientModule,
     ApiModule,
     LocalStoreModule,
-    AppRoutingModule,
+    ErrorsModule.forRoot(),
     SharedModule.forRoot(),
-    ErrorsModule.forRoot()
+    AppRoutingModule
   ],
   providers: [...resolvers],
   bootstrap: [AppComponent]
