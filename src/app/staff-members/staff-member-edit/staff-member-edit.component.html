@@ -1,4 +1,4 @@
-<main>
+<main class="pt-5">
   
   <svg
     routerLink="/staff-members/{{staffMember.ID}}"
@@ -15,26 +15,21 @@
   </svg>
 
   <div class="container">
-    <div class="pt-2">
 
-
-      <div class="pt-5 pb-5">
-        <div class="row">
-          <div class="col">
-            <div class="staff-member-pic__container">
-              <div class="staff-member-pic__head"></div>
-              <div class="staff-member-pic__body"></div>
-            </div>
-          </div>
+    <div class="row">
+      <div class="col">
+        <div class="staff-member-pic__container mt-5 mb-5">
+          <div class="staff-member-pic__head"></div>
+          <div class="staff-member-pic__body"></div>
         </div>
       </div>
-
-      <app-staff-member-details-form 
-        [(form)]="staffMemberDetailsForm"
-        [staffMember]="staffMember"
-      ></app-staff-member-details-form>
-
     </div>
+
+    <app-staff-member-details-form
+      [(form)]="staffMemberDetailsForm"
+      [staffMember]="staffMember"
+    ></app-staff-member-details-form>
+
   </div>
 </main>
 <footer>

@@ -886,10 +886,10 @@ $calendar-day-height: 90px;
 
 // Custom staff detail
 
-$staff-member-img-width: 250px;
-$staff-member-body-width: 200px;
-$staff-member-head-height: 122px;
-$staff-member-head-width: 100px;
+$staff-member-img-width: 150px;
+$staff-member-body-width: $staff-member-img-width * (4/5);
+$staff-member-head-height: $staff-member-img-width * (1/2);
+$staff-member-head-width: $staff-member-img-width * (1/3);
 
 // Custom buttons
 
