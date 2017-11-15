@@ -78,6 +78,13 @@ export class StandupsNewPreviewComponent implements OnInit {
       })
     })
     .subscribe(value => {
+      this.currentStandupService.clearCurrentStandup()
+      this.dayID = value._embedded.days[0].ID;
+      this.alertService.add({
+        type: 'success',
+        msg: 'stand-up saved',
+        duration: 5000
+      });
       this.router.navigateByUrl(`standups/${this.dayID}`);
     }, err => {
       this.alertService.add({
