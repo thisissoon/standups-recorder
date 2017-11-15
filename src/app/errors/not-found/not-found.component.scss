@@ -1,0 +1,12 @@
+// Bootstrap functions
+@import "~bootstrap/scss/functions";
+
+// Core variables and mixins
+@import "../../../scss/helpers";
+    
+.error__item {
+  position: fixed;
+  top: calc(50% - 40px);
+  width: 100%;
+  color: $red
+}
