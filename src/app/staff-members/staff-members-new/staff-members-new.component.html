@@ -46,7 +46,15 @@
 
       <div class="col">
         <div class="nav__item">
-          <a (click)="onSubmit()" class="nav__link cta">
+          <a 
+            *ngIf="staffMemberDetailsForm._status === 'VALID'"
+            (click)="onSubmit()" 
+            class="nav__link cta">
+            <span>create</span>
+          </a>
+          <a 
+            *ngIf="staffMemberDetailsForm._status === 'INVALID'"
+            class="nav__link">
             <span>create</span>
           </a>
         </div>
