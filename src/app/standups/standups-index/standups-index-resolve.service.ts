@@ -7,6 +7,8 @@ import 'rxjs/Rx';
 import { DayService } from '../../api/services';
 import { DaysResponse, DayItem } from '../../api/models';
 
+import { ErrorService } from '../../errors/error.service'
+
 @Injectable()
 export class DaysResolver implements Resolve<DaysResponse[]> {
   /**
@@ -14,7 +16,10 @@ export class DaysResolver implements Resolve<DaysResponse[]> {
    * @param {QuestionsService} dayService
    * @memberof DaysResolver
    */
-  constructor(private dayService: DayService) { }
+  constructor(
+    private dayService: DayService,
+    private errorService: ErrorService
+  ) { }
   /**
    * make request to day service to get list of days
    *
@@ -22,32 +27,37 @@ export class DaysResolver implements Resolve<DaysResponse[]> {
    * @memberof DaysResolver
    */
   resolve(): Observable<DaysResponse[]> {
-    return this.dayService.list();
+    return this.dayService.list()
+      .catch(err => this.errorService.handleError(err));
   }
 }
 
 @Injectable()
-export class CalendarArrayResolver implements Resolve<DayItem[][]> {
+export class CalendarArrayResolver implements Resolve<DayItem[][] | {} > {
   /**
    * Creates an instance of CalendarArrayResolver.
    * @param {QuestionsService} dayService
    * @memberof CalendarArrayResolver
    */
-  constructor(private dayService: DayService) { }
+  constructor(
+    private dayService: DayService,
+    private errorService: ErrorService
+  ) { }
   /**
    * make request to day service to get list of days
    *
    * @returns {Observable<DayItem[][]>}
    * @memberof CalendarArrayResolver
    */
-  resolve(): Observable<DayItem[][]> {
+  resolve(): Observable<DayItem[][] | {}> {
     return this.dayService
       .list()
       .map((response: DaysResponse) => {
         if (response._embedded) {
           return this.generateCalendarArray(response._embedded.days, new Date());
         }
-      });
+      })
+      .catch(err => this.errorService.handleError(err));
   }
 
   /**
