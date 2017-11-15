@@ -14,13 +14,8 @@ import { StaffMembersResolver } from './staff-members/staff-members-resolve.serv
 const appRoutes: Routes = [
   {
     path: '',
-    component: TodayComponent,
-    resolve: {
-      today: TodayResolver,
-      positions: TodayPositionsResolver,
-      summaries: TodaySummariesResolver,
-      staffMembers: StaffMembersResolver,
-    }
+    redirectTo: '/today',
+    pathMatch: 'full'
   },
   {
     path: 'today',
@@ -29,7 +24,7 @@ const appRoutes: Routes = [
       today: TodayResolver,
       positions: TodayPositionsResolver,
       summaries: TodaySummariesResolver,
-      staffMembers: StaffMembersResolver,
+      staffMembers: StaffMembersResolver
     }
   },
   {
@@ -40,11 +35,7 @@ const appRoutes: Routes = [
     path: 'standups',
     loadChildren: './standups/standups.module#StandupsModule'
   },
-  {
-    path: 'errors',
-    loadChildren: './errors/errors.module#ErrorsModule'
-  },
-  { path: '**', redirectTo: 'errors/404' }
+  { path: '**', redirectTo: '404' }
 ];
 
 @NgModule({
