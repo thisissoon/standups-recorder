@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { StaffMemberItem } from '../../api/models';
 import { StaffMemberService } from '../../api/services';
 
+import { AlertService } from '../../shared/alerts/alert.service';
+
 @Component({
   selector: 'app-staff-members-new',
   templateUrl: './staff-members-new.component.html',
@@ -45,15 +47,26 @@ export class StaffMembersNewComponent implements OnInit {
   public onSubmit() {
     this.staffMemberService.create(this.staffMemberDetailsForm.value)
       .subscribe(value => {
-        console.log(value._links.staffMember.href.split('/')[2]);
+        this.alertService.add({
+          type: 'success',
+          msg: 'staff member created',
+          duration: 5000
+        });
         this.router.navigateByUrl(`staff-members/${value._links.staffMember.href.split('/')[2]}`);
+      }, err => {
+        this.alertService.add({
+          type: 'error',
+          msg: 'not created',
+          duration: 5000
+        });
       });
   }
 
   constructor(
     private formBuilder: FormBuilder,
     private staffMemberService: StaffMemberService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {

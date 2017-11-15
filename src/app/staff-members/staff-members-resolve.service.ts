@@ -7,6 +7,8 @@ import { StaffMemberService, PositionService } from '../api/services';
 
 import { StaffMembersResponse, StaffMemberItem, PositionsResponse } from '../api/models';
 
+import { ErrorService } from '../errors/error.service';
+
 @Injectable()
 export class StaffMembersResolver implements Resolve<StaffMembersResponse> {
   /**
@@ -14,7 +16,10 @@ export class StaffMembersResolver implements Resolve<StaffMembersResponse> {
    * @param {StaffMemberService} staffMemberService
    * @memberof StaffMembersResolver
    */
-  constructor(private staffMemberService: StaffMemberService) { }
+  constructor(
+    private staffMemberService: StaffMemberService,
+    private errorService: ErrorService
+  ) { }
   /**
    * make request to staff member service to get list of staff members
    *
@@ -24,27 +29,32 @@ export class StaffMembersResolver implements Resolve<StaffMembersResponse> {
   resolve(): Observable<StaffMembersResponse> {
     const params = new HttpParams()
       .set('sort', 'firstName:asc');
-    return this.staffMemberService.list(params);
+    return this.staffMemberService.list(params)
+      .catch(err => this.errorService.handleError(err));
   }
 
 }
 
 @Injectable()
-export class StaffMemberResolver implements Resolve<StaffMemberItem> {
+export class StaffMemberResolver implements Resolve<StaffMemberItem | {}> {
   /**
    * Creates an instance of StaffMemberResolver.
    * @param {StaffMemberService} staffMemberService
    * @memberof StaffMemberResolver
    */
-  constructor(private staffMemberService: StaffMemberService) { }
+  constructor(
+    private staffMemberService: StaffMemberService,
+    private errorService: ErrorService
+  ) { }
   /**
    * make request to staff member service to get list of staff members
    *
    * @returns {Observable<StaffMemberItem>}
    * @memberof StaffMemberResolver
    */
-  resolve(route: ActivatedRouteSnapshot): Observable<StaffMemberItem> {
-    return this.staffMemberService.get(route.params['staffMemberID']);
+  resolve(route: ActivatedRouteSnapshot): Observable<StaffMemberItem | {}> {
+    return this.staffMemberService.get(route.params['staffMemberID'])
+      .catch(err => this.errorService.handleError(err));
   }
 
 }
@@ -56,7 +66,10 @@ export class FirstStandUpResolver implements Resolve<PositionsResponse> {
    * @param {PositionService} positionService
    * @memberof FirstStandUpResolver
    */
-  constructor(private positionService: PositionService) { }
+  constructor(
+    private positionService: PositionService,
+    private errorService: ErrorService
+  ) { }
   /**
    * make request to positions service to get list of positions
    *
@@ -68,7 +81,8 @@ export class FirstStandUpResolver implements Resolve<PositionsResponse> {
       .set('staffID', route.params['staffMemberID'])
       .set('sort', 'date:asc')
       .set('limit', '1');
-    return this.positionService.list(params);
+    return this.positionService.list(params)
+      .catch(err => this.errorService.handleError(err));
   }
 
 }

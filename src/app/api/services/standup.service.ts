@@ -15,7 +15,9 @@ export class StandupService {
    */
   private endpointUrl = `${environment.apiUrl}/standups`;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   /**
    * Submit day.
@@ -25,6 +27,7 @@ export class StandupService {
    * @memberof DayService
    */
   public post(data: StandupItem): Observable<any> {
-    return this.http.post(`${this.endpointUrl}`, data);
+    return this.http.post(`${this.endpointUrl}`, data)
+      .catch(err => Observable.throw(err));
   }
 }

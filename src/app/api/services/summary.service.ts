@@ -21,7 +21,9 @@ export class SummaryService {
    *
    * @memberof SummaryService
    */
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
   /**
    * Returns the matching summary
    *
@@ -39,7 +41,8 @@ export class SummaryService {
    */
   public list(params: HttpParams = new HttpParams()): Observable<any> {
     const options: any = { params, observe: 'body' };
-    return this.http.get<SummariesResponse>(this.endpointUrl, options);
+    return this.http.get<SummariesResponse>(this.endpointUrl, options)
+      .catch(err => Observable.throw(err));
   }
   /**
    * Submit summary.

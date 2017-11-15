@@ -9,6 +9,8 @@ import { StandupService } from '../../api/services';
 
 import { CurrentStandupService } from '../../local-store/services';
 
+import { AlertService } from '../../shared/alerts/alert.service';
+
 @Component({
   selector: 'app-standups-new-preview',
   templateUrl: './standups-new-preview.component.html',
@@ -76,7 +78,20 @@ export class StandupsNewPreviewComponent implements OnInit {
       })
     })
     .subscribe(value => {
-      this.router.navigateByUrl(`standups-index/${this.dayID}`);
+      this.currentStandupService.clearCurrentStandup()
+      this.dayID = value._embedded.days[0].ID;
+      this.alertService.add({
+        type: 'success',
+        msg: 'stand-up saved',
+        duration: 5000
+      });
+      this.router.navigateByUrl(`standups/${this.dayID}`);
+    }, err => {
+      this.alertService.add({
+        type: 'error',
+        msg: 'stand-up not saved',
+        duration: 5000
+      });
     });
   }
 
@@ -100,7 +115,8 @@ export class StandupsNewPreviewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public standupService: StandupService,
-    public currentStandupService: CurrentStandupService
+    public currentStandupService: CurrentStandupService,
+    public alertService: AlertService
   ) { }
 
   ngOnInit() {

@@ -21,7 +21,9 @@ export class PositionService {
    *
    * @memberof PositionService
    */
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
   /**
    * Returns the matching position
    *
@@ -39,7 +41,8 @@ export class PositionService {
    */
   public list(params: HttpParams = new HttpParams()): Observable<any> {
     const options: any = { params, observe: 'body' };
-    return this.http.get<PositionsResponse[]>(this.endpointUrl, options);
+    return this.http.get<PositionsResponse[]>(this.endpointUrl, options)
+      .catch(err => Observable.throw(err));
   }
   /**
    * Submit position.

@@ -21,15 +21,18 @@ export class DayService {
    *
    * @memberof DayService
    */
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
   /**
    * Returns the matching position
    *
-   * @returns {Observable<DayItem>}
+   * @returns {Observable<any>}
    * @memberof DayService
    */
-  public get(dayID): Observable<DayItem> {
-    return this.http.get<DayItem>(`${this.endpointUrl}/${dayID}`);
+  public get(dayID): Observable<any> {
+    return this.http.get<DayItem>(`${this.endpointUrl}/${dayID}`)
+      .catch(err => Observable.throw(err));
   }
   /**
    * Returns the matching positions
@@ -39,7 +42,8 @@ export class DayService {
    */
   public list(params: HttpParams = new HttpParams()): Observable<any> {
     const options: any = { params, observe: 'body' };
-    return this.http.get<DaysResponse[]>(`${this.endpointUrl}?sort=date:desc`, options);
+    return this.http.get(`${this.endpointUrl}?sort=date:desc`, options)
+      .catch(err => Observable.throw(err));
   }
   /**
    * Submit day.

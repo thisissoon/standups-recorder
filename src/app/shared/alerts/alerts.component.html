@@ -1,0 +1,24 @@
+<div 
+  *ngFor="let alert of alertService.alerts; let i = index"
+  class="alert"
+>
+
+  <div class="row no-gutters">
+
+
+    <div class="col">
+      <div class="alert__item">
+        <span 
+          class="alert__message"
+          [ngClass]="{
+            'alert__message--error': alert.type === 'error',
+            'alert__message--info': alert.type === 'info',
+            'alert__message--success': alert.type === 'success',
+            'alert__message--warning': alert.type === 'warning'
+          }"
+        >{{alert.type}}: {{alert.msg}}</span>
+      </div>
+    </div>
+
+  </div>
+</div>

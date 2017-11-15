@@ -21,7 +21,9 @@ export class StaffMemberService {
    *
    * @memberof StaffMemberService
    */
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
   /**
    * Returns the matching position
    *
@@ -39,7 +41,8 @@ export class StaffMemberService {
    */
   public list(params: HttpParams): Observable<any> {
     const options: any = { params, observe: 'body' };
-    return this.http.get<StaffMembersResponse[]>(this.endpointUrl, options);
+    return this.http.get<StaffMembersResponse[]>(this.endpointUrl, options)
+      .catch(err => Observable.throw(err));
   }
   /**
    * update a staff member.
@@ -60,6 +63,7 @@ export class StaffMemberService {
    * @memberof CurrentService
    */
   public create(data: any): Observable<any> {
-    return this.http.post(`${this.endpointUrl}`, data);
+    return this.http.post(`${this.endpointUrl}`, data)
+      .catch(err => Observable.throw(err));
   }
 }

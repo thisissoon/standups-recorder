@@ -59,7 +59,7 @@ export class StandupsIndexComponent implements OnInit {
    */
   ngOnInit() {
     this.route.data.forEach((data: { days: DaysResponse, calendarArray: DayItem[][] }) => {
-      this.DBDays = data.days._embedded.days;
+      this.DBDays = data.days._embedded ? data.days._embedded.days : null;
       this.calendarArray = data.calendarArray;
     });
   }

@@ -9,6 +9,7 @@
     <div class="staff-member-selector"></div>
     <app-staff-members-list
       class="app-staff-members-list"
+      *ngIf="staffMembers.length"
       [staffMembers]="staffMembers"
       [selectorY]="selectorY"
       [selectedStaffMembers]="selectedStaffMembers"

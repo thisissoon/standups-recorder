@@ -5,6 +5,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { StaffMemberItem } from '../../api/models';
 import { StaffMemberService } from '../../api/services';
 
+import { AlertService } from '../../shared/alerts/alert.service';
+
 @Component({
   selector: 'app-staff-member-edit',
   templateUrl: './staff-member-edit.component.html',
@@ -40,7 +42,18 @@ export class StaffMemberEditComponent implements OnInit {
   public onSubmit() {
     this.staffMemberService.update(this.staffMember.ID, this.staffMemberDetailsForm.value)
       .subscribe(value => {
+        this.alertService.add({
+          type: 'success',
+          msg: 'staff member updated',
+          duration: 5000
+        });
         this.router.navigateByUrl(`staff-members/${value.ID}`);
+      }, err => {
+        this.alertService.add({
+          type: 'error',
+          msg: 'not updated',
+          duration: 5000
+        });
       });
   }
 
@@ -48,7 +61,8 @@ export class StaffMemberEditComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private staffMemberService: StaffMemberService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {

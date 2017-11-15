@@ -7,6 +7,8 @@ import { PositionService, SummaryService, StaffMemberService, DayService } from 
 
 import { PositionsResponse, SummariesResponse, StaffMembersResponse, DayItem } from '../../api/models';
 
+import { ErrorService } from '../../errors/error.service';
+
 
 @Injectable()
 export class PositionsResolver implements Resolve<PositionsResponse[]> {
@@ -15,7 +17,10 @@ export class PositionsResolver implements Resolve<PositionsResponse[]> {
    * @param {PositionService} positionService
    * @memberof PositionsResolver
    */
-  constructor(private positionService: PositionService) { }
+  constructor(
+    private positionService: PositionService,
+    private errorService: ErrorService
+  ) { }
   /**
    * make request to position service to get list of positions
    * filtered by dayID
@@ -27,7 +32,8 @@ export class PositionsResolver implements Resolve<PositionsResponse[]> {
     const params = new HttpParams()
       .set('dayID', route.params['dayID'])
       .set('sort', 'placeIndex:asc');
-    return this.positionService.list(params);
+    return this.positionService.list(params)
+      .catch(err => this.errorService.handleError(err));
   }
 
 }
@@ -39,7 +45,10 @@ export class SummariesResolver implements Resolve<SummariesResponse[]> {
    * @param {SummaryService} summaryService
    * @memberof SummariesResolver
    */
-  constructor(private summaryService: SummaryService) { }
+  constructor(
+    private summaryService: SummaryService,
+    private errorService: ErrorService
+  ) { }
   /**
    * make request to summary service to get list of summaries
    * filtered by dayID
@@ -51,7 +60,8 @@ export class SummariesResolver implements Resolve<SummariesResponse[]> {
     const params = new HttpParams()
       .set('dayID', route.params['dayID'])
       .set('sort', 'orderIndex:asc');
-    return this.summaryService.list(params);
+    return this.summaryService.list(params)
+      .catch(err => this.errorService.handleError(err));
   }
 
 }
@@ -63,7 +73,10 @@ export class DayResolver implements Resolve<DayItem> {
    * @param {DayService} dayService
    * @memberof DayResolver
    */
-  constructor(private dayService: DayService) { }
+  constructor(
+    private dayService: DayService,
+    private errorService: ErrorService
+  ) { }
   /**
    * make request to staff member service to get list of staff members
    *
@@ -71,7 +84,8 @@ export class DayResolver implements Resolve<DayItem> {
    * @memberof DayResolver
    */
   resolve(route: ActivatedRouteSnapshot): Observable<DayItem> {
-    return this.dayService.get(route.params['dayID']);
+    return this.dayService.get(route.params['dayID'])
+      .catch(err => this.errorService.handleError(err));
   }
 
 }
