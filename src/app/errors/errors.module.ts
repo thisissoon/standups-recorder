@@ -4,11 +4,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ErrorService } from './error.service';
 import { ErrorsRoutingModule, routedComponents } from './errors-routing.module';
+import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
   imports: [
     CommonModule,
-    ErrorsRoutingModule
+    ErrorsRoutingModule,
+    SharedModule
   ],
   declarations: [
     ...routedComponents,
