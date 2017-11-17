@@ -1,6 +1,10 @@
+import { Component } from '@angular/core'
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ServerErrorComponent } from './server-error.component';
+
+@Component({ selector: 'app-footer-nav', template: '' })
+class FooterNavStubComponent { }
 
 describe('ServerErrorComponent', () => {
   let component: ServerErrorComponent;
@@ -8,7 +12,10 @@ describe('ServerErrorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ServerErrorComponent ]
+      declarations: [ 
+        ServerErrorComponent,
+        FooterNavStubComponent
+      ]
     })
     .compileComponents();
   }));

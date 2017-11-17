@@ -1,6 +1,10 @@
+import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotFoundComponent } from './not-found.component';
+
+@Component({ selector: 'app-footer-nav', template: '' })
+class FooterNavStubComponent { }
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;
@@ -8,7 +12,10 @@ describe('NotFoundComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NotFoundComponent ]
+      declarations: [ 
+        NotFoundComponent,
+        FooterNavStubComponent
+      ]
     })
     .compileComponents();
   }));

@@ -166,41 +166,6 @@ export class StandupsNewEditComponent implements OnInit {
   }
 
   /**
-   * Saves standup and redirects to detail page
-   *
-   * @memberof StandupsNewEditComponent
-   *
-   * @method saveStandup
-   */
-  public saveStandup() {
-    this.dayService.post({date: this.date.toISOString().split('T')[0]})
-      .flatMap(response => {
-        this.dayID = response._links.day.href.split('/')[2];
-        const positions = this.positions.map(position => {
-          return this.positionService.post({
-            placeIndex: position.placeIndex,
-            staffID: position.staffID,
-            dayID: this.dayID
-          });
-        });
-        const summaries = this.summaries.map(summary => {
-          return this.summaryService.post({
-            orderIndex: summary.orderIndex,
-            staffID: summary.staffID,
-            dayID: this.dayID
-          });
-        });
-        const all = positions.concat(summaries);
-        return Observable.merge(...all);
-      })
-      .subscribe(value => {}, err => {
-        console.log(err);
-      }, () => {
-        this.router.navigateByUrl(`standups/${this.dayID}`);
-      });
-  }
-
-  /**
    * Finds summary with matching staff ID
    *
    * @memberof StandupsNewEditComponent
@@ -222,10 +187,7 @@ export class StandupsNewEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public currentStandupService: CurrentStandupService,
-    public location: Location,
-    private dayService: DayService,
-    private positionService: PositionService,
-    private summaryService: SummaryService
+    public location: Location
   ) { }
 
   /**
@@ -255,6 +217,7 @@ export class StandupsNewEditComponent implements OnInit {
         return staffMember;
       });
       this.positions = data.positions;
+      console.log(this.positions);
       this.summaries = data.summaries;
       this.date = data.date ? data.date : new Date();
     });
