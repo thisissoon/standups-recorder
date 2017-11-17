@@ -2,10 +2,12 @@ main {
   overflow-y: scroll;
   position: fixed;
   width: 100vw;
+  height: 100vh;
 }
 
 .button-add {
   position: fixed;
   top: calc(50% - 35px);
   left: calc(50% - 35px);
+  z-index: 1;
 }
