@@ -6,7 +6,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test --single-run --code-coverage",
+    "build:prod": "ng build -prod",
+    "test": "ng test --code-coverage",
+    "test:single": "ng test --single-run --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "server:examples": "webpack-dev-server --config webpack.examples.js --progress --profile --watch --hot"
