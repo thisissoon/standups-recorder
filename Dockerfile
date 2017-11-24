@@ -11,7 +11,7 @@ COPY . /app
 RUN npm install
 
 # Run build application into dist folder
-RUN npm run build
+RUN npm run build:prod
 
 
 
