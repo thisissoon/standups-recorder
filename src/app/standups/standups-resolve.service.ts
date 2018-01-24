@@ -28,6 +28,7 @@ export class StaffMembersResolver implements Resolve<StaffMembersResponse> {
    */
   resolve(): Observable<StaffMembersResponse> {
     const params = new HttpParams()
+      .set('current', 'true')
       .set('sort', 'firstName:asc');
     return this.staffMemberService.list(params)
       .catch(err => this.errorService.handleError(err));
